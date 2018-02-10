@@ -14,6 +14,8 @@ import projekt.mathe.game.mathespiel.scenes.loading.LoadingScene;
 
 public class Maingame extends Game{
 
+	public static boolean INVISIBLES_VISIBLE = true;
+	
 	private static final long serialVersionUID = 8243059591883622826L;
 
 	public Maingame(Frame frame) {
@@ -28,7 +30,7 @@ public class Maingame extends Game{
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
 		this.registerScene(new DrawingScene(this));
-		setCurrentScene("pausenhof", new MainSceneData(), 120f);
+		setCurrentScene("loading", new MainSceneData(), 120f);
 	}
 
 	@Override

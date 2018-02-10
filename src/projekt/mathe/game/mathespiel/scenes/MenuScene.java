@@ -24,37 +24,37 @@ public class MenuScene extends Scene{
 		sliderHolder.addElement(new Slider(this, sliderHolder, -200, 85, 85, 200, 50, "START", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, -300, 85, 185, 200, 50, "TEST", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, -400, 85, 285, 200, 50, "TEST2", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, -500, 85, 385, 200, 50, "TEST3", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, -600, 85, 485, 200, 50, "TEST3", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, -700, 85, 585, 200, 50, "TEST3", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("chemie", new MainSceneData(), 150f);
+				callScene("pausenhof", new MainSceneData(), 150f);
 			}
 		}));
 		bgHelper = new TextureHelper();

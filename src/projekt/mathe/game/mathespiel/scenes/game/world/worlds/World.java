@@ -3,6 +3,7 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds;
 import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.mathespiel.Maingame;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.BarrierHolder;
@@ -16,8 +17,6 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 
 public abstract class World{
 
-	private static final boolean INVISIBLES_VISIBLE = true;
-	
 	public Scene container;
 	public Tileholder tileholder;
 	public EntityHolder entityholder;
@@ -31,8 +30,8 @@ public abstract class World{
 		this.container = container;
 		tileholder = new Tileholder(container, this);
 		entityholder = new EntityHolder(container, this);
-		loadingZoneHolder = new LoadingZoneHolder(container, INVISIBLES_VISIBLE);
-		barrierHolder = new BarrierHolder(container, INVISIBLES_VISIBLE);
+		loadingZoneHolder = new LoadingZoneHolder(container, Maingame.INVISIBLES_VISIBLE);
+		barrierHolder = new BarrierHolder(container, Maingame.INVISIBLES_VISIBLE);
 	}
 
 	public final void onWorldTick(float delta) {

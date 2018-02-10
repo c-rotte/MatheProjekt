@@ -1,5 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.player;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -69,6 +70,8 @@ public class MapPlayer extends ScreenElement{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(textureHelper.getCurrentImage(), (int) (x + w/2 - 33), (int) y, 65, 75, null);
+		g2d.setColor(Color.CYAN);
+		g2d.draw(getBounds());
 	}
 
 }
