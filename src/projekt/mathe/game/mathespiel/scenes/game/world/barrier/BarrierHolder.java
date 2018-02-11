@@ -5,14 +5,12 @@ import java.awt.Rectangle;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
+import projekt.mathe.game.mathespiel.Settings;
 
 public class BarrierHolder extends Holder<Barrier>{
 
-	private boolean visible;
-	
-	public BarrierHolder(Scene container, boolean visible) {
+	public BarrierHolder(Scene container) {
 		super(container);
-		this.visible = visible;
 	}
 	
 	public boolean doesCollide(Rectangle rectangle) {
@@ -26,7 +24,7 @@ public class BarrierHolder extends Holder<Barrier>{
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		if(visible) {
+		if(Settings.HITBOXEN_ANZEIGEN) {
 			super.onPaint(g2d);
 		}
 	}

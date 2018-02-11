@@ -4,19 +4,17 @@ import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
+import projekt.mathe.game.mathespiel.Settings;
 
 public class LoadingZoneHolder extends Holder<LoadingZone>{
 
-	private boolean visible;
-	
-	public LoadingZoneHolder(Scene container, boolean visible) {
+	public LoadingZoneHolder(Scene container) {
 		super(container);
-		this.visible = visible;
 	}
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		if(visible) {
+		if(Settings.HITBOXEN_ANZEIGEN) {
 			super.onPaint(g2d);
 		}
 	}

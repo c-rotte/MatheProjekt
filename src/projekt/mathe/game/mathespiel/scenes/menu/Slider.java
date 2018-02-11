@@ -20,9 +20,11 @@ public class Slider extends ScreenElement{
 	private Runnable runnable;
 	private boolean interactable;
 	private SliderHolder holder;
+	private int originalX;
 	
 	public Slider(Scene container, SliderHolder holder, int x, int aimX, int y, int w, int h, String text, int textSize, Color textColor, Color bgColor, Color bgColorSelected, Color bgColorClicked, Runnable runnable) {
 		super(container, x, y, w, h);
+		originalX = x;
 		this.holder = holder;
 		this.aimX = aimX;
 		this.textSize = textSize;
@@ -32,6 +34,13 @@ public class Slider extends ScreenElement{
 		this.bgColorSelected = bgColorSelected;
 		this.bgColorClicked = bgColorClicked;
 		this.runnable = runnable;
+		interactable = true;
+	}
+	
+	public void reset() {
+		selected = false;
+		clicked = false;
+		x = originalX;
 		interactable = true;
 	}
 	

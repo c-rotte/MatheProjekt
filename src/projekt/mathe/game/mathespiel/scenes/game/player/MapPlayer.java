@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
 public class MapPlayer extends ScreenElement{
@@ -70,8 +71,10 @@ public class MapPlayer extends ScreenElement{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(textureHelper.getCurrentImage(), (int) (x + w/2 - 33), (int) y, 65, 75, null);
-		g2d.setColor(Color.CYAN);
-		g2d.draw(getBounds());
+		if(Settings.HITBOXEN_ANZEIGEN) {
+			g2d.setColor(Color.CYAN);
+			g2d.draw(getBounds());
+		}
 	}
 
 }

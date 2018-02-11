@@ -55,39 +55,50 @@ public class Saver {
 		} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	public static int getInt(String key) throws Exception {
+	public static int getInt(String key) {
 		if(!data.containsKey(key)) {
-			throw new Exception("Couldn't find Data!");
+			throw new NullPointerException("Couldn't find Data!");
 		}
 		return Integer.valueOf(data.get(key));
 	}
 	
-	public static double getDouble(String key) throws Exception {
+	public static double getDouble(String key) {
 		if(!data.containsKey(key)) {
-			throw new Exception("Couldn't find Data!");
+			throw new NullPointerException("Couldn't find Data!");
 		}
 		return Double.valueOf(data.get(key));
 	}
 	
-	public static String getString(String key) throws Exception {
+	public static String getString(String key) {
 		if(!data.containsKey(key)) {
-			throw new Exception("Couldn't find Data!");
+			throw new NullPointerException("Couldn't find Data!");
 		}
 		return String.valueOf(data.get(key));
 	}
 	
-	public static float getFloat(String key) throws Exception {
+	public static float getFloat(String key) {
 		if(!data.containsKey(key)) {
-			throw new Exception("Couldn't find Data!");
+			throw new NullPointerException("Couldn't find Data!");
 		}
 		return Float.valueOf(data.get(key));
 	}
 	
-	public static short getShort(String key) throws Exception {
+	public static short getShort(String key) {
 		if(!data.containsKey(key)) {
-			throw new Exception("Couldn't find Data!");
+			throw new NullPointerException("Couldn't find Data!");
 		}
 		return Short.valueOf(data.get(key));
+	}
+	
+	public static boolean getBoolean(String key) {
+		if(!data.containsKey(key)) {
+			throw new NullPointerException("Couldn't find Data!");
+		}
+		return Boolean.valueOf(data.get(key));
+	}
+	
+	public static boolean containsData(String key) {
+		return data.containsKey(key);
 	}
 	
 }

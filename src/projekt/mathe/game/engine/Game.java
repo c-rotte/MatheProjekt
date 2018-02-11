@@ -25,6 +25,7 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.titlebar.Titlebar;
+import projekt.mathe.game.mathespiel.Settings;
 
 public abstract class Game extends JPanel implements ActionListener{
 
@@ -260,8 +261,8 @@ public abstract class Game extends JPanel implements ActionListener{
 		g2d.setTransform(affineTransform);
 		if(!fullscreen) {
 			titlebar.onPaint(g2d);
-		}else {
-			Helper.drawStringAroundPoint(100, 100, fpsHelper.getFPS() + "", Color.BLACK, 40, FONT.Chrobot, g2d);
+		}else if(Settings.FPS_ANZEIGEN){
+			Helper.drawStringAroundPoint(100, 100, fpsHelper.getFPS() + "", Color.YELLOW, 40, FONT.Chrobot, g2d);
 		}
 		g2d.setTransform(affineTransform);
 		

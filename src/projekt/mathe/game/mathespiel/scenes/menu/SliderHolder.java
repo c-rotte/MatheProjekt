@@ -25,6 +25,12 @@ public class SliderHolder extends Holder<Slider>{
 		}
 	}
 	
+	public void reset() {
+		for(Slider slider : getElements()) {
+			slider.reset();
+		}
+	}
+	
 	public boolean wasClicked() {
 		for(Slider slider : getElements()) {
 			if(!slider.isInteractable()) {
@@ -32,12 +38,6 @@ public class SliderHolder extends Holder<Slider>{
 			}
 		}
 		return false;
-	}
-	
-	public void reset() {
-		for(Slider slider : getElements()) {
-			slider.setInteractable(true);
-		}
 	}
 	
 }

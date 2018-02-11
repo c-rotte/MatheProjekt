@@ -9,6 +9,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
+import projekt.mathe.game.mathespiel.Settings;
 
 public class Titlebar {
 
@@ -48,7 +49,7 @@ public class Titlebar {
 		if(icon != null) {
 			g2d.drawImage(icon, Values.TITLEBAR_HEIGHT/4, Values.TITLEBAR_HEIGHT/4, Values.TITLEBAR_HEIGHT/2, Values.TITLEBAR_HEIGHT/2, null);
 		}
-		Helper.drawStringAroundPoint(Values.WINDOW_WIDTH/2, Values.TITLEBAR_HEIGHT/2, title + " " + container.fpsHelper.getFPS(), Values.TITLEBAR_COLOR_1, Values.TITLEBAR_HEIGHT - 9, FONT.Chrobot, g2d);
+		Helper.drawStringAroundPoint(Values.WINDOW_WIDTH/2, Values.TITLEBAR_HEIGHT/2, title + (Settings.FPS_ANZEIGEN ? " " + container.fpsHelper.getFPS() : ""), Values.TITLEBAR_COLOR_1, Values.TITLEBAR_HEIGHT - 9, FONT.Chrobot, g2d);
 	}
 	
 	public void onMouseClicked(MouseEvent e){

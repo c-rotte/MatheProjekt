@@ -30,8 +30,8 @@ public abstract class World{
 		this.container = container;
 		tileholder = new Tileholder(container, this);
 		entityholder = new EntityHolder(container, this);
-		loadingZoneHolder = new LoadingZoneHolder(container, Maingame.INVISIBLES_VISIBLE);
-		barrierHolder = new BarrierHolder(container, Maingame.INVISIBLES_VISIBLE);
+		loadingZoneHolder = new LoadingZoneHolder(container);
+		barrierHolder = new BarrierHolder(container);
 	}
 
 	public final void onWorldTick(float delta) {

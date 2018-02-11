@@ -10,27 +10,33 @@ import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
+import projekt.mathe.game.engine.save.Saver;
+import projekt.mathe.game.mathespiel.Settings;
+import projekt.mathe.game.mathespiel.scenes.menu.CheckBox;
+import projekt.mathe.game.mathespiel.scenes.menu.CheckBoxHolder;
 import projekt.mathe.game.mathespiel.scenes.menu.Slider;
 import projekt.mathe.game.mathespiel.scenes.menu.SliderHolder;
 
-public class MenuScene extends Scene{
-	
+public class SettingsScene extends Scene{
+
+	private CheckBoxHolder checkBoxHolder;
 	private SliderHolder sliderHolder;
 	private TextureHelper bgHelper;
-
-	public MenuScene(Game container) {
-		super(container, "menu", Color.WHITE);
+	
+	public SettingsScene(Game container) {
+		super(container, "settings", Color.CYAN);
+		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
+		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
+		checkBoxHolder = new CheckBoxHolder(this);
+		checkBoxHolder.addElement(new CheckBox(this, "fps", 100, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.LIGHT_GRAY).setClicked(Settings.FPS_ANZEIGEN));
+		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 100, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.LIGHT_GRAY).setClicked(Settings.HITBOXEN_ANZEIGEN));
 		sliderHolder = new SliderHolder(this);
-		sliderHolder.addElement(new Slider(this, sliderHolder, -200, 85, 85, 200, 50, "START", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
+		sliderHolder.addElement(new Slider(this, sliderHolder, -50, 20, 20, 120, 40, "BACK", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				callScene("pausenhof", new MainSceneData(), 100f);
-			}
-		}));
-		sliderHolder.addElement(new Slider(this, sliderHolder, -300, 85, 185, 200, 50, "SETTINGS", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
-			@Override
-			public void run() {
-				callScene("settings", new MainSceneData(), 50f);
+				Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
+				Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
+				callScene("menu", getDataForNextScene(), 50f);
 			}
 		}));
 		bgHelper = new TextureHelper();
@@ -46,16 +52,19 @@ public class MenuScene extends Scene{
 
 	@Override
 	public void onMouseDragged(MouseEvent e) {
+		checkBoxHolder.onMouseDragged(e);
 		sliderHolder.onMouseDragged(e);
 	}
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
+		checkBoxHolder.onMouseDragged(e);
 		sliderHolder.onMouseDragged(e);
 	}
 	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
+		checkBoxHolder.onMouseClicked(e);
 		sliderHolder.onMouseClicked(e);
 	}
 	
@@ -67,6 +76,7 @@ public class MenuScene extends Scene{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(bgHelper.getCurrentImage(), 0, 0, null);
+		checkBoxHolder.onPaint(g2d);
 		sliderHolder.onPaint(g2d);
 	}
 
