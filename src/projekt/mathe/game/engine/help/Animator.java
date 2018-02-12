@@ -34,6 +34,10 @@ public class Animator {
 		value = startVal;
 	}
 	
+	public void setValue(float value) {
+		this.value = value;
+	}
+	
 	public float getCurrValueRelative() {
 		return 1f - (Float.valueOf(value) / Float.valueOf(startVal));
 	}

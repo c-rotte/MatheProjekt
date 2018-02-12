@@ -3,12 +3,14 @@ package projekt.mathe.game.mathespiel.scenes.game;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.nio.channels.NonWritableChannelException;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
+import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.PausenhofWorld;
 
@@ -21,6 +23,7 @@ public class PausenhofScene extends Scene{
 		player.setWorld(world);
 		registerWorld(world);
 		registerPlayer(player);
+		registerPauseScreen(new MainPauseScreen(this));
 	}
 
 	@Override

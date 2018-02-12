@@ -21,15 +21,15 @@ public class SettingsScene extends Scene{
 
 	private CheckBoxHolder checkBoxHolder;
 	private SliderHolder sliderHolder;
-	private TextureHelper bgHelper;
+	private Image bg;
 	
 	public SettingsScene(Game container) {
 		super(container, "settings", Color.CYAN);
 		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
 		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
 		checkBoxHolder = new CheckBoxHolder(this);
-		checkBoxHolder.addElement(new CheckBox(this, "fps", 100, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.LIGHT_GRAY).setClicked(Settings.FPS_ANZEIGEN));
-		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 100, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.LIGHT_GRAY).setClicked(Settings.HITBOXEN_ANZEIGEN));
+		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.LIGHT_GRAY).setClicked(Settings.FPS_ANZEIGEN));
+		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.LIGHT_GRAY).setClicked(Settings.HITBOXEN_ANZEIGEN));
 		sliderHolder = new SliderHolder(this);
 		sliderHolder.addElement(new Slider(this, sliderHolder, -50, 20, 20, 120, 40, "BACK", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
@@ -39,8 +39,7 @@ public class SettingsScene extends Scene{
 				callScene("menu", getDataForNextScene(), 50f);
 			}
 		}));
-		bgHelper = new TextureHelper();
-		bgHelper.addState("normal", 100000, new Image[] {ResLoader.getImageByName("general/menuBG.png")});
+		bg = ResLoader.getImageByName("general/menuBG.png");
 	}
 
 	@Override
@@ -75,7 +74,7 @@ public class SettingsScene extends Scene{
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(bgHelper.getCurrentImage(), 0, 0, null);
+		g2d.drawImage(bg, 0, 0, null);
 		checkBoxHolder.onPaint(g2d);
 		sliderHolder.onPaint(g2d);
 	}

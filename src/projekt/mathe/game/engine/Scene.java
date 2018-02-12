@@ -11,6 +11,7 @@ import java.awt.event.MouseWheelEvent;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Camera;
 import projekt.mathe.game.engine.help.KeyController;
+import projekt.mathe.game.engine.pause.PauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
@@ -30,6 +31,8 @@ public abstract class Scene {
 	public World world;
 	public MapPlayer player;
 	
+	private PauseScreen pauseScreen;
+	
 	public Scene(Game container, String id, Color backgroundcolor){
 		this.container = container;
 		this.id = id;
@@ -46,18 +49,36 @@ public abstract class Scene {
 		this.player = player;
 	}
 	
+	public void registerPauseScreen(PauseScreen pauseScreen) {
+		this.pauseScreen = pauseScreen;
+	}
+	
 	public String getId() {
 		return id;
 	}
 
 	public final void onSceneTick(float delta) {
-		if(world != null) {
-			world.onWorldTick(delta);
+		if(pauseScreen != null) {
+			pauseScreen.checkKeyPress();
+			pauseScreen.onTick(delta);
+			if(!pauseScreen.isOpen()) {
+				if(world != null) {
+					world.onWorldTick(delta);
+				}
+				if(player != null) {
+					player.onTick(delta);
+				}
+				onTick(delta);
+			}
+		}else {
+			if(world != null) {
+				world.onWorldTick(delta);
+			}
+			if(player != null) {
+				player.onTick(delta);
+			}
+			onTick(delta);
 		}
-		if(player != null) {
-			player.onTick(delta);
-		}
-		onTick(delta);
 		if(fading) {
 			if(fadeAnimator != null) {
 				fadeAnimator.calculate(delta);
@@ -102,7 +123,9 @@ public abstract class Scene {
 			}
 			fillScene(g2d, Color.BLACK, alpha);
 		}
-		g2d.setColor(Color.RED);
+		if(pauseScreen != null) {
+			pauseScreen.onPaint(g2d); //kein onPerformancepaint (kein eig. Screenelement)
+		}
 	}
 	
 	public void fillScene(Graphics2D g2d, Color color, float alpha) {

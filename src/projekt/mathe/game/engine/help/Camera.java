@@ -1,6 +1,9 @@
 package projekt.mathe.game.engine.help;
 
 import java.awt.Rectangle;
+import java.awt.geom.Rectangle2D;
+
+import org.w3c.dom.css.Rect;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.Values;
@@ -42,10 +45,12 @@ public class Camera {
 		y += amount;
 	}
 
-	public boolean inRangeOfCamera(float x2, float y2, float w, float h) {
-		return this.x <= x2 + w && this.x + Values.WINDOW_WIDTH * container.container.xRatio > x2 && this.y <= y2 + h && this.y + (Values.WINDOW_HEIGHT + Values.TITLEBAR_HEIGHT) * container.container.yRatio > y2 - h;
+	public boolean inRangeOfCamera(float x, float y, float w, float h) {
+		boolean xb = x > this.x - w && x < this.x + Values.WINDOW_WIDTH;
+		boolean yb = y > this.y - h && y < this.y + Values.WINDOW_HEIGHT;
+		return xb && yb;
 	}
-	
+
 	public void focusX(float x) {
 		setX((float) (x - (Values.WINDOW_WIDTH/2)));
 	}
@@ -96,4 +101,8 @@ public class Camera {
 		}
 	}
 	
+	public Rectangle translateAbsolutBounds(Rectangle bounds) {
+		return new Rectangle((int) translateAbsolutX((float) bounds.getX()), (int) translateAbsolutY((float) bounds.getY()), (int) bounds.getWidth(), (int) bounds.getHeight());
+	}
+
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.lang.management.RuntimeMXBean;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
@@ -16,7 +17,7 @@ import projekt.mathe.game.mathespiel.scenes.menu.SliderHolder;
 public class MenuScene extends Scene{
 	
 	private SliderHolder sliderHolder;
-	private TextureHelper bgHelper;
+	private Image bg;
 
 	public MenuScene(Game container) {
 		super(container, "menu", Color.WHITE);
@@ -33,8 +34,7 @@ public class MenuScene extends Scene{
 				callScene("settings", new MainSceneData(), 50f);
 			}
 		}));
-		bgHelper = new TextureHelper();
-		bgHelper.addState("normal", 100000, new Image[] {ResLoader.getImageByName("general/menuBG.png")});
+		bg = ResLoader.getImageByName("general/menuBG.png");
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class MenuScene extends Scene{
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(bgHelper.getCurrentImage(), 0, 0, null);
+		g2d.drawImage(bg, 0, 0, null);
 		sliderHolder.onPaint(g2d);
 	}
 
