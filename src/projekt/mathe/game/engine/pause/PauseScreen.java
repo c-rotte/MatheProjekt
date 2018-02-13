@@ -6,6 +6,7 @@ import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
+import projekt.mathe.game.engine.help.Animator;
 
 public abstract class PauseScreen extends ScreenElement{
 
@@ -14,10 +15,9 @@ public abstract class PauseScreen extends ScreenElement{
 	private float aimX, startX;
 	private boolean clickable;
 	private String state; //"hidden", "fadingIn", "shown", "fadingOut"
-	
 	private int keycode;
-	
 	private PauseScreenClickableHolder holder;
+	public float xUnterschied;
 	
 	public PauseScreen(Scene container, int x, int y, int w, int h) {
 		super(container, x, y, w, h);
@@ -25,10 +25,15 @@ public abstract class PauseScreen extends ScreenElement{
 		clickable = true;
 		selectedX = x;
 		selectedY = y;
+		xUnterschied = x + w;
 		keycode = KeyEvent.VK_ESCAPE;
 		holder = new PauseScreenClickableHolder(container);
 	}
 
+	public float getSPEED() {
+		return SPEED;
+	}
+	
 	public void reset() {
 		holder.reset();
 		state = "hidden";
@@ -97,6 +102,10 @@ public abstract class PauseScreen extends ScreenElement{
 		}
 	}
 	
+	public void onToggle() {
+		
+	}
+	
 	public final void onScreenTick(float delta) {
 		boolean pressed = getContainer().keyController.isPressed(keycode) && !getContainer().fading;
 		boolean interacted = pressed && clickable;
@@ -113,6 +122,7 @@ public abstract class PauseScreen extends ScreenElement{
 					aimX = getContainer().camera.translateAbsolutX(selectedX);
 					y = getContainer().camera.translateAbsolutY(selectedY);
 					state = "fadingIn";
+					onToggle();
 				}
 				break;
 			case "fadingIn":
@@ -126,6 +136,7 @@ public abstract class PauseScreen extends ScreenElement{
 			case "shown": 
 				if(interacted) {
 					state = "fadingOut";
+					onToggle();
 				}
 				break;
 			case "fadingOut":

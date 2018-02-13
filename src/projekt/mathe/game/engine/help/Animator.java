@@ -13,6 +13,9 @@ public class Animator {
 	
 	public void calculate(float delta) {
 		value -= diff * delta;
+		if(value < 0) {
+			value = 0;
+		}
 	}
 	
 	public float getCurrValue() {

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.pause.PauseScreen;
@@ -11,6 +12,7 @@ import projekt.mathe.game.engine.pause.PauseScreen;
 public class MainPauseScreen extends PauseScreen{
 
 	private Color backgroundColor;
+	private Animator bgAnimator;
 	
 	public MainPauseScreen(Scene container) {
 		super(container, 200, 150, 880, 420);
@@ -28,15 +30,27 @@ public class MainPauseScreen extends PauseScreen{
 				System.out.println("Jetzt würde der Speichervorgang starten...");
 			}
 		}).addText("Speichern", 30, Color.WHITE).setMaxClickTimes(-1));
+		bgAnimator = new Animator(xUnterschied, getSPEED());
 	}
 
 	@Override
+	public void onToggle() {
+		bgAnimator.reset();
+	}
+	
+	@Override
 	public void onTick(float delta) {
 		getHolder().onTick(delta);
+		bgAnimator.calculate(delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
+		if(getState().equals("fadingIn") || getState().equals("shown")) {
+			getContainer().fillScene(g2d, Color.BLACK, bgAnimator.getCurrValueRelative() / 2f);
+		}else if(getState().equals("fadingOut")) {
+			getContainer().fillScene(g2d, Color.BLACK, (1f - bgAnimator.getCurrValueRelative()) / 2f);
+		}
 		g2d.setColor(backgroundColor);
 		g2d.fill(getBounds());
 		Helper.drawStringAroundPoint(getMiddle().x, (int) (y + 40), "PAUSE", Color.WHITE, 40, FONT.Ailerons, g2d);
