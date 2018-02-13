@@ -10,8 +10,10 @@ public abstract class PauseScreenClickable extends ScreenElement{
 	private PauseScreen pauseScreen;
 	private Runnable runnable;
 	private float xAbstand, yAbstand;
-	
+	private int t;
+	private int timesClicked;
 	private String state; //"normal", "selected", "clicked"
+	private boolean pressable;
 	
 	public PauseScreenClickable(Scene container, PauseScreen pauseScreen, int x, int y, int w, int h) {
 		super(container, x, y, w, h);
@@ -19,8 +21,16 @@ public abstract class PauseScreenClickable extends ScreenElement{
 		xAbstand = x;
 		yAbstand = y;
 		state = "normal";
+		t = 1;
+		timesClicked = 0;
+		pressable = true;
 	}
 
+	public PauseScreenClickable setMaxClickTimes(int t) {
+		this.t = t;
+		return this;
+	}
+	
 	public void addRunnable(Runnable runnable) {
 		this.runnable = runnable;
 	}
@@ -31,10 +41,13 @@ public abstract class PauseScreenClickable extends ScreenElement{
 	
 	public void reset() {
 		state = "normal";
+		timesClicked = 0;
+		pressable = true;
 	}
 	
-	public void onMouseDragged(MouseEvent e) {
-		if(!state.equals("clicked")) {
+	@Override
+	public void onMouseMoved(MouseEvent e) {
+		if(!(state.equals("clicked") && timesClicked >= t && t > 0)) {
 			if(getBounds().contains(e.getPoint())) {
 				state = "selected";
 			}else {
@@ -43,12 +56,41 @@ public abstract class PauseScreenClickable extends ScreenElement{
 		}
 	}
 	
-	public void onMouseClicked(MouseEvent e) {
-		if(!state.equals("clicked") && getBounds().contains(e.getPoint())) {
-			state = "clicked";
-			if(runnable != null) {
-				runnable.run();
+	@Override
+	public void onMouseDragged(MouseEvent e) {
+		if(!(state.equals("clicked") && timesClicked >= t && t > 0)) {
+			if(getBounds().contains(e.getPoint())) {
+				state = "selected";
+			}else {
+				state = "normal";
 			}
+		}
+	}
+	
+	@Override
+	public void onMousePressed(MouseEvent e) {
+		if(getBounds().contains(e.getPoint())) {
+			if(pressable) {
+				pressable = false;
+				if((timesClicked < t || t <= 0) && !getPauseScreen().getHolder().isOneTimeClicked()) {
+					state = "clicked";
+					timesClicked++;
+					if(timesClicked == t) {
+						getPauseScreen().getHolder().setOneTimeClicked(true);
+					}
+					if(runnable != null) {
+						runnable.run();
+					}
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void onMouseReleased(MouseEvent e) {
+		if(getBounds().contains(e.getPoint())) {
+			state = "selected";
+			pressable = true;
 		}
 	}
 	

@@ -7,22 +7,12 @@ import projekt.mathe.game.engine.elements.Holder;
 
 public class CheckBoxHolder extends Holder<CheckBox>{
 
+	private boolean clickable;
+	
 	public CheckBoxHolder(Scene container) {
 		super(container);
 	}
 
-	public void onMouseDragged(MouseEvent e) {
-		for(CheckBox checkBox : getElements()) {
-			checkBox.onMouseDragged(e);
-		}
-	}
-	
-	public void onMouseClicked(MouseEvent e) {
-		for(CheckBox checkBox : getElements()) {
-			checkBox.onMouseClicked(e);
-		}
-	}
-	
 	public boolean wasClicked(String id) {
 		for(CheckBox checkBox : getElements()) {
 			if(checkBox.getID().equals(id)) {
@@ -30,6 +20,17 @@ public class CheckBoxHolder extends Holder<CheckBox>{
 			}
 		}
 		throw new NullPointerException("Element wasn't found!");
+	}
+	
+	public void setClickable(boolean clickable) {
+		this.clickable = clickable;
+	}
+	
+	@Override
+	public void onMouseClicked(MouseEvent e) {
+		if(clickable) {
+			super.onMouseClicked(e);
+		}
 	}
 	
 }

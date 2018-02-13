@@ -56,14 +56,23 @@ public class Slider extends ScreenElement{
 		this.runnable = runnable;
 	}
 	
+	@Override
 	public void onMouseDragged(MouseEvent e){
 		if(!clicked) {
 			selected = getBounds().contains(e.getPoint());
 		}
 	}
 	
+	@Override
+	public void onMouseMoved(MouseEvent e){
+		if(!clicked) {
+			selected = getBounds().contains(e.getPoint());
+		}
+	}
+	
+	@Override
 	public void onMouseClicked(MouseEvent e) {
-		if(selected && interactable) {
+		if(selected && interactable && !holder.wasClicked()) {
 			interactable = false;
 			clicked = true;
 			runnable.run();

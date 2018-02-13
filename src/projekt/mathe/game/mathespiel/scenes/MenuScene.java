@@ -49,7 +49,7 @@ public class MenuScene extends Scene{
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
-		sliderHolder.onMouseDragged(e);
+		sliderHolder.onMouseMoved(e);
 	}
 	
 	@Override

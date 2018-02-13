@@ -7,6 +7,8 @@ import projekt.mathe.game.engine.elements.Holder;
 
 public class PauseScreenClickableHolder extends Holder<PauseScreenClickable>{
 
+	private boolean oneTimeClicked;
+	
 	public PauseScreenClickableHolder(Scene container) {
 		super(container);
 	}
@@ -17,29 +19,20 @@ public class PauseScreenClickableHolder extends Holder<PauseScreenClickable>{
 			clickable.onClickableTick(delta);
 		}
 	}
-	
-	public void onMouseMoved(MouseEvent e) {
-		for(PauseScreenClickable clickable : getElements()) {
-			clickable.onMouseDragged(e);
-		}
-	}
 
-	public void onMouseDragged(MouseEvent e) {
-		for(PauseScreenClickable clickable : getElements()) {
-			clickable.onMouseDragged(e);
-		}
-	}
-		
-	public void onMouseClicked(MouseEvent e) {
-		for(PauseScreenClickable clickable : getElements()) {
-			clickable.onMouseClicked(e);
-		}
-	}
-	
 	public void reset() {
 		for(PauseScreenClickable clickable : getElements()) {
 			clickable.reset();
 		}
+		oneTimeClicked = false;
+	}
+
+	public boolean isOneTimeClicked() {
+		return oneTimeClicked;
+	}
+
+	public void setOneTimeClicked(boolean oneTimeClicked) {
+		this.oneTimeClicked = oneTimeClicked;
 	}
 	
 }

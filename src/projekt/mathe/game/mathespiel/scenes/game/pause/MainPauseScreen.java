@@ -21,7 +21,13 @@ public class MainPauseScreen extends PauseScreen{
 			public void run() {
 				container.callScene("menu", container.getDataForNextScene(), 60);
 			}
-		}).addText("Menu", 30, Color.WHITE));
+		}).addText("Menu", 30, Color.WHITE).setMaxClickTimes(1));
+		getHolder().addElement(new MainPauseScreenClickable(container, this, 350, 270, 180, 40, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
+			@Override
+			public void run() {
+				System.out.println("Jetzt würde der Speichervorgang starten...");
+			}
+		}).addText("Speichern", 30, Color.WHITE).setMaxClickTimes(-1));
 	}
 
 	@Override

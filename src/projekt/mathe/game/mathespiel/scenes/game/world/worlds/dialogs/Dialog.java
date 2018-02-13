@@ -193,7 +193,7 @@ public abstract class Dialog{
 		drawText(g2d);
 		
 		if(currCard.hasSelection() && currCard.openedSelections) {
-			g2d.drawImage(selectionBoxImg, world.container.camera.translateAbsolutX(1100), world.container.camera.translateAbsolutY(500), 15 + 30 * currCard.getLongestSelection().length(), currCard.selections.length * 30 + 40, null);
+			g2d.drawImage(selectionBoxImg, world.container.camera.translateAbsolutX(1100), world.container.camera.translateAbsolutY(500), 65 + 15 * currCard.getLongestSelection().length(), currCard.selections.length * 30 + 40, null);
 			for(int i = 0; i < currCard.selections.length; i++) {
 				if(i == index) {
 					g2d.drawImage(selecterImg, world.container.camera.translateAbsolutX(1120), world.container.camera.translateAbsolutY(530) + i * 30, 18, 18, null);

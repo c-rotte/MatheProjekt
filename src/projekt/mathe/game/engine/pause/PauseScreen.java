@@ -2,6 +2,7 @@ package projekt.mathe.game.engine.pause;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
@@ -47,21 +48,52 @@ public abstract class PauseScreen extends ScreenElement{
 		return holder;
 	}
 	
+	@Override
 	public void onMouseMoved(MouseEvent e) {
 		if(!state.equals("hidden")) {
 			holder.onMouseMoved(e);
 		}
 	}
 	
+	@Override
 	public void onMouseDragged(MouseEvent e) {
 		if(!state.equals("hidden")) {
 			holder.onMouseDragged(e);
 		}
 	}
 	
+	@Override
 	public void onMouseClicked(MouseEvent e) {
 		if(!state.equals("hidden")) {
 			holder.onMouseClicked(e);
+		}
+	}
+	
+	@Override
+	public void onMousePressed(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMousePressed(e);
+		}
+	}
+	
+	@Override
+	public void onMouseReleased(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseReleased(e);
+		}
+	}
+	
+	@Override
+	public void onMouseExited(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseExited(e);
+		}
+	}
+	
+	@Override
+	public void onMouseWheelMoved(MouseWheelEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseWheelMoved(e);
 		}
 	}
 	

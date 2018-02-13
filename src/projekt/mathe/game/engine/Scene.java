@@ -154,9 +154,15 @@ public abstract class Scene {
 	}
 	
 	public final void onSceneMousePressed(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMousePressed(e);
+		}
 		onMousePressed(e);
 	}
 	public final void onSceneMouseReleased(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseReleased(e);
+		}
 		onMouseReleased(e);
 	}
 	public final void onSceneMouseClicked(MouseEvent e) {
@@ -178,9 +184,15 @@ public abstract class Scene {
 		onMouseMoved(e);
 	}
 	public final void onSceneMouseWheelMoved(MouseWheelEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseWheelMoved(e);
+		}
 		onMouseWheelMoved(e);
 	}
 	public final void onSceneMouseExited(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseExited(e);
+		}
 		onMouseExited(e);
 	}
 	

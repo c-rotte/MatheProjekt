@@ -10,21 +10,7 @@ public class SliderHolder extends Holder<Slider>{
 	public SliderHolder(Scene container) {
 		super(container);
 	}
-	
-	public void onMouseDragged(MouseEvent e) {
-		for(Slider slider : getElements()) {
-			slider.onMouseDragged(e);
-		}
-	}
-	
-	public void onMouseClicked(MouseEvent e) {
-		if(!wasClicked()) {
-			for(Slider slider : getElements()) {
-				slider.onMouseClicked(e);
-			}
-		}
-	}
-	
+
 	public void reset() {
 		for(Slider slider : getElements()) {
 			slider.reset();

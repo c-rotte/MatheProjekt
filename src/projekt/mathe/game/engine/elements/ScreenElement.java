@@ -3,6 +3,8 @@ package projekt.mathe.game.engine.elements;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.Scene;
 
@@ -51,5 +53,13 @@ public abstract class ScreenElement {
 		Point point = new Point((int) (x + w/2), (int) (y + h/2));
 		return point;
 	}
+	
+	public void onMousePressed(MouseEvent e) {}
+	public void onMouseReleased(MouseEvent e) {}
+	public void onMouseClicked(MouseEvent e) {}
+	public void onMouseDragged(MouseEvent e) {}
+	public void onMouseMoved(MouseEvent e) {}
+	public void onMouseWheelMoved(MouseWheelEvent e) {}
+	public void onMouseExited(MouseEvent e) {}
 	
 }

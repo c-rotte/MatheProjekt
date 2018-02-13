@@ -21,7 +21,7 @@ public class SettingsScene extends Scene{
 	private CheckBoxHolder checkBoxHolder;
 	private SliderHolder sliderHolder;
 	private Image bg;
-	
+
 	public SettingsScene(Game container) {
 		super(container, "settings", Color.CYAN);
 		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
@@ -56,8 +56,8 @@ public class SettingsScene extends Scene{
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
-		checkBoxHolder.onMouseDragged(e);
-		sliderHolder.onMouseDragged(e);
+		checkBoxHolder.onMouseMoved(e);
+		sliderHolder.onMouseMoved(e);
 	}
 	
 	@Override
@@ -69,6 +69,7 @@ public class SettingsScene extends Scene{
 	@Override
 	public void onTick(float delta) {
 		sliderHolder.onTick(delta);
+		checkBoxHolder.setClickable(!sliderHolder.wasClicked());
 	}
 
 	@Override

@@ -68,10 +68,17 @@ public class CheckBox extends ScreenElement{
 		}
 	}
 	
+	@Override
 	public void onMouseDragged(MouseEvent e) {
 		selected = getBounds().contains(e.getPoint()); 
 	}
 	
+	@Override
+	public void onMouseMoved(MouseEvent e) {
+		selected = getBounds().contains(e.getPoint()); 
+	}
+	
+	@Override
 	public void onMouseClicked(MouseEvent e) {
 		if(getBounds().contains(e.getPoint())) {
 			clicked = !clicked;

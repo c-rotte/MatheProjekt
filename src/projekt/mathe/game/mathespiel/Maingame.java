@@ -31,7 +31,7 @@ public class Maingame extends Game{
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
 		this.registerScene(new DrawingScene(this));
-		setCurrentScene("loading", new MainSceneData(), 120f);
+		setCurrentScene("pausenhof", new MainSceneData(), 120f);
 	}
 
 	@Override
