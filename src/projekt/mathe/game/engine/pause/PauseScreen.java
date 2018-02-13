@@ -1,44 +1,121 @@
 package projekt.mathe.game.engine.pause;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 
 public abstract class PauseScreen extends ScreenElement{
-	
-	private boolean open;
-	private int key;
-	private boolean canToggle;
 
-	public PauseScreen(Scene container, int x, int y, int w, int h, int key) {
+	private float SPEED = 10;
+	private float selectedX, selectedY;
+	private float aimX, startX;
+	private boolean clickable;
+	private String state; //"hidden", "fadingIn", "shown", "fadingOut"
+	
+	private int keycode;
+	
+	private PauseScreenClickableHolder holder;
+	
+	public PauseScreen(Scene container, int x, int y, int w, int h) {
 		super(container, x, y, w, h);
-		this.key = key;
-		canToggle = true;
+		state = "hidden";
+		clickable = true;
+		selectedX = x;
+		selectedY = y;
+		keycode = KeyEvent.VK_ESCAPE;
+		holder = new PauseScreenClickableHolder(container);
 	}
 
-	public boolean toggle() {
-		if(!open && getContainer().fading) {
-			return false;
+	public void reset() {
+		holder.reset();
+		state = "hidden";
+	}
+	
+	public PauseScreen setSpeed(float SPEED) {
+		this.SPEED = SPEED;
+		return this;
+	}
+	
+	public PauseScreen setKeyCode(int keycode) {
+		this.keycode = keycode;
+		return this;
+	}
+	
+	public PauseScreenClickableHolder getHolder() {
+		return holder;
+	}
+	
+	public void onMouseMoved(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseMoved(e);
 		}
-		getContainer().keyController.reset();
-		open = !open;
-		onToggle();
-		return true;
+	}
+	
+	public void onMouseDragged(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseDragged(e);
+		}
+	}
+	
+	public void onMouseClicked(MouseEvent e) {
+		if(!state.equals("hidden")) {
+			holder.onMouseClicked(e);
+		}
+	}
+	
+	public final void onScreenTick(float delta) {
+		boolean pressed = getContainer().keyController.isPressed(keycode) && !getContainer().fading;
+		boolean interacted = pressed && clickable;
+		if(pressed) {
+			clickable = false;
+		}else {
+			clickable = true;
+		}
+		switch (state) {
+			case "hidden": 
+				if(interacted) {
+					startX = getContainer().camera.translateAbsolutX(0) - w;
+					x = startX;
+					aimX = getContainer().camera.translateAbsolutX(selectedX);
+					y = getContainer().camera.translateAbsolutY(selectedY);
+					state = "fadingIn";
+				}
+				break;
+			case "fadingIn":
+				if(x < aimX) {
+					x += SPEED * delta;
+				}else {
+					x = aimX;
+					state = "shown";
+				}
+				break;
+			case "shown": 
+				if(interacted) {
+					state = "fadingOut";
+				}
+				break;
+			case "fadingOut":
+				y = getContainer().camera.translateAbsolutY(selectedY);
+				startX = getContainer().camera.translateAbsolutX(0) - w;
+				if(x > startX) {
+					x -= SPEED * delta;
+				}else {
+					x = startX;
+					state = "hidden";
+				}
+				break;
+		}
+		onTick(delta);
 	}
 	
 	public boolean isOpen() {
-		return open;
+		return state.equals("shown") || state.equals("fadingIn");
 	}
 	
-	public abstract void onToggle();
-	
-	public void checkKeyPress() {
-		if(canToggle && getContainer().keyController.isPressed(key)) {
-			if(toggle()) {
-				canToggle = false;
-			}
-		}else if(!getContainer().keyController.isPressed(key)){
-			canToggle = true;
-		}
+	public String getState() {
+		return state;
 	}
-	
+
 }

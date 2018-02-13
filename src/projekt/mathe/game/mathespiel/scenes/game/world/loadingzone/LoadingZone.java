@@ -3,9 +3,7 @@ package projekt.mathe.game.mathespiel.scenes.game.world.loadingzone;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.elements.ScreenElement;
-import projekt.mathe.game.mathespiel.Main;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 

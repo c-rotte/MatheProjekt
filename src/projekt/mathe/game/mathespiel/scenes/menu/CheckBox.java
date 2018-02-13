@@ -1,11 +1,9 @@
 package projekt.mathe.game.mathespiel.scenes.menu;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;

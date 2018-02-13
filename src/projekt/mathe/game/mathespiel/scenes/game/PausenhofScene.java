@@ -3,7 +3,6 @@ package projekt.mathe.game.mathespiel.scenes.game;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.nio.channels.NonWritableChannelException;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;

@@ -64,7 +64,7 @@ public abstract class Game extends JPanel implements ActionListener{
 				}
 				if(mouseEventValid(e) && currScene != null) {
 					MouseEvent e2 = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger());
-					currScene.onMouseDragged(e2);
+					currScene.onSceneMouseDragged(e2);
 				}
 			}
 
@@ -78,7 +78,7 @@ public abstract class Game extends JPanel implements ActionListener{
 				}
 				if(mouseEventValid(e) && currScene != null) {
 					MouseEvent e2 = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger());
-					currScene.onMouseMoved(e2);
+					currScene.onSceneMouseMoved(e2);
 				}
 			}
 			
@@ -96,7 +96,7 @@ public abstract class Game extends JPanel implements ActionListener{
 				}
 				if(mouseEventValid(e) && currScene != null) {
 					MouseEvent e2 = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger());
-					currScene.onMousePressed(e2);
+					currScene.onSceneMousePressed(e2);
 				}
 			}
 			
@@ -110,7 +110,7 @@ public abstract class Game extends JPanel implements ActionListener{
 				}
 				if(mouseEventValid(e) && currScene != null) {
 					MouseEvent e2 = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger());
-					currScene.onMouseClicked(e2);
+					currScene.onSceneMouseClicked(e2);
 					Logger.log("Clicked on Screen; coords=" + e2.getX() + "," + e2.getY()); 
 				}
 			}
@@ -119,7 +119,7 @@ public abstract class Game extends JPanel implements ActionListener{
 			public void mouseReleased(MouseEvent e) {
 				if(mouseEventValid(e) && currScene != null) {
 					MouseEvent e2 = new MouseEvent((Component) e.getSource(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger());
-					currScene.onMouseReleased(e2);
+					currScene.onSceneMouseReleased(e2);
 				}
 			}
 			
@@ -129,7 +129,7 @@ public abstract class Game extends JPanel implements ActionListener{
 					titlebar.onMouseExited();
 				}
 				if(currScene != null) {
-					currScene.onMouseExited();
+					currScene.onSceneMouseExited(e);
 				}
 			}
 			
@@ -137,7 +137,7 @@ public abstract class Game extends JPanel implements ActionListener{
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				if(mouseEventValid(e) && currScene != null) {
 					MouseWheelEvent e2 = new MouseWheelEvent(e.getComponent(), e.getID(), e.getWhen(), e.getModifiers(), (int) (currScene.camera.translateAbsolutX(e.getX() / xRatio)), (int) (currScene.camera.translateAbsolutY(e.getY() / yRatio)) - (fullscreen? 0 : Values.TITLEBAR_HEIGHT), e.getClickCount(), e.isPopupTrigger(), e.getScrollType(), e.getScrollAmount(), e.getWheelRotation());
-					currScene.onMouseWheelMoved(e2);
+					currScene.onSceneMouseWheelMoved(e2);
 				}
 			}
 			

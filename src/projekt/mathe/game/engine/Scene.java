@@ -41,6 +41,10 @@ public abstract class Scene {
 		this.keyController = new KeyController();
 	}
 	
+	public void registerPauseScreen(PauseScreen pauseScreen) {
+		this.pauseScreen = pauseScreen;
+	}
+	
 	public void registerWorld(World world) {
 		this.world = world;
 	}
@@ -49,28 +53,12 @@ public abstract class Scene {
 		this.player = player;
 	}
 	
-	public void registerPauseScreen(PauseScreen pauseScreen) {
-		this.pauseScreen = pauseScreen;
-	}
-	
 	public String getId() {
 		return id;
 	}
 
 	public final void onSceneTick(float delta) {
-		if(pauseScreen != null) {
-			pauseScreen.checkKeyPress();
-			pauseScreen.onTick(delta);
-			if(!pauseScreen.isOpen()) {
-				if(world != null) {
-					world.onWorldTick(delta);
-				}
-				if(player != null) {
-					player.onTick(delta);
-				}
-				onTick(delta);
-			}
-		}else {
+		if(pauseScreen == null || !pauseScreen.isOpen()) {
 			if(world != null) {
 				world.onWorldTick(delta);
 			}
@@ -78,6 +66,9 @@ public abstract class Scene {
 				player.onTick(delta);
 			}
 			onTick(delta);
+		}
+		if(pauseScreen != null) {
+			pauseScreen.onScreenTick(delta);
 		}
 		if(fading) {
 			if(fadeAnimator != null) {
@@ -114,6 +105,9 @@ public abstract class Scene {
 		if(world != null) {
 			world.onWorldPaintOnTop(g2d);
 		}
+		if(pauseScreen != null && !pauseScreen.getState().equals("hidden")) {
+			pauseScreen.onPerformacePaint(g2d);
+		}
 		if(fading) {
 			float alpha;
 			if(dataForNextScene != null) {
@@ -122,9 +116,6 @@ public abstract class Scene {
 				alpha = 1f - fadeAnimator.getCurrValueRelative();
 			}
 			fillScene(g2d, Color.BLACK, alpha);
-		}
-		if(pauseScreen != null) {
-			pauseScreen.onPaint(g2d); //kein onPerformancepaint (kein eig. Screenelement)
 		}
 	}
 	
@@ -157,6 +148,40 @@ public abstract class Scene {
 		fading = true;
 		fadeAnimator = new Animator(fade, 1);
 		keyController.reset();
+		if(pauseScreen != null) {
+			pauseScreen.reset();
+		}
+	}
+	
+	public final void onSceneMousePressed(MouseEvent e) {
+		onMousePressed(e);
+	}
+	public final void onSceneMouseReleased(MouseEvent e) {
+		onMouseReleased(e);
+	}
+	public final void onSceneMouseClicked(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseClicked(e);
+		}
+		onMouseClicked(e);
+	}
+	public final void onSceneMouseDragged(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseDragged(e);
+		}
+		onMouseDragged(e);
+	}
+	public final void onSceneMouseMoved(MouseEvent e) {
+		if(pauseScreen != null) {
+			pauseScreen.onMouseMoved(e);
+		}
+		onMouseMoved(e);
+	}
+	public final void onSceneMouseWheelMoved(MouseWheelEvent e) {
+		onMouseWheelMoved(e);
+	}
+	public final void onSceneMouseExited(MouseEvent e) {
+		onMouseExited(e);
 	}
 	
 	public void onMousePressed(MouseEvent e) {}
@@ -165,7 +190,7 @@ public abstract class Scene {
 	public void onMouseDragged(MouseEvent e) {}
 	public void onMouseMoved(MouseEvent e) {}
 	public void onMouseWheelMoved(MouseWheelEvent e) {}
-	public void onMouseExited() {}
+	public void onMouseExited(MouseEvent e) {}
 	
 	public final void onKeyPressed(KeyEvent e) {
 		keyController.press(e.getKeyCode());

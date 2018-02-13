@@ -3,7 +3,6 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds;
 import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.mathespiel.Maingame;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.BarrierHolder;
@@ -17,6 +16,10 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 
 public abstract class World{
 
+	/*
+	 * Hält Entites, Tiles, Loadingzones und Barriers
+	 */
+	
 	public Scene container;
 	public Tileholder tileholder;
 	public EntityHolder entityholder;

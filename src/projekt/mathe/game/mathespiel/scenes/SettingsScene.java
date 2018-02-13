@@ -9,7 +9,6 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.ResLoader;
-import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.menu.CheckBox;

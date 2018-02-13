@@ -1,9 +1,6 @@
 package projekt.mathe.game.engine.help;
 
 import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-
-import org.w3c.dom.css.Rect;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.Values;
@@ -94,11 +91,7 @@ public class Camera {
 		y *= container.container.yRatio;
 		y -= container.container.yOffset;
 		y /= container.container.yRatio;
-		if(container.container.fullscreen) {
-			return (int) (y + getY());
-		}else {
-			return (int) (y + getY());
-		}
+		return (int) (y + getY());
 	}
 	
 	public Rectangle translateAbsolutBounds(Rectangle bounds) {
