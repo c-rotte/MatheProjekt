@@ -3,6 +3,8 @@ package projekt.mathe.game.mathespiel.scenes.game.pause;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import javax.swing.JOptionPane;
+
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
@@ -27,7 +29,7 @@ public class MainPauseScreen extends PauseScreen{
 		getHolder().addElement(new MainPauseScreenClickable(container, this, 350, 270, 180, 40, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("Jetzt würde der Speichervorgang starten...");
+				//Speichervorgang
 			}
 		}).addText("Speichern", 30, Color.WHITE).setMaxClickTimes(-1));
 		bgAnimator = new Animator(xUnterschied, getSPEED());

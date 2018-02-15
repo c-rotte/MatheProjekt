@@ -21,12 +21,19 @@ public class Camera {
 		this.maxBounds = maxBounds;
 	}
 	
-	public boolean outOfMaxBounds() {
+	public boolean outOfMaxBoundsX() {
 		if(maxBounds == null) {
 			throw new NullPointerException("MaxBounds not set");
 		}
 		if(getFocusX() - Values.WINDOW_WIDTH/2 < maxBounds.x || getFocusX() + Values.WINDOW_WIDTH/2 > maxBounds.x + maxBounds.width) {
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean outOfMaxBoundsY() {
+		if(maxBounds == null) {
+			throw new NullPointerException("MaxBounds not set");
 		}
 		if(getFocusY() - Values.WINDOW_HEIGHT/2 < maxBounds.y || getFocusY() + Values.WINDOW_HEIGHT/2 > maxBounds.y + maxBounds.height) {
 			return true;

@@ -133,7 +133,7 @@ public class PlayerController {
 		if(player.world.doesPlayerCollideWithBarrier() || player.world.doesPlayerCollideWithEntity() != null) {
 			player.x = preX;
 			player.getContainer().camera.setX(preCamX);
-		}else if(player.getContainer().camera.outOfMaxBounds()) {
+		}else if(player.getContainer().camera.outOfMaxBoundsX()) {
 			player.getContainer().camera.setX(preCamX);
 		}
 		
@@ -160,7 +160,6 @@ public class PlayerController {
 		}else if((int) (player.getContainer().camera.getFocusY() - (player.y + player.h/2)) > getMaxYOffset()) {
 			if(ySpeed < 0) {
 				player.getContainer().camera.moveY(ySpeed * delta);
-
 			}
 		}
 		if(Math.abs(ySpeed) > 0) {
@@ -170,7 +169,7 @@ public class PlayerController {
 		if(player.world.doesPlayerCollideWithBarrier() || player.world.doesPlayerCollideWithEntity() != null) {
 			player.y = preY;
 			player.getContainer().camera.setY(preCamY);
-		}else if(player.getContainer().camera.outOfMaxBounds()) {
+		}else if(player.getContainer().camera.outOfMaxBoundsY()) {
 			player.getContainer().camera.setY(preCamY);
 		}
 		

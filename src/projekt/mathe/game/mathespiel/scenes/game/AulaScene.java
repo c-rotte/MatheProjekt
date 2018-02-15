@@ -2,11 +2,13 @@ package projekt.mathe.game.mathespiel.scenes.game;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.AulaWorld;
@@ -42,6 +44,12 @@ public class AulaScene extends Scene{
 			player.x = -220;
 			player.y = 1384;
 			player.direction = "up";
+		}else if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("aulaEingang")) {
+			camera.focusX(140);
+			camera.focusY(-140);
+			player.x = -383;
+			player.y = -185;
+			player.direction = "right";
 		}else {
 			camera.focusX(140);
 			camera.focusY(207);
@@ -53,7 +61,7 @@ public class AulaScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-		
+
 	}
 
 	@Override

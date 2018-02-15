@@ -8,6 +8,7 @@ import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.MenuScene;
 import projekt.mathe.game.mathespiel.scenes.SettingsScene;
+import projekt.mathe.game.mathespiel.scenes.TischeScene;
 import projekt.mathe.game.mathespiel.scenes.game.AulaScene;
 import projekt.mathe.game.mathespiel.scenes.game.ChemieScene;
 import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
@@ -30,8 +31,9 @@ public class Maingame extends Game{
 		this.registerScene(new LoadingScene(this));
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
+		this.registerScene(new TischeScene(this));
 		this.registerScene(new DrawingScene(this));
-		setCurrentScene("pausenhof", new MainSceneData(), 120f);
+		setCurrentScene("loading", new MainSceneData(), 120f);
 	}
 
 	@Override

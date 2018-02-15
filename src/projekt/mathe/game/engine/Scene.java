@@ -12,6 +12,7 @@ import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Camera;
 import projekt.mathe.game.engine.help.KeyController;
 import projekt.mathe.game.engine.pause.PauseScreen;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
