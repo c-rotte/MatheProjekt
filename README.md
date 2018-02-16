@@ -2,7 +2,7 @@
 
 ### Konzept ###
 
-Ein RPG-Spiel, welches auf mathematischen Aufgaben aufbaut.
+Ein Adventure-Spiel, welches auf mathematischen Aufgaben aufbaut.
 
 ### Build ###
 

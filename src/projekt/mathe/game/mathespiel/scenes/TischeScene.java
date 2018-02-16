@@ -51,7 +51,7 @@ public class TischeScene extends Scene{
 	
 	@Override
 	public void onTick(float delta) {
-		//Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
+		Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
 	}
 
 	@Override
