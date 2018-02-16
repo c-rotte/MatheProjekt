@@ -32,7 +32,7 @@ public class TischeScene extends Scene{
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
 			camera.focusX(50);
 			camera.focusY(-68);
-			player.x = -60;
+			player.x = -123;
 			player.y = -136;
 			player.direction = "right";
 		}else {
@@ -51,7 +51,7 @@ public class TischeScene extends Scene{
 	
 	@Override
 	public void onTick(float delta) {
-
+		//Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
 	}
 
 	@Override

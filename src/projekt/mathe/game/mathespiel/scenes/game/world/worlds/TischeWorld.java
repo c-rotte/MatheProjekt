@@ -17,7 +17,7 @@ public class TischeWorld extends World{
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/tische/lower/unten_01", 638, "png"), 22);
 		CutTile.addSplicedTiles(container, this, -500, -500, false, Helper.getImagesBySplices("game/tiles/tische/upper/oben_01", 638, "png"), 22);
 		Barrier.addBarriersFromFile(ResLoader.getFile("game/tiles/tische/barrier.txt"), this);
-		addLoadingZone(new LoadingZone(-225, -180, 50, 200, this, "aula", 20f, "aulaEingang"));
+		addLoadingZone(new LoadingZone(-205, -180, 50, 200, this, "aula", 20f, "aulaEingang"));
 	}
 
 	@Override

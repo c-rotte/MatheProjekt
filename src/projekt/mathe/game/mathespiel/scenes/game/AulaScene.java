@@ -47,8 +47,8 @@ public class AulaScene extends Scene{
 		}else if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("aulaEingang")) {
 			camera.focusX(140);
 			camera.focusY(-140);
-			player.x = -383;
-			player.y = -185;
+			player.x = -370;
+			player.y = -150;
 			player.direction = "right";
 		}else {
 			camera.focusX(140);
@@ -61,7 +61,7 @@ public class AulaScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-
+		
 	}
 
 	@Override
