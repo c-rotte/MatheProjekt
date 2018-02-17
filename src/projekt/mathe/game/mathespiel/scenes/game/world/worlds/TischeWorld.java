@@ -22,7 +22,7 @@ public class TischeWorld extends World{
 
 	@Override
 	public void onTick(float delta) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stuba
 		
 	}
 

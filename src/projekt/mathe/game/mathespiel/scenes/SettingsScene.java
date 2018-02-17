@@ -30,14 +30,6 @@ public class SettingsScene extends Scene{
 		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.LIGHT_GRAY).setClicked(Settings.FPS_ANZEIGEN));
 		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.LIGHT_GRAY).setClicked(Settings.HITBOXEN_ANZEIGEN));
 		sliderHolder = new SliderHolder(this);
-		sliderHolder.addElement(new Slider(this, sliderHolder, -50, 20, 20, 120, 40, "BACK", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
-			@Override
-			public void run() {
-				Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
-				Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
-				callScene("menu", getDataForNextScene(), 50f);
-			}
-		}));
 		bg = ResLoader.getImageByName("general/menuBG.png");
 	}
 

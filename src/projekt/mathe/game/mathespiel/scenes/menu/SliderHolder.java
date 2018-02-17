@@ -19,7 +19,7 @@ public class SliderHolder extends Holder<Slider>{
 	
 	public boolean wasClicked() {
 		for(Slider slider : getElements()) {
-			if(!slider.isInteractable()) {
+			if(slider.getState().equals("clicked")) {
 				return true;
 			}
 		}

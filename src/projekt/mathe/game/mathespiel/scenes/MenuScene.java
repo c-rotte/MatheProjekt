@@ -9,30 +9,52 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.ResLoader;
+import projekt.mathe.game.engine.help.TextureHelper;
+import projekt.mathe.game.engine.particle.ParticleHolder;
 import projekt.mathe.game.mathespiel.scenes.menu.Slider;
 import projekt.mathe.game.mathespiel.scenes.menu.SliderHolder;
 
 public class MenuScene extends Scene{
 	
+	private ParticleHolder particleHolder;
 	private SliderHolder sliderHolder;
-	private Image bg;
-
+	private TextureHelper titelHelper;
+	
 	public MenuScene(Game container) {
-		super(container, "menu", Color.WHITE);
+		super(container, "menu", Color.BLACK);
 		sliderHolder = new SliderHolder(this);
-		sliderHolder.addElement(new Slider(this, sliderHolder, -200, 85, 85, 200, 50, "START", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
-			@Override
-			public void run() {
-				callScene("pausenhof", new MainSceneData(), 100f);
-			}
-		}));
-		sliderHolder.addElement(new Slider(this, sliderHolder, -300, 85, 185, 200, 50, "SETTINGS", 30, Color.WHITE, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, new Runnable() {
-			@Override
-			public void run() {
-				callScene("settings", new MainSceneData(), 50f);
-			}
-		}));
-		bg = ResLoader.getImageByName("general/menuBG.png");
+		sliderHolder.addElement(new Slider(this, sliderHolder, 568, 436, 144, 38, new Image[] {
+				ResLoader.getImageByName("menu/buttons/Start1.png"),
+				ResLoader.getImageByName("menu/buttons/Start2.png"),
+				ResLoader.getImageByName("menu/buttons/Start3.png")
+			}).addOnClickListener(new Runnable() {
+				@Override
+				public void run() {
+					callScene("pausenhof", getDataForNextScene(), 80f);
+				}
+			}));
+		sliderHolder.addElement(new Slider(this, sliderHolder, 524, 496, 232, 38, new Image[] {
+				ResLoader.getImageByName("menu/buttons/Optionen1.png"),
+				ResLoader.getImageByName("menu/buttons/Optionen2.png"),
+				ResLoader.getImageByName("menu/buttons/Optionen3.png")
+			}).addOnClickListener(new Runnable() {
+				@Override
+				public void run() {
+					callScene("settings", getDataForNextScene(), 80f);
+				}
+			}));
+		sliderHolder.addElement(new Slider(this, sliderHolder, 582, 550, 116, 43, new Image[] {
+				ResLoader.getImageByName("menu/buttons/Über1.png"),
+				ResLoader.getImageByName("menu/buttons/Über2.png"),
+				ResLoader.getImageByName("menu/buttons/Über3.png")
+			}));
+		Image[] titelImages = new Image[21];
+		for(int i = 0; i < 21; i++) {
+			titelImages[i] = ResLoader.getImageByName("menu/titel/titel_000" + (i <= 9 ? "0" : "") + i + ".png");
+		}
+		titelHelper = new TextureHelper();
+		titelHelper.addState("normal", 9, titelImages);
+		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.ORANGE);
 	}
 
 	@Override
@@ -60,11 +82,14 @@ public class MenuScene extends Scene{
 	@Override
 	public void onTick(float delta) {
 		sliderHolder.onTick(delta);
+		titelHelper.onTick(delta);
+		particleHolder.onTick(delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(bg, 0, 0, null);
+		particleHolder.onPaint(g2d);
+		g2d.drawImage(titelHelper.getCurrentImage(), 331, 140, 617, 55, null);
 		sliderHolder.onPaint(g2d);
 	}
 
