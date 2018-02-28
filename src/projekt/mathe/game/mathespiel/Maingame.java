@@ -18,24 +18,36 @@ import projekt.mathe.game.mathespiel.scenes.loading.LoadingScene;
 public class Maingame extends Game{
 
 	private static final long serialVersionUID = 8243059591883622826L;
-
+	private boolean finishedLoading;
+	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		registerScenes();
+		registerMenuScenes();
+		setCurrentScene("loading", new MainSceneData(), 120f);
+		new Thread(() -> {
+			registerGameScenes();
+			finishedLoading = true;
+		}).start();
 	}
 
-	private void registerScenes(){
-		this.registerScene(new SettingsScene(this));
-		this.registerScene(new MenuScene(this));
+	private void registerGameScenes(){
 		this.registerScene(new ChemieScene(this));
-		this.registerScene(new LoadingScene(this));
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
 		this.registerScene(new TischeScene(this));
 		this.registerScene(new DrawingScene(this));
-		setCurrentScene("loading", new MainSceneData(), 120f);
 	}
 
+	private void registerMenuScenes() {
+		this.registerScene(new LoadingScene(this));
+		this.registerScene(new MenuScene(this));
+		this.registerScene(new SettingsScene(this));
+	}
+	
+	public boolean finishedLoading() {
+		return finishedLoading;
+	}
+	
 	@Override
 	public void onExit() {
 		Saver.setData("fps", Settings.FPS_ANZEIGEN);

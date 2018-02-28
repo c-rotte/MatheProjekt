@@ -8,9 +8,12 @@ import java.awt.event.MouseEvent;
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
+import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
+import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.particle.ParticleHolder;
+import projekt.mathe.game.mathespiel.Maingame;
 import projekt.mathe.game.mathespiel.scenes.menu.Slider;
 import projekt.mathe.game.mathespiel.scenes.menu.SliderHolder;
 
@@ -19,9 +22,17 @@ public class MenuScene extends Scene{
 	private ParticleHolder particleHolder;
 	private SliderHolder sliderHolder;
 	private TextureHelper titelHelper;
+	private boolean gameLoading;
+	private TextureHelper loadingHelper;
 	
 	public MenuScene(Game container) {
 		super(container, "menu", Color.BLACK);
+		loadingHelper = new TextureHelper();
+		Image[] loadingIMG = new Image[45];
+		for(int i = 0; i < 45; i++) {
+			loadingIMG[i] = Helper.colorImage(ResLoader.getImageByName("menu/loading/frames_" + (i + 1) + ".png"), Color.WHITE);
+		}
+		loadingHelper.addState("normal", 10, loadingIMG);
 		sliderHolder = new SliderHolder(this);
 		sliderHolder.addElement(new Slider(this, sliderHolder, 568, 436, 144, 38, new Image[] {
 				ResLoader.getImageByName("menu/buttons/Start1.png"),
@@ -30,7 +41,7 @@ public class MenuScene extends Scene{
 			}).addOnClickListener(new Runnable() {
 				@Override
 				public void run() {
-					callScene("pausenhof", getDataForNextScene(), 80f);
+					startGame();
 				}
 			}));
 		sliderHolder.addElement(new Slider(this, sliderHolder, 524, 496, 232, 38, new Image[] {
@@ -54,14 +65,19 @@ public class MenuScene extends Scene{
 		}
 		titelHelper = new TextureHelper();
 		titelHelper.addState("normal", 9, titelImages);
-		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.ORANGE);
+		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.WHITE);
 	}
 
+	private void startGame() {
+		gameLoading = true;
+	}
+	
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		camera.setX(0);
 		camera.setY(0);
 		sliderHolder.reset();
+		gameLoading = false;
 	}
 
 	@Override
@@ -84,6 +100,14 @@ public class MenuScene extends Scene{
 		sliderHolder.onTick(delta);
 		titelHelper.onTick(delta);
 		particleHolder.onTick(delta);
+		if(gameLoading) {
+			if(((Maingame) container).finishedLoading()) {
+				gameLoading = false;
+				callScene("pausenhof", getDataForNextScene(), 80f);
+			}else {
+				loadingHelper.onTick(delta);
+			}
+		}
 	}
 
 	@Override
@@ -91,6 +115,10 @@ public class MenuScene extends Scene{
 		particleHolder.onPaint(g2d);
 		g2d.drawImage(titelHelper.getCurrentImage(), 331, 140, 617, 55, null);
 		sliderHolder.onPaint(g2d);
+		if(gameLoading && !((Maingame) container).finishedLoading()) {
+			g2d.drawImage(loadingHelper.getCurrentImage(), 1200, 640, 70, 70, null);
+			Helper.drawStringFromLeft(1000, 690, "Loading...", Color.WHITE, 40, FONT.Ailerons, g2d);
+		}
 	}
 
 	@Override

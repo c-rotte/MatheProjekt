@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import projekt.mathe.game.engine.Frame;
 import projekt.mathe.game.engine.Popup;
@@ -43,17 +46,17 @@ public class Main {
 		private static final Font font = new Font("Verdana", Font.BOLD, 20);
 		private static final GradientPaint paint = new GradientPaint(13, 13, Color.GREEN, 174, 24, new Color(0, 255, 255), true);
 		
+		private static final float objectAmount = 89f;
+		
 		@Override
 		public void onPaint(Graphics2D g2d) {
-			g2d.setColor(Color.GRAY);
-			g2d.drawRect(0, 0, 200 - 1, 50 - 1);
 			g2d.setColor(new Color(222, 222, 222));
 			g2d.fillRect(10, 10, 180, 30);
 			g2d.setPaint(paint);
-			g2d.fillRect(10, 10, (int) (180 * Logger.getRelativeLoadedObjects()), 30);
+			g2d.fillRect(10, 10, (int) (180 * (Logger.getLoadedObjects() / objectAmount)), 30);
 			g2d.setColor(Color.WHITE);
 			g2d.setFont(font);
-			g2d.drawString((int) (Logger.getRelativeLoadedObjects() * 100f) + "%", 90, 32);
+			g2d.drawString((int) ((Logger.getLoadedObjects() / objectAmount) * 100f) + "%", 90, 32);
 		}
 		
 	}
