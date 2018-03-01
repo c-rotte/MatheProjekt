@@ -13,6 +13,7 @@ import projekt.mathe.game.mathespiel.scenes.game.AulaScene;
 import projekt.mathe.game.mathespiel.scenes.game.ChemieScene;
 import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
+import projekt.mathe.game.mathespiel.scenes.game.SekScene;
 import projekt.mathe.game.mathespiel.scenes.loading.LoadingScene;
 
 public class Maingame extends Game{
@@ -35,6 +36,7 @@ public class Maingame extends Game{
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
 		this.registerScene(new TischeScene(this));
+		this.registerScene(new SekScene(this));
 		this.registerScene(new DrawingScene(this));
 	}
 

@@ -113,7 +113,9 @@ public class Helper {
 		Image[] images = new Image[amount];
 		for(int i = 1; i <= amount; i++) {
 			String name = beginning + "_" + (i <= 9 ? "0" : "") + i + "." + imgEnd.replace(".", "");
-			images[i - 1] = ResLoader.getImageByName(name);
+			try {
+				images[i - 1] = ResLoader.getImageByName(name);
+			}catch (Exception e) {}
 		}
 		return images;
 	}

@@ -41,7 +41,9 @@ public class CutTile extends Tile{
 				r = 0;
 				c++;
 			}
-			addTiles(container, world, x + images[0].getWidth(null) * r, y + c * images[0].getHeight(null), belowPlayer, images[i]);
+			if(images[i] != null) {
+				addTiles(container, world, x + images[i].getWidth(null) * r, y + c * images[i].getHeight(null), belowPlayer, images[i]);
+			}
 			r++;
 		}
 	}
