@@ -5,16 +5,17 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.save.Saver;
+import projekt.mathe.game.mathespiel.scenes.InfoScene;
+import projekt.mathe.game.mathespiel.scenes.LoadingScene;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.MenuScene;
 import projekt.mathe.game.mathespiel.scenes.SettingsScene;
-import projekt.mathe.game.mathespiel.scenes.TischeScene;
 import projekt.mathe.game.mathespiel.scenes.game.AulaScene;
 import projekt.mathe.game.mathespiel.scenes.game.ChemieScene;
 import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
-import projekt.mathe.game.mathespiel.scenes.loading.LoadingScene;
+import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
 
 public class Maingame extends Game{
 
@@ -44,6 +45,7 @@ public class Maingame extends Game{
 		this.registerScene(new LoadingScene(this));
 		this.registerScene(new MenuScene(this));
 		this.registerScene(new SettingsScene(this));
+		this.registerScene(new InfoScene(this));
 	}
 	
 	public boolean finishedLoading() {

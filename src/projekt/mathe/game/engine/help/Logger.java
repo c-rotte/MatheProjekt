@@ -18,7 +18,11 @@ public class Logger {
 	}
 
 	public static float getRelativeLoadedObjects() {
-		return ((float) LOADED) / 10258f;
+		return ((float) LOADED) / ((float) getAmountToLoad());
+	}
+	
+	public static int getAmountToLoad() {
+		return 10258;
 	}
 	
 }

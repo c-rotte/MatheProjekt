@@ -46,7 +46,7 @@ public class Main {
 		private static final Font font = new Font("Verdana", Font.BOLD, 20);
 		private static final GradientPaint paint = new GradientPaint(13, 13, Color.GREEN, 174, 24, new Color(0, 255, 255), true);
 		
-		private static final float objectAmount = 89f;
+		private static final float objectAmount = 95f;
 		
 		@Override
 		public void onPaint(Graphics2D g2d) {

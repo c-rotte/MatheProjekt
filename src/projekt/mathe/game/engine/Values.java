@@ -5,7 +5,7 @@ import java.awt.RenderingHints;
 
 public class Values {
 
-	public static final String TITLEBAR_TEXT = "Title";
+	public static final String TITLEBAR_TEXT = "Nachts im Bunker";
 	public static final int TITLEBAR_HEIGHT = 25;
 	public static final Color TITLEBAR_COLOR_1 = Color.WHITE;
 	public static final Color TITLEBAR_COLOR_2 = new Color(128, 128, 128);

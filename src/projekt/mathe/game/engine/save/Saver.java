@@ -12,7 +12,7 @@ import projekt.mathe.game.engine.help.Logger;
 
 public class Saver {
 
-	private final static String path = System.getProperty("user.dir") + "/saves.data";
+	private final static String path = System.getenv("APPDATA") + "/saves.data";
 	private static File file;
 	private static HashMap<String, String> data;
 	

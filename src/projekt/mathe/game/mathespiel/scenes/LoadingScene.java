@@ -1,4 +1,4 @@
-package projekt.mathe.game.mathespiel.scenes.loading;
+package projekt.mathe.game.mathespiel.scenes;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -13,7 +13,6 @@ import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
-import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 
 public class LoadingScene extends Scene{
 

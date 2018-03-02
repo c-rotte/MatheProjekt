@@ -11,14 +11,14 @@ import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
 
-public class Slider extends ScreenElement{
+public class Button extends ScreenElement{
 
-	private SliderHolder holder;
+	private ButtonHolder holder;
 	private Runnable runnable;
 	private String state;
 	private Image[] tex;
 	
-	public Slider(Scene container, SliderHolder holder, int x, int y, int w, int h, Image[] tex) {
+	public Button(Scene container, ButtonHolder holder, int x, int y, int w, int h, Image[] tex) {
 		super(container, x, y, w, h);
 		this.holder = holder;
 		state = "normal";
@@ -29,7 +29,7 @@ public class Slider extends ScreenElement{
 		state = "normal";
 	}
 	
-	public Slider addOnClickListener(Runnable runnable) {
+	public Button addOnClickListener(Runnable runnable) {
 		this.runnable = runnable;
 		return this;
 	}

@@ -1,5 +1,6 @@
 package projekt.mathe.game.engine.help;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -13,6 +14,9 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -30,12 +34,18 @@ import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import projekt.mathe.game.engine.help.Helper.FONT;
+
 public class Helper {
 	
 	private static HashMap<FONT, String> fonts = new HashMap<>();
 	
 	public static enum FONT{
-		FreePixel, Chrobot, Ailerons
+		FreePixel, Chrobot, Ailerons, VCR
+	}
+	
+	public static String fontToName(FONT font) {
+		return fonts.get(font);
 	}
 	
 	public static void loadFont() {
@@ -43,7 +53,8 @@ public class Helper {
 			Font[] fs = {
 				Font.createFont(Font.TRUETYPE_FONT, ResLoader.getFile("general/fonts/FreePixel.ttf")),
 				Font.createFont(Font.TRUETYPE_FONT, ResLoader.getFile("general/fonts/Chrobot.otf")),
-				Font.createFont(Font.TRUETYPE_FONT, ResLoader.getFile("general/fonts/Ailerons.otf"))
+				Font.createFont(Font.TRUETYPE_FONT, ResLoader.getFile("general/fonts/Ailerons.otf")),
+				Font.createFont(Font.TRUETYPE_FONT, ResLoader.getFile("general/fonts/Vcr.ttf"))
 			};
 		    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		    for(Font font : fs) {
@@ -52,6 +63,7 @@ public class Helper {
 		    fonts.put(FONT.FreePixel, "Free Pixel");
 		    fonts.put(FONT.Chrobot, "Chrobot");
 		    fonts.put(FONT.Ailerons, "Ailerons");
+		    fonts.put(FONT.VCR, "VCR OSD Mono");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -89,23 +101,45 @@ public class Helper {
 		double y = (299 * color.getRed() + 587 * color.getGreen() + 114 * color.getBlue()) / 1000;
 		return y >= 128 ? Color.black : Color.white;
 	}
-	
-	public static void drawStringAroundPoint(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d) {
-		final Font f = new Font(fonts.get(font), Font.PLAIN, size);
+
+	public static void drawStringFromLeft(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, int outlineSize) {
+		final Font f = new Font(Helper.fontToName(font), Font.PLAIN, size);
 		g2d.setFont(f);
-		g2d.setColor(color);
 		final FontMetrics fm = g2d.getFontMetrics();
 		final Rectangle2D stringBounds = fm.getStringBounds(s, g2d);
-		g2d.drawString(s, (int) (x - stringBounds.getWidth()/2), (int) (y + fm.getAscent() + stringBounds.getY()/2));
-	}
-	
-	public static void drawStringFromLeft(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d) {
-		final Font f = new Font(fonts.get(font), Font.PLAIN, size);
-		g2d.setFont(f);
+		
+		if(outline != null && outlineSize > 0) {
+			g2d.setColor(outline);
+			AffineTransform transform = new AffineTransform();
+			transform.translate(x, (int) (y + fm.getAscent() + stringBounds.getY()/2));
+			Shape shape = new TextLayout(s, f, g2d.getFontRenderContext()).getOutline(transform);
+			g2d.setStroke(new BasicStroke(outlineSize));
+			g2d.fill(shape);
+			g2d.draw(shape);
+		}
+		
 		g2d.setColor(color);
-		final FontMetrics fm = g2d.getFontMetrics();
-		final Rectangle2D stringBounds = fm.getStringBounds(s, g2d);
 		g2d.drawString(s, x, (int) (y + fm.getAscent() + stringBounds.getY()/2));
+	}
+
+	public static void drawStringAroundPosition(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, int outlineSize) {
+		final Font f = new Font(Helper.fontToName(font), Font.PLAIN, size);
+		g2d.setFont(f);
+		final FontMetrics fm = g2d.getFontMetrics();
+		final Rectangle2D stringBounds = fm.getStringBounds(s, g2d);
+		
+		if(outline != null && outlineSize > 0) {
+			g2d.setColor(outline);
+			AffineTransform transform = new AffineTransform();
+			transform.translate((int) (x - stringBounds.getWidth()/2), (int) (y + fm.getAscent() + stringBounds.getY()/2));
+			Shape shape = new TextLayout(s, f, g2d.getFontRenderContext()).getOutline(transform);
+			g2d.setStroke(new BasicStroke(outlineSize));
+			g2d.fill(shape);
+			g2d.draw(shape);
+		}
+		
+		g2d.setColor(color);
+		g2d.drawString(s, (int) (x - stringBounds.getWidth()/2), (int) (y + fm.getAscent() + stringBounds.getY()/2));
 	}
 
 	public static Image[] getImagesBySplices(String beginning, int amount, String imgEnd) {

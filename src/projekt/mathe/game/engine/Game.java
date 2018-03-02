@@ -261,8 +261,9 @@ public abstract class Game extends JPanel implements ActionListener{
 		g2d.setTransform(affineTransform);
 		if(!fullscreen) {
 			titlebar.onPaint(g2d);
-		}else if(Settings.FPS_ANZEIGEN){
-			Helper.drawStringAroundPoint(100, 100, fpsHelper.getFPS() + "", Color.YELLOW, 40, FONT.Chrobot, g2d);
+		}
+		if(Settings.FPS_ANZEIGEN){
+			Helper.drawStringAroundPosition(100, 100, fpsHelper.getFPS() + "", Color.YELLOW, 40, FONT.Chrobot, g2d, null, -1);
 		}
 		g2d.setTransform(affineTransform);
 		

@@ -46,7 +46,7 @@ public class MainPauseScreenClickable extends PauseScreenClickable{
 		}
 		g2d.fill(getBounds());
 		if(hasText) {
-			Helper.drawStringAroundPoint(getMiddle().x, getMiddle().y, text, textColor, textSize, FONT.Ailerons, g2d);
+			Helper.drawStringAroundPosition(getMiddle().x, getMiddle().y, text, textColor, textSize, FONT.Ailerons, g2d, null, -1);
 		}
 	}
 

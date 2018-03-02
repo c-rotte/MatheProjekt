@@ -60,7 +60,7 @@ public class CheckBox extends ScreenElement{
 		g2d.setColor(bg);
 		g2d.fill(getBounds());
 		if(text != null) {
-			Helper.drawStringFromLeft((int) (x + w + 20), (int) (y + h/2), text, textColor, (int) h, FONT.Chrobot, g2d);
+			Helper.drawStringFromLeft((int) (x + w + 20), (int) (y + h/2), text, textColor, (int) h, FONT.VCR, g2d, null, -1);
 		}
 		if(clicked) {
 			g2d.setColor(fg);

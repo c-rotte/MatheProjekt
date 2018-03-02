@@ -5,20 +5,20 @@ import java.awt.event.MouseEvent;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
 
-public class SliderHolder extends Holder<Slider>{
+public class ButtonHolder extends Holder<Button>{
 
-	public SliderHolder(Scene container) {
+	public ButtonHolder(Scene container) {
 		super(container);
 	}
 
 	public void reset() {
-		for(Slider slider : getElements()) {
+		for(Button slider : getElements()) {
 			slider.reset();
 		}
 	}
 	
 	public boolean wasClicked() {
-		for(Slider slider : getElements()) {
+		for(Button slider : getElements()) {
 			if(slider.getState().equals("clicked")) {
 				return true;
 			}

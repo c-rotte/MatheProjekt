@@ -49,7 +49,7 @@ public class Titlebar {
 		if(icon != null) {
 			g2d.drawImage(icon, Values.TITLEBAR_HEIGHT/4, Values.TITLEBAR_HEIGHT/4, Values.TITLEBAR_HEIGHT/2, Values.TITLEBAR_HEIGHT/2, null);
 		}
-		Helper.drawStringAroundPoint(Values.WINDOW_WIDTH/2, Values.TITLEBAR_HEIGHT/2, title + (Settings.FPS_ANZEIGEN ? " " + container.fpsHelper.getFPS() : ""), Values.TITLEBAR_COLOR_1, Values.TITLEBAR_HEIGHT - 9, FONT.Chrobot, g2d);
+		Helper.drawStringAroundPosition(Values.WINDOW_WIDTH/2, Values.TITLEBAR_HEIGHT/2, title, Values.TITLEBAR_COLOR_1, Values.TITLEBAR_HEIGHT - 9, FONT.Ailerons, g2d, null, -1);
 	}
 	
 	public void onMouseClicked(MouseEvent e){

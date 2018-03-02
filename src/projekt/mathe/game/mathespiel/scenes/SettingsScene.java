@@ -9,66 +9,86 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.ResLoader;
+import projekt.mathe.game.engine.particle.ParticleHolder;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.Settings;
+import projekt.mathe.game.mathespiel.scenes.menu.Button;
+import projekt.mathe.game.mathespiel.scenes.menu.ButtonHolder;
 import projekt.mathe.game.mathespiel.scenes.menu.CheckBox;
 import projekt.mathe.game.mathespiel.scenes.menu.CheckBoxHolder;
-import projekt.mathe.game.mathespiel.scenes.menu.Slider;
-import projekt.mathe.game.mathespiel.scenes.menu.SliderHolder;
 
 public class SettingsScene extends Scene{
 
 	private CheckBoxHolder checkBoxHolder;
-	private SliderHolder sliderHolder;
-	private Image bg;
-
+	private ButtonHolder buttonHolder;
+	private ParticleHolder particleHolder;
+	
 	public SettingsScene(Game container) {
-		super(container, "settings", Color.CYAN);
+		super(container, "settings", Color.BLACK);
 		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
 		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
 		checkBoxHolder = new CheckBoxHolder(this);
-		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.LIGHT_GRAY).setClicked(Settings.FPS_ANZEIGEN));
-		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.LIGHT_GRAY).setClicked(Settings.HITBOXEN_ANZEIGEN));
-		sliderHolder = new SliderHolder(this);
-		bg = ResLoader.getImageByName("general/menuBG.png");
+		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.WHITE).setClicked(Settings.FPS_ANZEIGEN));
+		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.WHITE).setClicked(Settings.HITBOXEN_ANZEIGEN));
+		checkBoxHolder.addElement(new CheckBox(this, "setting3", 50, 220, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Setting 3", Color.WHITE));
+		checkBoxHolder.addElement(new CheckBox(this, "setting4", 50, 280, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Setting 4", Color.WHITE));
+		buttonHolder = new ButtonHolder(this);
+		buttonHolder.addElement(new Button(this, buttonHolder, 20, 20, 133, 33, new Image[] {
+			ResLoader.getImageByName("menu/buttons/Zurück1.png"),
+			ResLoader.getImageByName("menu/buttons/Zurück2.png"),
+			ResLoader.getImageByName("menu/buttons/Zurück3.png")
+		}).addOnClickListener(new Runnable() {
+			@Override
+			public void run() {
+				callScene("menu", getDataForNextScene(), 60f);
+				saveSettings();
+			}
+		}));
+		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.WHITE);
 	}
 
+	private void saveSettings() {
+		Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
+		Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
+	}
+	
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		camera.setX(0);
 		camera.setY(0);
-		sliderHolder.reset();
+		buttonHolder.reset();
 	}
 
 	@Override
 	public void onMouseDragged(MouseEvent e) {
 		checkBoxHolder.onMouseDragged(e);
-		sliderHolder.onMouseDragged(e);
+		buttonHolder.onMouseDragged(e);
 	}
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
 		checkBoxHolder.onMouseMoved(e);
-		sliderHolder.onMouseMoved(e);
+		buttonHolder.onMouseMoved(e);
 	}
 	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
 		checkBoxHolder.onMouseClicked(e);
-		sliderHolder.onMouseClicked(e);
+		buttonHolder.onMouseClicked(e);
 	}
 	
 	@Override
 	public void onTick(float delta) {
-		sliderHolder.onTick(delta);
-		checkBoxHolder.setClickable(!sliderHolder.wasClicked());
+		particleHolder.onTick(delta);
+		buttonHolder.onTick(delta);
+		checkBoxHolder.setClickable(!buttonHolder.wasClicked());
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(bg, 0, 0, null);
+		particleHolder.onPaint(g2d);
 		checkBoxHolder.onPaint(g2d);
-		sliderHolder.onPaint(g2d);
+		buttonHolder.onPaint(g2d);
 	}
 
 	@Override

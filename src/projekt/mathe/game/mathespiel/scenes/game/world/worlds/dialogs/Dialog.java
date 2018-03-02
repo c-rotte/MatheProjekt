@@ -182,7 +182,7 @@ public abstract class Dialog{
 		int y = 435;
 		for(String string : lines) {
 			if(string != null && !string.equals("null")) {
-				Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(200), world.container.camera.translateAbsolutY(y), string.trim(), Color.BLACK, 30, FONT.FreePixel, g2d);
+				Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(200), world.container.camera.translateAbsolutY(y), string.trim(), Color.BLACK, 30, FONT.FreePixel, g2d, null, -1);
 				y += 25;
 			}
 		}
@@ -197,9 +197,9 @@ public abstract class Dialog{
 			for(int i = 0; i < currCard.selections.length; i++) {
 				if(i == index) {
 					g2d.drawImage(selecterImg, world.container.camera.translateAbsolutX(1120), world.container.camera.translateAbsolutY(530) + i * 30, 18, 18, null);
-					Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(1140), world.container.camera.translateAbsolutY(530) + i * 30, currCard.selections[i], Color.GRAY, 30, FONT.FreePixel, g2d);
+					Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(1140), world.container.camera.translateAbsolutY(530) + i * 30, currCard.selections[i], Color.GRAY, 30, FONT.FreePixel, g2d, null, -1);
 				}else {
-					Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(1120), world.container.camera.translateAbsolutY(530) + i * 30, currCard.selections[i], Color.BLACK, 30, FONT.FreePixel, g2d);
+					Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(1120), world.container.camera.translateAbsolutY(530) + i * 30, currCard.selections[i], Color.BLACK, 30, FONT.FreePixel, g2d, null, -1);
 				}
 			}
 		}

@@ -1,4 +1,4 @@
-package projekt.mathe.game.mathespiel.scenes;
+package projekt.mathe.game.mathespiel.scenes.game;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,6 +13,7 @@ import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.Main;
 import projekt.mathe.game.mathespiel.Settings;
+import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.TischeWorld;
 
@@ -51,7 +52,7 @@ public class TischeScene extends Scene{
 	
 	@Override
 	public void onTick(float delta) {
-		Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
+		//Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
 	}
 
 	@Override

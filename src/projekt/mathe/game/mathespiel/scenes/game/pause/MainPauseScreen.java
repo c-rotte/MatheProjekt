@@ -55,7 +55,7 @@ public class MainPauseScreen extends PauseScreen{
 		}
 		g2d.setColor(backgroundColor);
 		g2d.fill(getBounds());
-		Helper.drawStringAroundPoint(getMiddle().x, (int) (y + 40), "PAUSE", Color.WHITE, 40, FONT.Ailerons, g2d);
+		Helper.drawStringAroundPosition(getMiddle().x, (int) (y + 40), "PAUSE", Color.WHITE, 40, FONT.Ailerons, g2d, null, -1);
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(getMiddle().x - 60, (int) (y + 63), 120, 2);
 		getHolder().onPaint(g2d);
