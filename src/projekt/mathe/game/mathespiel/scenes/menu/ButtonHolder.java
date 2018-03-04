@@ -16,7 +16,7 @@ public class ButtonHolder extends Holder<Button>{
 			slider.reset();
 		}
 	}
-	
+
 	public boolean wasClicked() {
 		for(Button slider : getElements()) {
 			if(slider.getState().equals("clicked")) {

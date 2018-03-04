@@ -5,6 +5,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.save.Saver;
+import projekt.mathe.game.mathespiel.scenes.ChooseScene;
 import projekt.mathe.game.mathespiel.scenes.InfoScene;
 import projekt.mathe.game.mathespiel.scenes.LoadingScene;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
@@ -46,6 +47,7 @@ public class Maingame extends Game{
 		this.registerScene(new MenuScene(this));
 		this.registerScene(new SettingsScene(this));
 		this.registerScene(new InfoScene(this));
+		this.registerScene(new ChooseScene(this));
 	}
 	
 	public boolean finishedLoading() {

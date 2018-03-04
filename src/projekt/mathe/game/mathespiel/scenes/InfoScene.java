@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
+import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.Helper.FONT;
@@ -24,16 +25,14 @@ public class InfoScene extends Scene{
 		super(container, "info", Color.BLACK);
 		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.WHITE);
 		buttonHolder = new ButtonHolder(this);
-		buttonHolder.addElement(new Button(this, buttonHolder, 20, 20, 133, 33, new Image[] {
-			ResLoader.getImageByName("menu/buttons/Zurück1.png"),
-			ResLoader.getImageByName("menu/buttons/Zurück2.png"),
-			ResLoader.getImageByName("menu/buttons/Zurück3.png")
-		}).addOnClickListener(new Runnable() {
-			@Override
-			public void run() {
-				callScene("menu", getDataForNextScene(), 60f);
-			}
-		}));
+		buttonHolder.addElement(new Button(this, buttonHolder, 40, 40, 140, 40)
+				.setText("ZURÜCK", 40, 110, 57, new Color[] {new Color(0, 180, 255), new Color(0, 100, 141), new Color(0, 55, 78)}, 3.4f)
+				.addOnClickListener(new Runnable() {
+					@Override
+					public void run() {
+						callScene("menu", getDataForNextScene(), Values.MENU_FADING);	
+					}
+				}));
 	}
 
 	@Override

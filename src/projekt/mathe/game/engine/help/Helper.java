@@ -102,7 +102,7 @@ public class Helper {
 		return y >= 128 ? Color.black : Color.white;
 	}
 
-	public static void drawStringFromLeft(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, int outlineSize) {
+	public static void drawStringFromLeft(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, float outlineSize) {
 		final Font f = new Font(Helper.fontToName(font), Font.PLAIN, size);
 		g2d.setFont(f);
 		final FontMetrics fm = g2d.getFontMetrics();
@@ -111,7 +111,7 @@ public class Helper {
 		if(outline != null && outlineSize > 0) {
 			g2d.setColor(outline);
 			AffineTransform transform = new AffineTransform();
-			transform.translate(x, (int) (y + fm.getAscent() + stringBounds.getY()/2));
+			transform.translate(x, (int) Math.round(y + fm.getAscent() + stringBounds.getY()/2));
 			Shape shape = new TextLayout(s, f, g2d.getFontRenderContext()).getOutline(transform);
 			g2d.setStroke(new BasicStroke(outlineSize));
 			g2d.fill(shape);
@@ -119,10 +119,10 @@ public class Helper {
 		}
 		
 		g2d.setColor(color);
-		g2d.drawString(s, x, (int) (y + fm.getAscent() + stringBounds.getY()/2));
+		g2d.drawString(s, x, (int) Math.round(y + fm.getAscent() + stringBounds.getY()/2));
 	}
 
-	public static void drawStringAroundPosition(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, int outlineSize) {
+	public static void drawStringAroundPosition(int x, int y, String s, Color color, int size, FONT font, Graphics2D g2d, Color outline, float outlineSize) {
 		final Font f = new Font(Helper.fontToName(font), Font.PLAIN, size);
 		g2d.setFont(f);
 		final FontMetrics fm = g2d.getFontMetrics();
@@ -131,7 +131,7 @@ public class Helper {
 		if(outline != null && outlineSize > 0) {
 			g2d.setColor(outline);
 			AffineTransform transform = new AffineTransform();
-			transform.translate((int) (x - stringBounds.getWidth()/2), (int) (y + fm.getAscent() + stringBounds.getY()/2));
+			transform.translate((int) Math.round(x - stringBounds.getWidth()/2), (int) Math.round(y + fm.getAscent() + stringBounds.getY()/2));
 			Shape shape = new TextLayout(s, f, g2d.getFontRenderContext()).getOutline(transform);
 			g2d.setStroke(new BasicStroke(outlineSize));
 			g2d.fill(shape);
@@ -139,7 +139,7 @@ public class Helper {
 		}
 		
 		g2d.setColor(color);
-		g2d.drawString(s, (int) (x - stringBounds.getWidth()/2), (int) (y + fm.getAscent() + stringBounds.getY()/2));
+		g2d.drawString(s, (int) Math.round(x - stringBounds.getWidth()/2), (int) Math.round(y + fm.getAscent() + stringBounds.getY()/2));
 	}
 
 	public static Image[] getImagesBySplices(String beginning, int amount, String imgEnd) {

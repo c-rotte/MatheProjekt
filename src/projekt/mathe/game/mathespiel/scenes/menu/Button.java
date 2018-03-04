@@ -16,13 +16,27 @@ public class Button extends ScreenElement{
 	private ButtonHolder holder;
 	private Runnable runnable;
 	private String state;
-	private Image[] tex;
+	private Color[] colors;
+	private String text;
+	private int size;
+	private float outlineSize;
 	
-	public Button(Scene container, ButtonHolder holder, int x, int y, int w, int h, Image[] tex) {
+	private int textX, textY;
+	
+	public Button(Scene container, ButtonHolder holder, int x, int y, int w, int h) {
 		super(container, x, y, w, h);
 		this.holder = holder;
 		state = "normal";
-		this.tex = tex;
+	}
+	
+	public Button setText(String text, int size, int x, int y, Color[] colors, float outlineSize) {
+		this.colors = colors;
+		this.size = size;
+		this.text = text;
+		this.outlineSize = outlineSize;
+		textX = x;
+		textY = y;
+		return this;
 	}
 	
 	public void reset() {
@@ -40,7 +54,7 @@ public class Button extends ScreenElement{
 	
 	@Override
 	public void onMouseDragged(MouseEvent e){
-		if(!state.equals("clicked") && !holder.wasClicked()) {
+		if(!state.equals("clicked") && !holder.wasClicked() && !getContainer().fading) {
 			if(getBounds().contains(e.getPoint())) {
 				state = "selected";
 			}else {
@@ -51,7 +65,7 @@ public class Button extends ScreenElement{
 	
 	@Override
 	public void onMouseMoved(MouseEvent e){
-		if(!state.equals("clicked") && !holder.wasClicked()) {
+		if(!state.equals("clicked") && !holder.wasClicked() && !getContainer().fading) {
 			if(getBounds().contains(e.getPoint())) {
 				state = "selected";
 			}else {
@@ -62,7 +76,7 @@ public class Button extends ScreenElement{
 	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
-		if(getBounds().contains(e.getPoint()) && !holder.wasClicked()) {
+		if(getBounds().contains(e.getPoint()) && !holder.wasClicked() && !getContainer().fading) {
 			state = "clicked";
 			if(runnable != null) {
 				runnable.run();
@@ -77,10 +91,12 @@ public class Button extends ScreenElement{
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
+		g2d.setColor(Color.GRAY);
+		//g2d.fill(getBounds());
 		switch (state) {
-			case "normal": g2d.drawImage(tex[0], (int) x, (int) y, (int) w, (int) h, null); break;
-			case "selected": g2d.drawImage(tex[1], (int) x, (int) y, (int) w, (int) h, null); break;
-			case "clicked": g2d.drawImage(tex[2], (int) x, (int) y, (int) w, (int) h, null); break;
+			case "normal": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[0], outlineSize); break;
+			case "selected": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[1], outlineSize); break;
+			case "clicked": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[2], outlineSize); break;
 		}
 		
 	}

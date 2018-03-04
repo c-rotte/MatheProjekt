@@ -27,6 +27,10 @@ public abstract class Holder <T extends ScreenElement>{
 		}
 	}
 
+	public void clear() {
+		list.clear();
+	}
+	
 	public ArrayList<T> getElements(){
 		return list;
 	}
