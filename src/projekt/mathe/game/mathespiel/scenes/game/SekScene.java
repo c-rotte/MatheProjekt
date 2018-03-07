@@ -3,11 +3,13 @@ package projekt.mathe.game.mathespiel.scenes.game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.SekWorld;
@@ -30,6 +32,7 @@ public class SekScene extends Scene{
 			camera.focusY(422);
 			player.x = -454;
 			player.y = 360;
+			player.direction = "right";
 		}else {
 			camera.focusX(1000);
 			camera.focusY(300);
@@ -40,7 +43,7 @@ public class SekScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-		//System.out.println("Kamera: x=" + camera.getFocusX() + "; y=" + camera.getFocusY() + "; Player: x=" + player.x + "; y=" + player.y);
+		//Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
 	}
 
 	@Override

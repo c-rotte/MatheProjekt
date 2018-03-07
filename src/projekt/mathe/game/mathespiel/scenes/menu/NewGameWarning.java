@@ -14,10 +14,9 @@ public class NewGameWarning extends Warning{
 	private ButtonHolder buttonHolder;
 	private String state;
 	private static final String[] warningMessage = {
-		"Du hast bereits",
-		"ein Spiel begonnen.",
-		"Wenn du ein neues",
-		"erstellst, wird der",
+		"Du hast bereits ein Spiel",
+		"begonnen. Wenn du ein",
+		"neues erstellst, wird der",
 		"vorherige Stand gelöscht.",
 		"Möchtest du fortfahren?"
 	};
@@ -77,13 +76,14 @@ public class NewGameWarning extends Warning{
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.setColor(new Color(20, 20, 20, 200));
+		g2d.setColor(new Color(20, 20, 20, 255));
 		g2d.fill(getBounds());
 		g2d.setStroke(new BasicStroke(10f));
-		g2d.setColor(Color.WHITE);
+		g2d.setColor(Color.DARK_GRAY);
 		g2d.draw(getBounds());
+		Helper.drawStringAroundPosition(640, 185, "ACHTUNG!", Color.RED, 50, FONT.VCR, g2d, null, -1);
 		for(int i = 0; i < warningMessage.length; i++) {
-			Helper.drawStringFromLeft(355, 175 + i * 38, warningMessage[i].toUpperCase(), Color.RED, 39, FONT.VCR, g2d, null, -1);
+			Helper.drawStringFromLeft(355, 230 + i * 38, warningMessage[i].toUpperCase(), Color.RED, 39, FONT.VCR, g2d, null, -1);
 		}
 		buttonHolder.onPaint(g2d);
 	}

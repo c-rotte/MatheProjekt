@@ -36,6 +36,12 @@ public class TischeScene extends Scene{
 			player.x = -123;
 			player.y = -136;
 			player.direction = "right";
+		}else if(lastID.equals("sek") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
+			camera.focusX(50);
+			camera.focusY(-140);
+			player.x = 450;
+			player.y = -256;
+			player.direction = "left";
 		}else {
 			camera.focusX(50);
 			camera.focusY(222);
