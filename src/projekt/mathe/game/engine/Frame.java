@@ -13,7 +13,6 @@ public class Frame{
 	private JFrame jframe;
 	private Game game;
 	private Rectangle currRealSize;
-	private boolean focussed;
 	private boolean started;
 	
 	public Frame() {
@@ -93,7 +92,6 @@ public class Frame{
 	public Frame show(){
 		jframe.add(game);
 		jframe.setVisible(true);
-		focussed = true;
 		return this;
 	}
 	
@@ -111,7 +109,7 @@ public class Frame{
 	}
 	
 	public boolean focussed() {
-		return focussed;
+		return jframe.isFocused();
 	}
 	
 	public boolean started() {

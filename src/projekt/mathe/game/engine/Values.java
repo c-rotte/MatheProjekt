@@ -16,6 +16,6 @@ public class Values {
 	public static final float FPS = 60;
 	public static final RenderingHints RENDERING_HINTS = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
 	public static final Color SCENE_BG_COLOR = new Color(0, 14, 51);
-	public static final float MENU_FADING = 40f;
+	public static final float MENU_FADING = 20f;
 	
 }

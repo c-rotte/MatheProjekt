@@ -10,6 +10,7 @@ import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
+import projekt.mathe.game.mathespiel.Settings;
 
 public class Button extends ScreenElement{
 
@@ -94,9 +95,9 @@ public class Button extends ScreenElement{
 		g2d.setColor(Color.GRAY);
 		//g2d.fill(getBounds());
 		switch (state) {
-			case "normal": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[0], outlineSize); break;
-			case "selected": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[1], outlineSize); break;
-			case "clicked": Helper.drawStringAroundPosition(textX, textY, text, Color.WHITE, size, FONT.VCR, g2d, colors[2], outlineSize); break;
+			case "normal": Helper.drawStringAroundPosition(textX, textY, text, Settings.DARKMODE ? Color.BLACK : Color.WHITE, size, FONT.VCR, g2d, colors[0], outlineSize); break;
+			case "selected": Helper.drawStringAroundPosition(textX, textY, text, Settings.DARKMODE ? Color.BLACK : Color.WHITE, size, FONT.VCR, g2d, colors[1], outlineSize); break;
+			case "clicked": Helper.drawStringAroundPosition(textX, textY, text, Settings.DARKMODE ? Color.BLACK : Color.WHITE, size, FONT.VCR, g2d, colors[2], outlineSize); break;
 		}
 		
 	}

@@ -23,7 +23,7 @@ public class Main {
 	private static Popup loading;
 	
 	private static void startGame() {
-		loading = new Popup(new LoadingPanel(), 200, 50, -1);
+		loading = new Popup(new LoadingPanel(), 200, 200, -1);
 		loading.show();
 		Helper.loadFont();
 		System.setProperty("sun.java2d.opengl", "true");
@@ -45,7 +45,6 @@ public class Main {
 
 		private static final Font font = new Font("Verdana", Font.BOLD, 20);
 		private static final GradientPaint paint = new GradientPaint(13, 13, Color.GREEN, 174, 24, new Color(0, 255, 255), true);
-		
 		private static final float objectAmount = 95f;
 		
 		@Override

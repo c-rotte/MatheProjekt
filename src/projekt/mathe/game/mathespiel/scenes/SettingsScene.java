@@ -26,12 +26,10 @@ public class SettingsScene extends Scene{
 	
 	public SettingsScene(Game container) {
 		super(container, "settings", Color.BLACK);
-		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
-		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
 		checkBoxHolder = new CheckBoxHolder(this);
 		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.WHITE).setClicked(Settings.FPS_ANZEIGEN));
 		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.WHITE).setClicked(Settings.HITBOXEN_ANZEIGEN));
-		checkBoxHolder.addElement(new CheckBox(this, "setting3", 50, 220, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Setting 3", Color.WHITE));
+		checkBoxHolder.addElement(new CheckBox(this, "darkmode", 50, 220, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Dunkler Modus", Color.WHITE).setClicked(Settings.DARKMODE));
 		checkBoxHolder.addElement(new CheckBox(this, "setting4", 50, 280, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Setting 4", Color.WHITE));
 		buttonHolder = new ButtonHolder(this);
 		buttonHolder.addElement(new Button(this, buttonHolder, 40, 40, 140, 40)
@@ -49,6 +47,7 @@ public class SettingsScene extends Scene{
 	private void saveSettings() {
 		Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
 		Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
+		Settings.DARKMODE = checkBoxHolder.wasClicked("darkmode");
 	}
 	
 	@Override

@@ -6,15 +6,17 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import projekt.mathe.game.engine.help.Logger;
+import projekt.mathe.game.mathespiel.Settings;
 
 public class Saver {
 
 	private final static String path = System.getenv("APPDATA") + "/saves.data";
 	private static File file;
-	private static HashMap<String, String> data;
+	private static HashMap<String, Object> data;
 	
 	public static void initialize() {
 		file = new File(path);
@@ -36,8 +38,15 @@ public class Saver {
 				}
 				reader.close();
 				Logger.log("Savefile loaded!");
+				loadSettings();
 			} catch (Exception e) {e.printStackTrace();}
 		}
+	}
+	
+	private static void loadSettings() {
+		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
+		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
+		Settings.DARKMODE = Saver.containsData("darkmode") ? Saver.getBoolean("darkmode") : false;
 	}
 	
 	public static void setData(String key, Object data) {
@@ -48,7 +57,7 @@ public class Saver {
 		try {
 			PrintWriter printWriter = new PrintWriter(new FileOutputStream(file));
 			for(String key : data.keySet()) {
-				printWriter.println(key + ":" + data.get(key));
+				printWriter.println(key + ":" + String.valueOf(data.get(key)));
 			}
 			printWriter.close();
 			Logger.log("Saved " + data.keySet().size() + " lines!");
@@ -59,14 +68,14 @@ public class Saver {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return Integer.valueOf(data.get(key));
+		return (int) data.get(key);
 	}
 	
 	public static double getDouble(String key) {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return Double.valueOf(data.get(key));
+		return (double) data.get(key);
 	}
 	
 	public static String getString(String key) {
@@ -80,21 +89,31 @@ public class Saver {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return Float.valueOf(data.get(key));
+		return (float) data.get(key);
 	}
 	
 	public static short getShort(String key) {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return Short.valueOf(data.get(key));
+		return (short) data.get(key);
 	}
 	
 	public static boolean getBoolean(String key) {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return Boolean.valueOf(data.get(key));
+		return String.valueOf(data.get(key)).equals("true");
+	}
+	
+	public static HashMap<String, Object> getMinigameStats(String id) {
+		HashMap<String, Object> stats = new HashMap<>();
+		for(String string : data.keySet()) {
+			if(string.contains(id + "_")) {
+				stats.put(string.replaceAll(id + "_", ""), data.get(string));
+			}
+		}
+		return stats;
 	}
 	
 	public static boolean containsData(String key) {

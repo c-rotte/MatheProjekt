@@ -1,5 +1,6 @@
 package projekt.mathe.game.engine.titlebar;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -41,7 +42,7 @@ public class Titlebar {
 	}
 	
 	public void onPaint(Graphics2D g2d){
-		g2d.setColor(Values.TITLEBAR_COLOR_2);
+		g2d.setColor(container.container.focussed() ? Values.TITLEBAR_COLOR_2 : Color.LIGHT_GRAY);
 		g2d.fillRect(0, 0, Values.WINDOW_WIDTH, Values.TITLEBAR_HEIGHT);
 		closeButton.onPaint(g2d);
 		maximizeButton.onPaint(g2d);

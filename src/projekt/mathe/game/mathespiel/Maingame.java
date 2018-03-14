@@ -56,12 +56,17 @@ public class Maingame extends Game{
 	
 	@Override
 	public void onExit() {
-		Saver.setData("fps", Settings.FPS_ANZEIGEN);
-		Saver.setData("hitbox", Settings.HITBOXEN_ANZEIGEN);
+		saveSettings();
 		Saver.saveData();
 		Logger.log("Caught Closing!");
 		container.shutdown();
 		System.exit(0);
+	}
+	
+	private void saveSettings() {
+		Saver.setData("fps", Settings.FPS_ANZEIGEN);
+		Saver.setData("hitbox", Settings.HITBOXEN_ANZEIGEN);
+		Saver.setData("darkmode", Settings.DARKMODE);
 	}
 	
 }
