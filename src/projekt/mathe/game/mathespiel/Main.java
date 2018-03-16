@@ -16,6 +16,8 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.save.Saver;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class Main {
 	

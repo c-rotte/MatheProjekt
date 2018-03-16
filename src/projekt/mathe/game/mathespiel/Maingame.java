@@ -17,6 +17,7 @@ import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
 import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
+import projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid.PyramidScene;
 
 public class Maingame extends Game{
 
@@ -40,6 +41,8 @@ public class Maingame extends Game{
 		this.registerScene(new TischeScene(this));
 		this.registerScene(new SekScene(this));
 		this.registerScene(new DrawingScene(this));
+		//
+		this.registerScene(new PyramidScene(this));
 	}
 
 	private void registerMenuScenes() {

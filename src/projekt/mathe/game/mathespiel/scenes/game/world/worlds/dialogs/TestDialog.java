@@ -20,7 +20,9 @@ public class TestDialog extends Dialog{
 
 	@Override
 	public void onSelected(Card lastcard, boolean finished) {
-
+		if(finished) {
+			world.container.callScene("pyramid", world.container.getDataForNextScene(), 40f);
+		}
 	}
 
 }

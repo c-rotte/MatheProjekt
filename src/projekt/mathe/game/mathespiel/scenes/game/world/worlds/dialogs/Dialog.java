@@ -19,7 +19,7 @@ public abstract class Dialog{
 	
 	private ArrayList<Card> cards;
 	private Card currCard;
-	private World world;
+	public World world;
 	private ArrayList<Integer> wasPressedLastFrame;
 	private int index;
 
@@ -226,6 +226,9 @@ public abstract class Dialog{
 				if(selections[i].length() > longestSelection.length()) {
 					longestSelection = selections[i];
 				}
+			}
+			if(longestSelection.length() > 5) {
+				throw new NullPointerException("Selektion zu lang!");
 			}
 		}
 		

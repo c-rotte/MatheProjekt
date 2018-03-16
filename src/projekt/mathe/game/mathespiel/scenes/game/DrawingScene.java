@@ -26,7 +26,6 @@ public class DrawingScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-		// TODO Auto-generated method stub
 		
 	}
 
