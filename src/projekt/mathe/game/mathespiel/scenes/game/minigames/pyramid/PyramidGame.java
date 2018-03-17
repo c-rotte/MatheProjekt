@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.minigame.MiniGame;
@@ -27,6 +29,7 @@ public class PyramidGame extends MiniGame{
 		backgroundHelper = new TextureHelper();
 		backgroundHelper.addState("broken", 99999, ResLoader.getImageByName("game/minigames/pyramid/bg_broken.png"));
 		blockHolder = new BlockHolder(container);
+		renewPyramid();
 	}
 
 	public void generateBlocks(int startX, int startY, int xSpace, int ySpace) {
@@ -89,47 +92,27 @@ public class PyramidGame extends MiniGame{
 	}
 	
 	private float[][] generateValues(){
+		long millis = System.currentTimeMillis();
 		ArrayList<float[]> values = new ArrayList<>();
-		Random random = new Random();
 		float[][] base = new float[5][2];
 		
-		ArrayList<Float> possibleTopValues = new ArrayList<Float>(Arrays.asList(1f, 2f, 3f, 4f, 5f));
-		ArrayList<Float> possibleBottomValues = new ArrayList<Float>(Arrays.asList(1f, 2f, 3f, 4f, 5f));
+		ArrayList<Float> existingValues = new ArrayList<Float>();
 		
 		for(float[] floats : base) {
-			float topValue;
-			float bottomValue;
+			float z;
+			float n;
 			do {
-				int topPos = possibleTopValues.size();
-				topValue = possibleTopValues.get(random.nextInt(topPos));
-				int bottomPos = possibleBottomValues.size();
-				bottomValue = possibleBottomValues.get(random.nextInt(bottomPos));
-				if(topValue == bottomValue && possibleTopValues.size() == 1 && possibleBottomValues.size() == 1) {
-					if(possibleBottomValues.get(0) == possibleTopValues.get(0)) {
-						possibleTopValues.clear();
-						possibleTopValues.add(6f);
-					}
-				}
-				/*System.out.println(topValue + "; " + bottomValue);
-				System.out.print("top: ");
-				for(float f : possibleTopValues) {
-					System.out.print(f + " ");
-				}
-				System.out.println();
-				System.out.print("bottom: ");
-				for(float f : possibleBottomValues) {
-					System.out.print(f + " ");
-				}
-				System.out.println();*/
-			} while (topValue == bottomValue);
-			possibleTopValues.remove(topValue);
-			possibleBottomValues.remove(bottomValue);
-			if(topValue < bottomValue) {
-				floats[0] = topValue;
-				floats[1] = bottomValue;
+				n = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+				z = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+			} while (n == z || existingValues.contains(z < n ? z / n : n / z));
+			if(n < z) {
+				floats[0] = n;
+				floats[1] = z;
+				existingValues.add(n / z);
 			}else {
-				floats[1] = topValue;
-				floats[0] = bottomValue;
+				floats[0] = z;
+				floats[1] = n;
+				existingValues.add(z / n);
 			}
 			values.add(floats);
 		}
@@ -141,8 +124,8 @@ public class PyramidGame extends MiniGame{
 				values.add(fs);
 			}
 		}
+		Logger.log("PyramidGame: Generated pyramid in " + (System.currentTimeMillis() - millis) + "ms");
 		return values.toArray(new float[values.size()][2]);
-		
 	}
 	
 	private float[][] generateNextLayer(float[][] floats){
