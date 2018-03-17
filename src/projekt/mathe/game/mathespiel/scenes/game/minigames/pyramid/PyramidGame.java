@@ -104,12 +104,23 @@ public class PyramidGame extends MiniGame{
 				topValue = possibleTopValues.get(random.nextInt(topPos));
 				int bottomPos = possibleBottomValues.size();
 				bottomValue = possibleBottomValues.get(random.nextInt(bottomPos));
-				if(possibleTopValues.size() == 1 && possibleBottomValues.size() == 1) {
+				if(topValue == bottomValue && possibleTopValues.size() == 1 && possibleBottomValues.size() == 1) {
 					if(possibleBottomValues.get(0) == possibleTopValues.get(0)) {
-						possibleTopValues.add(possibleTopValues.get(0) + 1);
-						possibleTopValues.remove(0);
+						possibleTopValues.clear();
+						possibleTopValues.add(6f);
 					}
 				}
+				/*System.out.println(topValue + "; " + bottomValue);
+				System.out.print("top: ");
+				for(float f : possibleTopValues) {
+					System.out.print(f + " ");
+				}
+				System.out.println();
+				System.out.print("bottom: ");
+				for(float f : possibleBottomValues) {
+					System.out.print(f + " ");
+				}
+				System.out.println();*/
 			} while (topValue == bottomValue);
 			possibleTopValues.remove(topValue);
 			possibleBottomValues.remove(bottomValue);
