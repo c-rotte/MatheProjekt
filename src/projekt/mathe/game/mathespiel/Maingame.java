@@ -41,7 +41,6 @@ public class Maingame extends Game{
 		this.registerScene(new TischeScene(this));
 		this.registerScene(new SekScene(this));
 		this.registerScene(new DrawingScene(this));
-		//
 		this.registerScene(new PyramidScene(this));
 	}
 

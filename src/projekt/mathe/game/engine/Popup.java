@@ -16,7 +16,7 @@ public class Popup {
 		Rectangle bounds = jframe.getGraphicsConfiguration().getDevice().getDefaultConfiguration().getBounds();
 		jframe.setLocation((int) (0 + bounds.getWidth()/2 - w/2), (int) (0 + bounds.getHeight()/2 - h/2));
 		jframe.setUndecorated(true);	
-		jframe.setBackground(new Color(1.0f, 1.0f, 1.0f, 0f));
+		//jframe.setBackground(new Color(1.0f, 1.0f, 1.0f, 0f));
 		jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jframe.add(drawing);
 		if(closeInMS >= 0) {

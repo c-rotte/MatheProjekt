@@ -21,10 +21,10 @@ public class Number {
 
 	public void onPaint(Graphics2D g2d) {
 		if(looseBlock != null) {
-			g2d.setColor(Color.BLACK);
-			g2d.fillRect((int) (looseBlock.x + 10), (int) (looseBlock.y + looseBlock.h/2 - 3), 80, 6);
-			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + looseBlock.h/4), "" + n1, Color.BLACK, 40, FONT.VCR, g2d, null, -1);
-			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + (looseBlock.h/4) * 3), "" + n2, Color.BLACK, 40, FONT.VCR, g2d, null, -1);
+			g2d.setColor(Color.DARK_GRAY);
+			g2d.fillRect((int) (looseBlock.x + 20), (int) (looseBlock.y + looseBlock.h/2 - 2), 60, 4);
+			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + looseBlock.h/4) - 3, "" + n1, Color.DARK_GRAY, 25, FONT.VCR, g2d, null, -1);
+			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + (looseBlock.h/4) * 3), "" + n2, Color.DARK_GRAY, 25, FONT.VCR, g2d, null, -1);
 		}
 	}
 	

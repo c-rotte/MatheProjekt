@@ -3,11 +3,13 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.help.ResLoader;
 
 public class LooseBlock extends Dragable{
 
@@ -16,15 +18,9 @@ public class LooseBlock extends Dragable{
 	private UUID occupiedPlaceID;
 	private float lastStillX, lastStillY;
 	private Number number;
+	private static Image blockImage = ResLoader.getImageByName("game/minigames/pyramid/brick.png");
+	private static final int KONTUR = 3;
 	
-	public LooseBlock(Scene container, int x, int y, int w, int h, BlockHolder blockHolder, float value) {
-		super(container, x, y, w, h);
-		lastStillX = x;
-		lastStillY = y;
-		this.blockHolder = blockHolder;
-		createNumber(value);
-	}
-
 	public LooseBlock(Scene container, int x, int y, int w, int h, BlockHolder blockHolder, int n1, int n2) {
 		super(container, x, y, w, h);
 		lastStillX = x;
@@ -32,33 +28,17 @@ public class LooseBlock extends Dragable{
 		this.blockHolder = blockHolder;
 		number = new Number(n1, n2, this);
 	}
-	
-	private void createNumber(float value) {
-		float tol = 0.001f;
-		float h1 = 1;
-		float h2 = 0;
-		float k1 = 0;
-		float k2 = 1;
-		float b = value;
-		do {
-			float a = (float) Math.floor(b);
-			float au = h1;
-			h1 = a * h1 + h2;
-			h2 = au;
-			au = k1;
-			k1 = a * k1 + k2;
-			k2 = au;
-			b = 1 / (b - a);
-		} while (Math.abs(value - h1/k1) > value * tol);
-		number = new Number((int) h1, (int) k1, this);
-	}
-	
+
 	public boolean inRightPlace() {
 		if(occupiedPlaceID == null) {
 			return false;
 		}
 		Place place = blockHolder.getPlaceByID(occupiedPlaceID);
 		return place.getNumber().getN1() == number.getN1() && place.getNumber().getN2() == number.getN2();
+	}
+	
+	public void setOccupiedPlaceID(UUID occupiedPlaceID) {
+		this.occupiedPlaceID = occupiedPlaceID;
 	}
 	
 	@Override
@@ -82,11 +62,9 @@ public class LooseBlock extends Dragable{
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.setColor(Color.RED);
-		g2d.fill(getBounds());
-		g2d.setColor(Color.WHITE);
-		g2d.setStroke(new BasicStroke(5f));
-		g2d.draw(getBounds());
+		g2d.setColor(Color.BLACK);
+		g2d.fillRect((int) (x - KONTUR), (int) (y - KONTUR), (int) (w + KONTUR * 2), (int) (h + KONTUR * 2));
+		g2d.drawImage(blockImage, (int) x, (int) y, (int) w, (int) h, null); 
 		number.onPaint(g2d);
 	}
 

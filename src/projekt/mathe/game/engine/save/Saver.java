@@ -14,12 +14,11 @@ import projekt.mathe.game.mathespiel.Settings;
 
 public class Saver {
 
-	private final static String path = System.getenv("APPDATA") + "/saves.data";
 	private static File file;
 	private static HashMap<String, Object> data;
 	
 	public static void initialize() {
-		file = new File(path);
+		file = new File(getAPPDATAPath() + "/saves.data");
 		data = new HashMap<>();
 		if(!file.exists()) {
 			try {
@@ -41,6 +40,18 @@ public class Saver {
 				loadSettings();
 			} catch (Exception e) {e.printStackTrace();}
 		}
+	}
+	
+	private static String getAPPDATAPath() {
+		String OS = (System.getProperty("os.name")).toUpperCase();
+		if(OS.contains("WIN")) {
+			return System.getenv("APPDATA");
+		}else if(OS.contains("MAC")){
+			return System.getProperty("user.home") + "/Library";
+		}else {
+			return System.getProperty("user.home");
+		}
+		
 	}
 	
 	private static void loadSettings() {

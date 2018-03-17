@@ -23,7 +23,7 @@ public class PyramidScene extends GameScene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
-		
+		pyramidGame.renewPyramid();
 	}
 
 	@Override

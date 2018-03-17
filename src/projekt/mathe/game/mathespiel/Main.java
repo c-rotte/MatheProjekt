@@ -25,7 +25,7 @@ public class Main {
 	private static Popup loading;
 	
 	private static void startGame() {
-		loading = new Popup(new LoadingPanel(), 200, 200, -1);
+		loading = new Popup(new LoadingPanel(), 190, 40, -1);
 		loading.show();
 		Helper.loadFont();
 		System.setProperty("sun.java2d.opengl", "true");
@@ -46,18 +46,20 @@ public class Main {
 	private static class LoadingPanel extends PopupPanel{
 
 		private static final Font font = new Font("Verdana", Font.BOLD, 20);
-		private static final GradientPaint paint = new GradientPaint(13, 13, Color.GREEN, 174, 24, new Color(0, 255, 255), true);
+		private static final GradientPaint paint = new GradientPaint(10, 10, Color.GREEN, 180, 10, new Color(0, 255, 255), true);
 		private static final float objectAmount = 95f;
 		
 		@Override
 		public void onPaint(Graphics2D g2d) {
-			g2d.setColor(new Color(222, 222, 222));
-			g2d.fillRect(10, 10, 180, 30);
+			g2d.setColor(Color.GRAY);
+			g2d.fillRect(0, 0, 190, 40);
+			g2d.setColor(Color.CYAN);
+			g2d.fillRect(5, 5, 180, 30);
 			g2d.setPaint(paint);
-			g2d.fillRect(10, 10, (int) (180 * (Logger.getLoadedObjects() / objectAmount)), 30);
+			g2d.fillRect(5, 5, (int) (180 * (Logger.getLoadedObjects() / objectAmount)), 30);
 			g2d.setColor(Color.WHITE);
 			g2d.setFont(font);
-			g2d.drawString((int) ((Logger.getLoadedObjects() / objectAmount) * 100f) + "%", 90, 32);
+			g2d.drawString((int) ((Logger.getLoadedObjects() / objectAmount) * 100f) + "%", 80, 27);
 		}
 		
 	}

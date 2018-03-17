@@ -1,31 +1,37 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.help.ResLoader;
+import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.minigame.MiniGame;
 
 public class PyramidGame extends MiniGame{
 
 	private BlockHolder blockHolder;
+	private TextureHelper backgroundHelper;
+	private boolean finished;
 	
 	public PyramidGame(Scene container) {
 		super(container, "pyramid");
+		backgroundHelper = new TextureHelper();
+		backgroundHelper.addState("broken", 99999, ResLoader.getImageByName("game/minigames/pyramid/bg_broken.png"));
 		blockHolder = new BlockHolder(container);
-		generateBlocks(640, 100, 75, 80);
 	}
 
 	public void generateBlocks(int startX, int startY, int xSpace, int ySpace) {
-		blockHolder.clear();
 		ArrayList<LooseBlock> looseBlocks = new ArrayList<>();
-		ArrayList<Float> values = generateValues();
+		float[][] values = generateValues();
 		int c = 0;
 		for(int a = 0; a < 5; a++) {
 			int startPos = startX - 200 - a * xSpace;
@@ -34,8 +40,8 @@ public class PyramidGame extends MiniGame{
 				int y = startY + a * ySpace;
 				int w = 100;
 				int h = 50;
-				looseBlocks.add(new LooseBlock(container, 0, 0, w, h, blockHolder, values.get(values.size() - c - 1)));
-				blockHolder.addPlace(new Place(container, x, y, w, h, values.get(values.size() - c - 1)));
+				looseBlocks.add(new LooseBlock(container, 0, 0, w, h, blockHolder, (int) values[values.length - c - 1][0], (int) values[values.length - c - 1][1]));
+				blockHolder.addPlace(new Place(container, x, y, w, h, (int) values[values.length - c - 1][0], (int) values[values.length - c - 1][1]));
 				c++;
 			}
 		}
@@ -73,6 +79,8 @@ public class PyramidGame extends MiniGame{
 			LooseBlock block = base[i];
 			block.x = 290 + i * 150;
 			block.y = 420;
+			block.setOccupiedPlaceID(blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).getID());
+			blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).setOccupied(true);
 			blockHolder.addBlock(block);
 		}
 		for(LooseBlock looseBlock : looseBlocks) {
@@ -80,75 +88,112 @@ public class PyramidGame extends MiniGame{
 		}
 	}
 	
-	private ArrayList<Float> generateValues(){
-		ArrayList<Float> floats = new ArrayList<>();
+	private float[][] generateValues(){
+		ArrayList<float[]> values = new ArrayList<>();
 		Random random = new Random();
 		float[][] base = new float[5][2];
-		ArrayList<Float> existingBaseValues = new ArrayList<>(); 
-		for(int i = 0; i < 5; i++) {
-			int n1;
-			int n2;
+		
+		ArrayList<Float> possibleTopValues = new ArrayList<Float>(Arrays.asList(1f, 2f, 3f, 4f, 5f));
+		ArrayList<Float> possibleBottomValues = new ArrayList<Float>(Arrays.asList(1f, 2f, 3f, 4f, 5f));
+		
+		for(float[] floats : base) {
+			float topValue;
+			float bottomValue;
 			do {
-				n1 = random.nextInt(4) + 1;
-				n2 = random.nextInt(4) + 1;
-			} while (n1 == n2 || (n1 < n2 ? existingBaseValues.contains(Float.valueOf(n1) / Float.valueOf(n2)) : existingBaseValues.contains(Float.valueOf(n2) / Float.valueOf(n1))));
-			if(n1 < n2) {
-				base[i][0] = n1;
-				base[i][1] = n2;
-				existingBaseValues.add(Float.valueOf(n1) / Float.valueOf(n2));
+				int topPos = possibleTopValues.size();
+				topValue = possibleTopValues.get(random.nextInt(topPos));
+				int bottomPos = possibleBottomValues.size();
+				bottomValue = possibleBottomValues.get(random.nextInt(bottomPos));
+			} while (topValue == bottomValue);
+			possibleTopValues.remove(topValue);
+			possibleBottomValues.remove(bottomValue);
+			if(topValue < bottomValue) {
+				floats[0] = topValue;
+				floats[1] = bottomValue;
 			}else {
-				base[i][1] = n1;
-				base[i][0] = n2;
-				existingBaseValues.add(Float.valueOf(n2) / Float.valueOf(n1));
+				floats[1] = topValue;
+				floats[0] = bottomValue;
+			}
+			values.add(floats);
+		}
+		
+		float[][] layer = base;
+		for(int i = 0; i < 4; i++) {
+			layer = generateNextLayer(layer);
+			for(float[] fs : layer) {
+				values.add(fs);
 			}
 		}
-		float[] row2 = new float[4];
-		for(int i = 0; i < 4; i++) {
-			float value = (base[i][0] / base[i][1]) + (base[i + 1][0] / base[i + 1][1]);
-			row2[i] = value;
-		}
-		float[] row3 = new float[3];
-		for(int i = 0; i < 3; i++) {
-			float value = row2[i] + row2[i + 1];
-			row3[i] = value;
-		}
-		float[] row4 = new float[2];
-		for(int i = 0; i < 2; i++) {
-			float value = row3[i] + row3[i + 1];
-			row4[i] = value;
-		}
-		float row5 = row4[0] + row4[1];
 		
-		for(float[] f : base) {
-			floats.add((float) (f[0] / f[1]));
-		}
-		for(float f : row2) {
-			floats.add(f);
-		}
-		for(float f : row3) {
-			floats.add(f);
-		}
-		for(float f : row4) {
-			floats.add(f);
-		}
-		floats.add(row5);
-		return floats;
+		return values.toArray(new float[values.size()][2]);
+		
 	}
 	
-	@Override
-	public void onTick(float delta) {
-		blockHolder.onTick(delta);
+	private float[][] generateNextLayer(float[][] floats){
+		float[][] layer = new float[floats.length - 1][2]; 
+		for(int i = 0; i < floats.length - 1; i++) {
+			float v1 = floats[i][0] / floats[i][1];
+			float v2 = floats[i + 1][0] / floats[i + 1][1];
+			
+			float tol = 0.001f;
+			float h1 = 1;
+			float h2 = 0;
+			float k1 = 0;
+			float k2 = 1;
+			float b = v1 + v2;
+			do {
+				float a = (float) Math.floor(b);
+				float au = h1;
+				h1 = a * h1 + h2;
+				h2 = au;
+				au = k1;
+				k1 = a * k1 + k2;
+				k2 = au;
+				b = 1 / (b - a);
+			} while (Math.abs(v1 + v2 - h1/k1) > (v1 + v2) * tol);
+			layer[i][0] = h1;
+			layer[i][1] = k1;
+		}
+		return layer;
+	}
+	
+	public void renewPyramid() {
+		finished = false;
+		blockHolder.clear();
+		generateBlocks(640, 100, 75, 80);
+	}
+	
+	public int getCorrectBlocks() {
 		int i = 0;
 		for(LooseBlock looseBlock : blockHolder.getElements()) {
 			if(looseBlock.inRightPlace()) {
 				i++;
 			}
 		}
-		System.out.println(i);
+		return i;
+	}
+	
+	@Override
+	public void onTick(float delta) {
+		blockHolder.onTick(delta);
+		backgroundHelper.onTick(delta);
+		if(getCorrectBlocks() == 15 && !finished) {
+			finished = true;
+			container.callScene("pausenhof", container.getDataForNextScene(), 40f);
+		}
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
+		g2d.drawImage(backgroundHelper.getCurrentImage(), 0, 0, 1280, 720, null);
+		if(getCorrectBlocks() == 15) {
+			container.fillScene(g2d, Color.GREEN, .5f);
+		}
+		g2d.setColor(new Color(1f, 1f, 1f, .5f));
+		g2d.fillRect(110, 510, 1070, 190);
+		g2d.setColor(Color.DARK_GRAY);
+		g2d.setStroke(new BasicStroke(5f));
+		g2d.drawRect(110, 510, 1070, 190);
 		blockHolder.onPaint(g2d);
 	}
 	

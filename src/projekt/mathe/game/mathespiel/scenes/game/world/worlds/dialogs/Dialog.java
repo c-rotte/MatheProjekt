@@ -48,6 +48,7 @@ public abstract class Dialog{
 		currCard = cards.get(0);
 		currText = "";
 		currTextCounter = 0;
+		currCard.openedSelections = false;
 		return this;
 	}
 	
@@ -176,6 +177,7 @@ public abstract class Dialog{
 				currLine = " " + word;
 				currWordNumber = 0;
 				index++;
+				lines[index] = currLine;
 			}
 		}
 
