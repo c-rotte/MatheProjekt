@@ -102,8 +102,8 @@ public class PyramidGame extends MiniGame{
 			float z;
 			float n;
 			do {
-				n = ThreadLocalRandom.current().nextInt(1, 5 + 1);
-				z = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+				n = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+				z = ThreadLocalRandom.current().nextInt(1, 4 + 1);
 			} while (n == z || existingValues.contains(z < n ? z / n : n / z));
 			if(n < z) {
 				floats[0] = n;
