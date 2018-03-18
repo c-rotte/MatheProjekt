@@ -3,6 +3,7 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -35,9 +36,12 @@ public abstract class Dialog{
 		index = 0;
 		currText = "";
 		currTextCounter = 0;
+		wasPressedLastFrame.add(KeyEvent.VK_ENTER);
 	}
 	
 	public abstract void onSelected(Card lastcard, boolean finished);
+	
+	public abstract void onFinished(Card lastcard);
 	
 	public Dialog reset() {
 		for(Card card : cards) {
@@ -48,7 +52,7 @@ public abstract class Dialog{
 		currCard = cards.get(0);
 		currText = "";
 		currTextCounter = 0;
-		currCard.openedSelections = false;
+		wasPressedLastFrame.add(KeyEvent.VK_ENTER);
 		return this;
 	}
 	
@@ -70,14 +74,21 @@ public abstract class Dialog{
 	public void next() {
 		int pos = cards.indexOf(currCard);
 		if(currCard.hasSelected()) {
-			onSelected(currCard, pos >= cards.size() - 1);
+			world.closeDialog();
 			index = 0;
+			onSelected(currCard, pos >= cards.size() - 1);
+			if(pos >= cards.size() - 1) {
+				return;
+			}
 		}
 		if(pos < cards.size() - 1) {
 			currCard = cards.get(pos + 1);
 			currText = "";
 		}else {
-			world.closeDialog();
+			if(!currCard.hasSelection()) {
+				world.closeDialog();
+				onFinished(currCard);
+			}
 		}
 	}
 	
@@ -119,9 +130,6 @@ public abstract class Dialog{
 			if(currText.length() < currCard.message.length()) {
 				char c = currCard.message.charAt(currText.length());
 				currText += c;
-				if(c == ' ') {
-					currText.length();
-				}
 			}
 		}
 		
@@ -216,6 +224,7 @@ public abstract class Dialog{
 		public int currIndex;
 		private String longestSelection;
 		
+		
 		public Card(String message) {
 			this.message = message;
 			currIndex = 0;
@@ -253,6 +262,7 @@ public abstract class Dialog{
 		public void reset() {
 			currIndex = 0;
 			selected = null;
+			openedSelections = false;
 		}
 		
 	}

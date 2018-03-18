@@ -18,7 +18,13 @@ public class TestDialog extends Dialog{
 			if(lastcard.selected.equals("ja")) {
 				world.container.callScene("pyramid", new MainSceneData(), 40f);
 			}
+			
 		}
+	}
+
+	@Override
+	public void onFinished(Card lastcard) {
+	
 	}
 
 }

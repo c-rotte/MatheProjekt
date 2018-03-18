@@ -2,6 +2,7 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -31,10 +32,6 @@ public class BlockHolder extends Holder<LooseBlock>{
 			}
 		}
 		return false;
-	}
-	
-	public void addBlock(LooseBlock looseBlock) {
-		addElement(looseBlock);
 	}
 	
 	public void addPlace(Place place) {
@@ -78,6 +75,18 @@ public class BlockHolder extends Holder<LooseBlock>{
 			place.onTick(delta);
 		}
 		super.onTick(delta);
+	}
+	
+	@Override
+	public void onMousePressed(MouseEvent e) {
+		for(LooseBlock looseBlock : getElements()) {
+			if(looseBlock.getBounds().contains(e.getPoint())) {
+				removeElement(looseBlock);
+				getElements().add(0, looseBlock);
+				break;
+			}
+		}
+		super.onMousePressed(e);
 	}
 	
 	@Override

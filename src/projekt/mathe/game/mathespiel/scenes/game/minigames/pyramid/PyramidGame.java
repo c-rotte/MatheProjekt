@@ -17,12 +17,15 @@ import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.minigame.MiniGame;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 
 public class PyramidGame extends MiniGame{
 
 	private BlockHolder blockHolder;
 	private TextureHelper backgroundHelper;
 	private boolean finished;
+	private boolean mouseBlocked;
 	
 	public PyramidGame(Scene container) {
 		super(container, "pyramid");
@@ -32,6 +35,10 @@ public class PyramidGame extends MiniGame{
 		renewPyramid();
 	}
 
+	public void setMouseBlocked(boolean mouseBlocked) {
+		this.mouseBlocked = mouseBlocked;
+	}
+	
 	public void generateBlocks(int startX, int startY, int xSpace, int ySpace) {
 		ArrayList<LooseBlock> looseBlocks = new ArrayList<>();
 		float[][] values = generateValues();
@@ -84,10 +91,11 @@ public class PyramidGame extends MiniGame{
 			block.y = 420;
 			block.setOccupiedPlaceID(blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).getID());
 			blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).setOccupied(true);
-			blockHolder.addBlock(block);
+			block.setMoveable(false);
+			blockHolder.addElement(block);
 		}
 		for(LooseBlock looseBlock : looseBlocks) {
-			blockHolder.addBlock(looseBlock);
+			blockHolder.addElement(looseBlock);
 		}
 	}
 	
@@ -178,16 +186,13 @@ public class PyramidGame extends MiniGame{
 		backgroundHelper.onTick(delta);
 		if(getCorrectBlocks() == 15 && !finished) {
 			finished = true;
-			container.callScene("pausenhof", container.getDataForNextScene(), 40f);
+			container.world.openDialog(new SuccessDialog(container.world));
 		}
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(backgroundHelper.getCurrentImage(), 0, 0, 1280, 720, null);
-		if(getCorrectBlocks() == 15) {
-			container.fillScene(g2d, Color.GREEN, .5f);
-		}
 		g2d.setColor(new Color(1f, 1f, 1f, .5f));
 		g2d.fillRect(110, 510, 1070, 190);
 		g2d.setColor(Color.DARK_GRAY);
@@ -198,37 +203,70 @@ public class PyramidGame extends MiniGame{
 	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
-		blockHolder.onMouseClicked(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseClicked(e);
+		}
 	}
 	
 	@Override
 	public void onMouseDragged(MouseEvent e) {
-		blockHolder.onMouseDragged(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseDragged(e);
+		}
 	}
 
 	@Override
 	public void onMouseExited(MouseEvent e) {
-		blockHolder.onMouseExited(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseExited(e);
+		}
 	}
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
-		blockHolder.onMouseMoved(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseMoved(e);
+		}
 	}
 	
 	@Override
 	public void onMousePressed(MouseEvent e) {
-		blockHolder.onMousePressed(e);
+		if(!mouseBlocked) {
+			blockHolder.onMousePressed(e);
+		}
 	}
 	
 	@Override
 	public void onMouseReleased(MouseEvent e) {
-		blockHolder.onMouseReleased(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseReleased(e);
+		}
 	}
 	
 	@Override
 	public void onMouseWheelMoved(MouseWheelEvent e) {
-		blockHolder.onMouseWheelMoved(e);
+		if(!mouseBlocked) {
+			blockHolder.onMouseWheelMoved(e);
+		}
+	}
+	
+	private class SuccessDialog extends Dialog{
+
+		public SuccessDialog(World world) {
+			super(world);
+			addCard(new Card("Du hast es geschafft! Vielen Dank!"));
+		}
+
+		@Override
+		public void onSelected(Card lastcard, boolean finished) {
+			
+		}
+
+		@Override
+		public void onFinished(Card lastcard) {
+			container.callScene("pausenhof", container.getDataForNextScene(), 40f);
+		}
+		
 	}
 	
 }

@@ -21,4 +21,9 @@ public class MovingTestDialog extends Dialog{
 		
 	}
 
+	@Override
+	public void onFinished(Card lastcard) {
+		
+	}
+
 }

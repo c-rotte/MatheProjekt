@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.ResLoader;
@@ -18,8 +19,11 @@ public class LooseBlock extends Dragable{
 	private UUID occupiedPlaceID;
 	private float lastStillX, lastStillY;
 	private Number number;
-	private static Image blockImage = ResLoader.getImageByName("game/minigames/pyramid/brick.png");
+	private static Image brickImage1 = ResLoader.getImageByName("game/minigames/pyramid/brick1.png");
+	private static Image brickImage2 = ResLoader.getImageByName("game/minigames/pyramid/brick2.png");
+	private Image brickImage;
 	private static final int KONTUR = 3;
+	private boolean moveable;
 	
 	public LooseBlock(Scene container, int x, int y, int w, int h, BlockHolder blockHolder, int n1, int n2) {
 		super(container, x, y, w, h);
@@ -27,8 +31,22 @@ public class LooseBlock extends Dragable{
 		lastStillY = y;
 		this.blockHolder = blockHolder;
 		number = new Number(n1, n2, this);
+		moveable = true;
+		if(Math.random() < .55f) {
+			brickImage = brickImage1;
+		}else {
+			brickImage = brickImage2;
+		}
 	}
 
+	public void setMoveable(boolean moveable) {
+		this.moveable = moveable;
+	}
+	
+	public Number getNumber() {
+		return number;
+	}
+	
 	public boolean inRightPlace() {
 		if(occupiedPlaceID == null) {
 			return false;
@@ -64,12 +82,15 @@ public class LooseBlock extends Dragable{
 	public void onPaint(Graphics2D g2d) {
 		g2d.setColor(Color.BLACK);
 		g2d.fillRect((int) (x - KONTUR), (int) (y - KONTUR), (int) (w + KONTUR * 2), (int) (h + KONTUR * 2));
-		g2d.drawImage(blockImage, (int) x, (int) y, (int) w, (int) h, null); 
+		g2d.drawImage(brickImage, (int) x, (int) y, (int) w, (int) h, null); 
 		number.onPaint(g2d);
 	}
 
 	@Override
 	public void onMousePressed(MouseEvent e) {
+		if(!moveable) {
+			return;
+		}
 		if(!blockHolder.grabbed()) {
 			if(getBounds().contains(e.getPoint())) {
 				if(occupiedPlaceID != null) {
@@ -82,9 +103,12 @@ public class LooseBlock extends Dragable{
 			super.onMousePressed(e);
 		}
 	}
-	
+
 	@Override
 	public void onMouseReleased(MouseEvent e) {
+		if(!moveable) {
+			return;
+		}
 		lastTickGrabbed = wasGrabbed();
 		super.onMouseReleased(e);
 	}
