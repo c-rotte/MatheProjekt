@@ -47,6 +47,13 @@ public class LooseBlock extends Dragable{
 		return number;
 	}
 	
+	public boolean inPlace() {
+		if(occupiedPlaceID == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean inRightPlace() {
 		if(occupiedPlaceID == null) {
 			return false;

@@ -26,6 +26,7 @@ public class PyramidGame extends MiniGame{
 	private TextureHelper backgroundHelper;
 	private boolean finished;
 	private boolean mouseBlocked;
+	private boolean notFinishedAgain;
 	
 	public PyramidGame(Scene container) {
 		super(container, "pyramid");
@@ -168,12 +169,23 @@ public class PyramidGame extends MiniGame{
 		finished = false;
 		blockHolder.clear();
 		generateBlocks(640, 100, 75, 80);
+		notFinishedAgain = true;
 	}
 	
 	public int getCorrectBlocks() {
 		int i = 0;
 		for(LooseBlock looseBlock : blockHolder.getElements()) {
 			if(looseBlock.inRightPlace()) {
+				i++;
+			}
+		}
+		return i;
+	}
+	
+	public int getPlacedBlocks() {
+		int i = 0;
+		for(LooseBlock looseBlock : blockHolder.getElements()) {
+			if(looseBlock.inPlace()) {
 				i++;
 			}
 		}
@@ -187,6 +199,14 @@ public class PyramidGame extends MiniGame{
 		if(getCorrectBlocks() == 15 && !finished) {
 			finished = true;
 			container.world.openDialog(new SuccessDialog(container.world));
+		}else if(!finished && !container.world.isDialogOpen()) {
+			if(getPlacedBlocks() == 15 && notFinishedAgain){
+				mouseBlocked = true;
+				notFinishedAgain = false;
+				container.world.openDialog(new FailedDialog(container.world));
+			}else if(getPlacedBlocks() != 15){
+				notFinishedAgain = true;
+			}
 		}
 	}
 
@@ -265,6 +285,25 @@ public class PyramidGame extends MiniGame{
 		@Override
 		public void onFinished(Card lastcard) {
 			container.callScene("pausenhof", container.getDataForNextScene(), 40f);
+		}
+		
+	}
+	
+	private class FailedDialog extends Dialog{
+
+		public FailedDialog(World world) {
+			super(world);
+			addCard(new Card("Das stimmt leider nicht. Überprüfe deine Auswahl bitte noch einmal."));
+		}
+
+		@Override
+		public void onSelected(Card lastcard, boolean finished) {
+			
+		}
+
+		@Override
+		public void onFinished(Card lastcard) {
+			mouseBlocked = false;
 		}
 		
 	}

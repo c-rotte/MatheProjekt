@@ -10,7 +10,9 @@ import projekt.mathe.game.engine.GameScene;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.help.Camera;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
+import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
@@ -18,7 +20,9 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Car
 public class PyramidScene extends GameScene{
 
 	private PyramidGame pyramidGame;
-
+	private MapPlayer lastPlayer;
+	private Camera lastCamera;
+	
 	public PyramidScene(Game container) {
 		super(container, "pyramid", Values.SCENE_BG_COLOR);
 		pyramidGame = new PyramidGame(this);
@@ -28,6 +32,10 @@ public class PyramidScene extends GameScene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		if(((MainSceneData) sceneData).getMapPlayer() != null && ((MainSceneData) sceneData).getCamera() != null) {
+			lastPlayer = ((MainSceneData) sceneData).getMapPlayer();
+			lastCamera = ((MainSceneData) sceneData).getCamera();
+		}
 		pyramidGame.setMouseBlocked(true);
 		pyramidGame.renewPyramid();
 		world.openDialog(new ExplanationDialog(world));
@@ -35,7 +43,10 @@ public class PyramidScene extends GameScene{
 
 	@Override
 	public SceneData getDataForNextScene() {
-		return new MainSceneData();
+		MainSceneData mainSceneData = new MainSceneData();
+		mainSceneData.setMapPlayer(lastPlayer);
+		mainSceneData.setCamera(lastCamera);
+		return mainSceneData;
 	}
 
 	@Override
@@ -54,7 +65,7 @@ public class PyramidScene extends GameScene{
 			super(world);
 			Card card1 = new Card("Es funktioniert wie eine Rechenpyramide. Finde einfach den Block, der die SUMME der beiden unteren Blöcke enthält.");
 			addCard(card1);
-			Card card2 = new Card("Mit der Maus kannst du den Block dann an die richtige Position setzen. Mache das einfach solange, bis alle Blöcke am richtigen Ort sind.");
+			Card card2 = new Card("Mit der Maus kannst du den Block dann an die richtige Position schieben. Du hast es geschafft, wenn alle Blöcke am richtigen Ort sind.");
 			addCard(card2);
 			Card card3 = new Card("Hast du alles verstanden?");
 			card3.addSelection("Ja", "Nein");
@@ -83,7 +94,7 @@ public class PyramidScene extends GameScene{
 
 		public GoDialog(World world) {
 			super(world);
-			Card card1 = new Card("Na, dann los!");
+			Card card1 = new Card("Na, dann los! Viel Glück!");
 			addCard(card1);
 		}
 

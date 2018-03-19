@@ -34,6 +34,10 @@ public class PausenhofScene extends Scene{
 			player.direction = "down";
 			camera.focusX(1035);
 			camera.focusY(0);
+		}else if(lastID.equals("pyramid")) {
+			if(((MainSceneData) sceneData).getMapPlayer() != null) {
+				player = ((MainSceneData) sceneData).getMapPlayer();
+			}
 		}else {
 			player.x = 1900;
 			player.y = 600;
@@ -60,7 +64,10 @@ public class PausenhofScene extends Scene{
 
 	@Override
 	public SceneData getDataForNextScene() {
-		return new MainSceneData();
+		MainSceneData mainSceneData = new MainSceneData();
+		mainSceneData.setMapPlayer(player);
+		mainSceneData.setCamera(camera);
+		return mainSceneData;
 	}
 
 }

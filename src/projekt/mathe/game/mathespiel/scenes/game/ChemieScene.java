@@ -61,7 +61,10 @@ public class ChemieScene extends Scene{
 
 	@Override
 	public SceneData getDataForNextScene() {
-		return new MainSceneData();
+		MainSceneData mainSceneData = new MainSceneData();
+		mainSceneData.setMapPlayer(player);
+		mainSceneData.setCamera(camera);
+		return mainSceneData;
 	}
 
 }
