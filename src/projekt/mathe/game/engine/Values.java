@@ -8,7 +8,7 @@ public class Values {
 	public static final String TITLEBAR_TEXT = "Nachts im Bunker";
 	public static final int TITLEBAR_HEIGHT = 25;
 	public static final Color TITLEBAR_COLOR_1 = Color.WHITE;
-	public static final Color TITLEBAR_COLOR_2 = new Color(128, 128, 128);
+	public static final Color TITLEBAR_COLOR_2 = new Color(100, 100, 100);
 	public static final int WINDOW_WIDTH = 1280;
 	public static final int WINDOW_HEIGHT = 720; 
 	public static final int TILE_SIZE = 50;

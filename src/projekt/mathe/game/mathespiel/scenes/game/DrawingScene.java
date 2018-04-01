@@ -8,6 +8,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.drawing.DrawingScreen;
+import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 
 public class DrawingScene extends Scene{
 
@@ -17,6 +18,7 @@ public class DrawingScene extends Scene{
 		super(container, "drawing", Color.CYAN);
 		screen = new DrawingScreen(0, 0, 500, 300, 400);
 		screen.setColor(Color.BLACK);
+		registerPauseScreen(new MainPauseScreen(this));
 	}
 
 	@Override

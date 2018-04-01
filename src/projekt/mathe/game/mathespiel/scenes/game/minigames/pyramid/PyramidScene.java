@@ -20,8 +20,7 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Car
 public class PyramidScene extends GameScene{
 
 	private PyramidGame pyramidGame;
-	private MapPlayer lastPlayer;
-	private Camera lastCamera;
+	private MainSceneData mainSceneData;
 	
 	public PyramidScene(Game container) {
 		super(container, "pyramid", Values.SCENE_BG_COLOR);
@@ -32,10 +31,7 @@ public class PyramidScene extends GameScene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
-		if(((MainSceneData) sceneData).getMapPlayer() != null && ((MainSceneData) sceneData).getCamera() != null) {
-			lastPlayer = ((MainSceneData) sceneData).getMapPlayer();
-			lastCamera = ((MainSceneData) sceneData).getCamera();
-		}
+		mainSceneData = (MainSceneData) sceneData;
 		pyramidGame.setMouseBlocked(true);
 		pyramidGame.renewPyramid();
 		world.openDialog(new ExplanationDialog(world));
@@ -43,9 +39,7 @@ public class PyramidScene extends GameScene{
 
 	@Override
 	public SceneData getDataForNextScene() {
-		MainSceneData mainSceneData = new MainSceneData();
-		mainSceneData.setMapPlayer(lastPlayer);
-		mainSceneData.setCamera(lastCamera);
+		mainSceneData.setMinigameCompleted(true);
 		return mainSceneData;
 	}
 

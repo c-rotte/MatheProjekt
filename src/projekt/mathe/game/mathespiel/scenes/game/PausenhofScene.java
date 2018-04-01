@@ -29,8 +29,8 @@ public class PausenhofScene extends Scene{
 	public void onCall(String lastID, SceneData sceneData) {
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1750));
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("aulaAusgang")) {
-			player.x = 1010;
-			player.y = -65;
+			player.setX(1010);
+			player.setY(-65);
 			player.direction = "down";
 			camera.focusX(1035);
 			camera.focusY(0);
@@ -38,9 +38,15 @@ public class PausenhofScene extends Scene{
 			if(((MainSceneData) sceneData).getMapPlayer() != null) {
 				player = ((MainSceneData) sceneData).getMapPlayer();
 			}
+			System.out.println("Game completed: " + ((MainSceneData) sceneData).minigameCompleted());
+		}else if(lastID.equals("race")) {
+			if(((MainSceneData) sceneData).getMapPlayer() != null) {
+				player = ((MainSceneData) sceneData).getMapPlayer();
+			}
+			System.out.println("Game completed: " + ((MainSceneData) sceneData).minigameCompleted());
 		}else {
-			player.x = 1900;
-			player.y = 600;
+			player.setX(1900);
+			player.setY(600);
 			player.direction = "left";
 			camera.focusX(1360);
 			camera.focusY(600);

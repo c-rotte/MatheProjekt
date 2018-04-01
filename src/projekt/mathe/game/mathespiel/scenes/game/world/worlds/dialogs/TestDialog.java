@@ -16,9 +16,8 @@ public class TestDialog extends Dialog{
 	public void onSelected(Card lastcard, boolean finished) {
 		if(finished) {
 			if(lastcard.selected.equals("ja")) {
-				world.container.callScene("pyramid", new MainSceneData(), 40f);
+				world.container.callScene("pyramid", world.container.getDataForNextScene(), 40f);
 			}
-			
 		}
 	}
 

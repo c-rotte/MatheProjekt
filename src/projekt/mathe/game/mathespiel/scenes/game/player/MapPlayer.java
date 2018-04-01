@@ -11,16 +11,17 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
 public class MapPlayer extends ScreenElement{
 
-	private PlayerController playerController;
+	public PlayerController playerController;
 	public World world;
 	public String direction;
 	public boolean running;
-	private static MapPlayerTextureHelper textureHelper = new MapPlayerTextureHelper();
+	public static MapPlayerTextureHelper textureHelper = new MapPlayerTextureHelper();
 	
 	public MapPlayer(Scene container, boolean girl) {
 		super(container, 0, 0, 54, 75);
 		direction = "down";
 		playerController = new PlayerController(this);
+		textureHelper.setGender(girl);
 	}
 	
 	public void setWorld(World world) {
@@ -43,10 +44,10 @@ public class MapPlayer extends ScreenElement{
 
 	public Rectangle getInteractionBounds() {
 		switch(direction) {
-			case "up" : return new Rectangle((int) x, (int) (y - h), (int) w, (int) h);
-			case "down" : return new Rectangle((int) x, (int) (y + h), (int) w, (int) (h * 1.5));
-			case "left" : return new Rectangle((int) (x - w), (int) y, (int) w, (int) h);
-			case "right" : return new Rectangle((int) (x + w), (int) y, (int) w, (int) h);
+			case "up" : return new Rectangle((int) getX(), (int) (getY() - getH()), (int) getW(), (int) getH());
+			case "down" : return new Rectangle((int) getX(), (int) (getY() + getH()), (int) getW(), (int) (getH() * 1.5));
+			case "left" : return new Rectangle((int) (getX() - getW()), (int) getY(), (int) getW(), (int) getH());
+			case "right" : return new Rectangle((int) (getX() + getW()), (int) getY(), (int) getW(), (int) getH());
 			default : return null;
 		}
 	}
@@ -65,12 +66,12 @@ public class MapPlayer extends ScreenElement{
 	
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) (y + h/2), (int) w, (int) (h/2));
+		return new Rectangle((int) getX(), (int) (getY() + getH()/2), (int) getW(), (int) (getH()/2));
 	}
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(textureHelper.getCurrentImage(), (int) (x + w/2 - 33), (int) y, 65, 75, null);
+		g2d.drawImage(textureHelper.getCurrentImage(), (int) (getX() + getW()/2 - 33), (int) getY(), 65, 75, null);
 		if(Settings.HITBOXEN_ANZEIGEN) {
 			g2d.setColor(Color.CYAN);
 			g2d.draw(getBounds());

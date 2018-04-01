@@ -28,7 +28,7 @@ public abstract class Tile extends ScreenElement{
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(textureHelper.getCurrentImage(), (int) x, (int) y, (int) w, (int) h, null);
+		g2d.drawImage(textureHelper.getCurrentImage(), (int) getX(), (int) getY(), (int) getW(), (int) getH(), null);
 	}
 	
 	public void addTextures(String mode, Image[] images, int steps) {

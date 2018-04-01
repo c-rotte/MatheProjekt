@@ -12,13 +12,53 @@ import projekt.mathe.game.engine.Scene;
 public abstract class ScreenElement {
 
 	private Scene container;
-	public float x, y, w, h;
+	private float x, y, w, h;
 	
 	public ScreenElement(Scene container, int x, int y, int w, int h) {
 		this.container = container;
 		this.x = x;
 		this.y = y;
 		this.w = w;
+		this.h = h;
+	}
+	
+	public void addToX(float f) {
+		x += f;
+	}
+	
+	public void addToY(float f) {
+		y += f;
+	}
+	
+	public float getX() {
+		return Math.round(x);
+	}
+
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	public float getY() {
+		return Math.round(y);
+	}
+
+	public void setY(float y) {
+		this.y = y;
+	}
+
+	public float getW() {
+		return Math.round(w);
+	}
+
+	public void setW(float w) {
+		this.w = w;
+	}
+
+	public float getH() {
+		return Math.round(h);
+	}
+
+	public void setH(float h) {
 		this.h = h;
 	}
 
@@ -47,7 +87,7 @@ public abstract class ScreenElement {
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int) x, (int) y, (int) w, (int) h);
+		return new Rectangle((int) Math.round(x), (int) Math.round(y), (int) w, (int) h);
 	}
 	
 	public Point getMiddle() {

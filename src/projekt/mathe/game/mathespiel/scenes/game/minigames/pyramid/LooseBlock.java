@@ -17,7 +17,7 @@ public class LooseBlock extends Dragable{
 	private BlockHolder blockHolder;
 	private boolean lastTickGrabbed;
 	private UUID occupiedPlaceID;
-	private float lastStillX, lastStillY;
+	private float startX, startY;
 	private Number number;
 	private static Image brickImage1 = ResLoader.getImageByName("game/minigames/pyramid/brick1.png");
 	private static Image brickImage2 = ResLoader.getImageByName("game/minigames/pyramid/brick2.png");
@@ -27,8 +27,6 @@ public class LooseBlock extends Dragable{
 	
 	public LooseBlock(Scene container, int x, int y, int w, int h, BlockHolder blockHolder, int n1, int n2) {
 		super(container, x, y, w, h);
-		lastStillX = x;
-		lastStillY = y;
 		this.blockHolder = blockHolder;
 		number = new Number(n1, n2, this);
 		moveable = true;
@@ -39,6 +37,13 @@ public class LooseBlock extends Dragable{
 		}
 	}
 
+	public void setPosition(float x, float y) {
+		setX(x);
+		setY(y);
+		startX = x;
+		startY = y;
+	}
+	
 	public void setMoveable(boolean moveable) {
 		this.moveable = moveable;
 	}
@@ -71,16 +76,14 @@ public class LooseBlock extends Dragable{
 		if(lastTickGrabbed) {
 			lastTickGrabbed = false;
 			Place place = blockHolder.getBoundsOfNearestPlace(this);
-			if(place != null) {
-				if(place.isOccupied()) {
-					x = lastStillX;
-					y = lastStillY;
-				}else {
-					x = place.x;
-					y = place.y;
-					place.setOccupied(true);
-					occupiedPlaceID = place.getID();
-				}
+			if(place != null && !place.isOccupied()) {
+				setX(place.getX());
+				setY(place.getY());
+				place.setOccupied(true);
+				occupiedPlaceID = place.getID();
+			}else {
+				setX(startX);
+				setY(startY);
 			}
 		}
 	}
@@ -88,8 +91,8 @@ public class LooseBlock extends Dragable{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.setColor(Color.BLACK);
-		g2d.fillRect((int) (x - KONTUR), (int) (y - KONTUR), (int) (w + KONTUR * 2), (int) (h + KONTUR * 2));
-		g2d.drawImage(brickImage, (int) x, (int) y, (int) w, (int) h, null); 
+		g2d.fillRect((int) (getX() - KONTUR), (int) (getY() - KONTUR), (int) (getW() + KONTUR * 2), (int) (getH() + KONTUR * 2));
+		g2d.drawImage(brickImage, (int) getX(), (int) getY(), (int) getW(), (int) getH(), null); 
 		number.onPaint(g2d);
 	}
 
@@ -104,8 +107,6 @@ public class LooseBlock extends Dragable{
 					blockHolder.setPlaceOccupied(occupiedPlaceID, false);
 					occupiedPlaceID = null;
 				}
-				lastStillX = x;
-				lastStillY = y;
 			}
 			super.onMousePressed(e);
 		}
@@ -118,6 +119,11 @@ public class LooseBlock extends Dragable{
 		}
 		lastTickGrabbed = wasGrabbed();
 		super.onMouseReleased(e);
+	}
+	
+	@Override
+	public void onMouseExited(MouseEvent e) {
+		onMouseReleased(e);
 	}
 	
 }

@@ -22,8 +22,8 @@ public abstract class Dragable extends ScreenElement{
 	public void onMousePressed(MouseEvent e) {
 		if(getBounds().contains(e.getPoint())) {
 			grabbed = true;
-			xDiff = e.getX() - x;
-			yDiff = e.getY() - y;
+			xDiff = e.getX() - getX();
+			yDiff = e.getY() - getY();
 		}
 	}
 	
@@ -40,8 +40,8 @@ public abstract class Dragable extends ScreenElement{
 	@Override
 	public void onMouseDragged(MouseEvent e) {
 		if(grabbed) {
-			x = e.getX() - xDiff;
-			y = e.getY() - yDiff;
+			setX(e.getX() - xDiff);
+			setY(e.getY() - yDiff);
 		}
 	}
 	

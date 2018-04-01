@@ -34,7 +34,7 @@ public class TestMoving extends MovingEntity{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.setColor(Color.WHITE);
-		g2d.fillRect((int) x, (int) y, (int) w, (int) h);
+		g2d.fillRect((int) getX(), (int) getY(), (int) getW(), (int) getH());
 	}
 
 }

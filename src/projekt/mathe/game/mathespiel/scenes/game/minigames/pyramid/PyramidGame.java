@@ -73,8 +73,7 @@ public class PyramidGame extends MiniGame{
 		int xc = 140;
 		int yc = 540;
 		for(LooseBlock looseBlock : looseBlocks) {
-			looseBlock.x = xc;
-			looseBlock.y = yc;
+			looseBlock.setPosition(xc, yc);
 			xc += mx;
 			if(xc > 1280 - mx) {
 				xc = 140;
@@ -88,8 +87,7 @@ public class PyramidGame extends MiniGame{
 		
 		for(int i = 0; i < 5; i++) {
 			LooseBlock block = base[i];
-			block.x = 290 + i * 150;
-			block.y = 420;
+			block.setPosition(290 + i * 150, 420);
 			block.setOccupiedPlaceID(blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).getID());
 			blockHolder.getPlaces().get(blockHolder.getPlaces().size() - 5 + i).setOccupied(true);
 			block.setMoveable(false);

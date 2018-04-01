@@ -11,6 +11,7 @@ import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
+import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.SekWorld;
 
@@ -22,6 +23,7 @@ public class SekScene extends Scene{
 		registerWorld(new SekWorld(this, player));
 		player.setWorld(world);
 		registerPlayer(player);
+		registerPauseScreen(new MainPauseScreen(this));
 	}
 
 	@Override
@@ -30,14 +32,14 @@ public class SekScene extends Scene{
 		if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("sekEingang")) {
 			camera.focusX(140);
 			camera.focusY(422);
-			player.x = -454;
-			player.y = 360;
+			player.setX(-454);
+			player.setY(360);
 			player.direction = "right";
 		}else {
 			camera.focusX(1000);
 			camera.focusY(300);
-			player.x = 1000;
-			player.y = 300;
+			player.setX(1000);
+			player.setY(300);
 		}
 	}
 

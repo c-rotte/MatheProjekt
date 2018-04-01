@@ -117,19 +117,19 @@ public abstract class PauseScreen extends ScreenElement{
 		switch (state) {
 			case "hidden": 
 				if(interacted) {
-					startX = getContainer().camera.translateAbsolutX(0) - w;
-					x = startX;
+					startX = getContainer().camera.translateAbsolutX(0) - getW();
+					setX(startX);
 					aimX = getContainer().camera.translateAbsolutX(selectedX);
-					y = getContainer().camera.translateAbsolutY(selectedY);
+					setY(getContainer().camera.translateAbsolutY(selectedY));
 					state = "fadingIn";
 					onToggle();
 				}
 				break;
 			case "fadingIn":
-				if(x < aimX) {
-					x += SPEED * delta;
+				if(getX() < aimX) {
+					addToX(SPEED * delta);
 				}else {
-					x = aimX;
+					setX(aimX);
 					state = "shown";
 				}
 				break;
@@ -140,12 +140,12 @@ public abstract class PauseScreen extends ScreenElement{
 				}
 				break;
 			case "fadingOut":
-				y = getContainer().camera.translateAbsolutY(selectedY);
-				startX = getContainer().camera.translateAbsolutX(0) - w;
-				if(x > startX) {
-					x -= SPEED * delta;
+				setY(getContainer().camera.translateAbsolutY(selectedY));
+				startX = getContainer().camera.translateAbsolutX(0) - getW();
+				if(getX() > startX) {
+					addToX(-SPEED * delta);
 				}else {
-					x = startX;
+					setX(startX);
 					state = "hidden";
 				}
 				break;

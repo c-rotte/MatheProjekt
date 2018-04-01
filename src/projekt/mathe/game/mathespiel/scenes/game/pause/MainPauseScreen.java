@@ -1,5 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.pause;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
@@ -53,11 +54,14 @@ public class MainPauseScreen extends PauseScreen{
 		}else if(getState().equals("fadingOut")) {
 			getContainer().fillScene(g2d, Color.BLACK, (1f - bgAnimator.getCurrValueRelative()) / 2f);
 		}
+		g2d.setColor(Color.WHITE);
+		g2d.setStroke(new BasicStroke(4f));
+		g2d.draw(getBounds());
 		g2d.setColor(backgroundColor);
 		g2d.fill(getBounds());
-		Helper.drawStringAroundPosition(getMiddle().x, (int) (y + 40), "PAUSE", Color.WHITE, 40, FONT.Ailerons, g2d, null, -1);
+		Helper.drawStringAroundPosition(getMiddle().x, (int) (getY() + 40), "PAUSE", Color.WHITE, 40, FONT.Ailerons, g2d, null, -1);
 		g2d.setColor(Color.WHITE);
-		g2d.fillRect(getMiddle().x - 60, (int) (y + 63), 120, 2);
+		g2d.fillRect(getMiddle().x - 60, (int) (getY() + 63), 120, 2);
 		getHolder().onPaint(g2d);
 	}
 

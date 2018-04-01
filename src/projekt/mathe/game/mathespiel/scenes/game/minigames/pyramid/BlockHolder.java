@@ -49,7 +49,7 @@ public class BlockHolder extends Holder<LooseBlock>{
 	
 	public Place getBoundsOfNearestPlace(LooseBlock looseBlock) {
 		for(Place place : places) {
-			if(Math.pow((looseBlock.x + looseBlock.w/2) - (place.x + place.w/2), 2) + Math.pow((looseBlock.y + looseBlock.h/2) - (place.y + place.h/2), 2) <= Math.pow(45, 2)) {
+			if(Math.pow((looseBlock.getX() + looseBlock.getW()/2) - (place.getX() + place.getW()/2), 2) + Math.pow((looseBlock.getY() + looseBlock.getH()/2) - (place.getY() + place.getH()/2), 2) <= Math.pow(45, 2)) {
 				return place;
 			}
 		}

@@ -42,26 +42,26 @@ public abstract class MovingEntity extends Entity{
 		if(currAim == null) {
 			return;
 		}
-		if(Math.abs(x - currAim[0]) <= speed && Math.abs(y - currAim[1]) <= speed) {
+		if(Math.abs(getX() - currAim[0]) <= speed && Math.abs(getY() - currAim[1]) <= speed) {
 			nextAim();
 		}
-		float oldX = x;
-		if(x - currAim[0] < -speed) {
-			x += speed * delta;
-		}else if(x - currAim[0] > speed) {
-			x -= speed * delta;
+		float oldX = getX();
+		if(getX() - currAim[0] < -speed) {
+			addToX(speed * delta);;
+		}else if(getX() - currAim[0] > speed) {
+			addToX(-speed * delta);
 		}
 		if(world.player.getBounds().intersects(getBounds())) {
-			x = oldX;
+			setX(oldX);
 		}
-		float oldY = y;
-		if(y - currAim[1] < -speed) {
-			y += speed * delta;
-		}else if(y - currAim[1] > speed) {
-			y -= speed * delta;
+		float oldY = getY();
+		if(getY() - currAim[1] < -speed) {
+			addToY(speed * delta);
+		}else if(getY() - currAim[1] > speed) {
+			addToY(-speed * delta);
 		}
 		if(world.player.getBounds().intersects(getBounds())) {
-			y = oldY;
+			setY(oldY);
 		}
 	}
 }

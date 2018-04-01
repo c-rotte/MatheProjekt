@@ -72,7 +72,7 @@ public class Camera {
 	}
 	
 	public float getX() {
-		return x;
+		return Math.round(x);
 	}
 
 	public void setX(float x) {
@@ -80,7 +80,7 @@ public class Camera {
 	}
 
 	public float getY() {
-		return y;
+		return Math.round(y);
 	}
 
 	public void setY(float y) {
@@ -91,14 +91,14 @@ public class Camera {
 		x *= container.container.xRatio;
 		x -= container.container.xOffset;
 		x /= container.container.xRatio;
-		return (int) (x + getX() + container.container.xOffset);
+		return (int) Math.round(x + getX() + container.container.xOffset);
 	}
 	
 	public int translateAbsolutY(float y) {
 		y *= container.container.yRatio;
 		y -= container.container.yOffset;
 		y /= container.container.yRatio;
-		return (int) (y + getY());
+		return (int) Math.round(y + getY());
 	}
 	
 	public Rectangle translateAbsolutBounds(Rectangle bounds) {

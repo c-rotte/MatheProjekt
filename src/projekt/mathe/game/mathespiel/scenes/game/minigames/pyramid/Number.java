@@ -22,9 +22,9 @@ public class Number {
 	public void onPaint(Graphics2D g2d) {
 		if(looseBlock != null) {
 			g2d.setColor(Color.BLACK);
-			g2d.fillRect((int) (looseBlock.x + 20), (int) (looseBlock.y + looseBlock.h/2 - 2), 60, 4);
-			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + looseBlock.h/4) - 3, "" + n1, Color.BLACK, 25, FONT.VCR, g2d, null, -1);
-			Helper.drawStringAroundPosition((int) (looseBlock.x + looseBlock.w/2), (int) (looseBlock.y + (looseBlock.h/4) * 3), "" + n2, Color.BLACK, 25, FONT.VCR, g2d, null, -1);
+			g2d.fillRect((int) (looseBlock.getX() + 20), (int) (looseBlock.getY() + looseBlock.getH()/2 - 2), 60, 4);
+			Helper.drawStringAroundPosition((int) (looseBlock.getX() + looseBlock.getW()/2), (int) (looseBlock.getY() + looseBlock.getH()/4) - 3, "" + n1, Color.BLACK, 25, FONT.VCR, g2d, null, -1);
+			Helper.drawStringAroundPosition((int) (looseBlock.getX() + looseBlock.getW()/2), (int) (looseBlock.getY() + (looseBlock.getH()/4) * 3), "" + n2, Color.BLACK, 25, FONT.VCR, g2d, null, -1);
 		}
 	}
 	

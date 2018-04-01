@@ -18,11 +18,11 @@ public abstract class Entity extends ScreenElement{
 	}
 
 	public void moveX(int x) {
-		this.x += x;
+		addToX(x);
 	}
 	
 	public void moveY(int y) {
-		this.y += y;
+		addToY(y);
 	}
 
 	public abstract void onInteract(MapPlayer player);

@@ -40,7 +40,7 @@ public class Barrier extends ScreenElement{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.setColor(Color.RED);
-		g2d.drawRect((int) x, (int) y, (int) w, (int) h);
+		g2d.drawRect((int) getX(), (int) getY(), (int) getW(), (int) getH());
 	}
 	
 }

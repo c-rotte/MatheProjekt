@@ -99,8 +99,8 @@ public abstract class PauseScreenClickable extends ScreenElement{
 	}
 	
 	public final void onClickableTick(float delta) {
-		x = pauseScreen.x + xAbstand;
-		y = pauseScreen.y + yAbstand;
+		setX(pauseScreen.getX() + xAbstand);
+		setY(pauseScreen.getY() + yAbstand);
 		onTick(delta);
 	}
 	

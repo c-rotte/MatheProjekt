@@ -14,6 +14,7 @@ import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.Main;
 import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
+import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.TischeWorld;
 
@@ -25,6 +26,7 @@ public class TischeScene extends Scene{
 		registerWorld(new TischeWorld(this, player));
 		player.setWorld(world);
 		registerPlayer(player);
+		registerPauseScreen(new MainPauseScreen(this));
 	}
 
 	@Override
@@ -33,20 +35,20 @@ public class TischeScene extends Scene{
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
 			camera.focusX(50);
 			camera.focusY(-68);
-			player.x = -123;
-			player.y = -136;
+			player.setX(-123);
+			player.setY(-136);
 			player.direction = "right";
 		}else if(lastID.equals("sek") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
 			camera.focusX(50);
 			camera.focusY(-140);
-			player.x = 450;
-			player.y = -256;
+			player.setX(450);
+			player.setY(-256);
 			player.direction = "left";
 		}else {
 			camera.focusX(50);
 			camera.focusY(222);
-			player.x = 300;
-			player.y = 222;
+			player.setX(300);
+			player.setY(222);
 			player.direction = "down";
 		}
 	}

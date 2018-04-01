@@ -25,19 +25,19 @@ public class Particle extends ScreenElement{
 	}
 
 	public boolean outOfBounds() {
-		return !getContainer().camera.inRangeOfCamera(x, y, w, h);
+		return !getContainer().camera.inRangeOfCamera(getX(), getY(), getW(), getH());
 	}
 	
 	@Override
 	public void onTick(float delta) {
-		x += xDist * SPEED * delta;
-		y += yDist * SPEED * delta;
+		addToX(xDist * SPEED * delta);
+		addToY(yDist * SPEED * delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		g2d.setColor(COLOR);
-		g2d.fillOval((int) (x - w/2), (int) (y - h/2), (int) w, (int) h);
+		g2d.fillOval((int) (getX() - getW()/2), (int) (getY() - getH()/2), (int) getW(), (int) getH());
 	}
 
 }
