@@ -1,5 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
+import java.sql.ResultSet;
+
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
 import projekt.mathe.game.engine.help.Camera;
@@ -17,6 +19,13 @@ public class RaceBackgroundHolder extends Holder<RaceBackgroundHelper>{
 		}
 	}
 
+	public void reset() {
+		lastCameraY = container.camera.getY() + 720;
+		for(int i = 0; i < 15; i++) {
+			addElement(new RaceBackgroundHelper(container, 0, 750 - i * 50));
+		}
+	}
+	
 	@Override
 	public void addElement(RaceBackgroundHelper t) {
 		lastY = t.getY();

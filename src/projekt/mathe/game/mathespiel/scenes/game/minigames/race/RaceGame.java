@@ -19,7 +19,7 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 
 public class RaceGame extends MiniGame{
 
-	private RaceBackgroundHolder backgroundHolder;
+	private static RaceBackgroundHolder backgroundHolder;
 	private RacePlayer racePlayer;
 	private RaceEnemy raceEnemy;
 	private Questionfield questionfield;
@@ -29,22 +29,26 @@ public class RaceGame extends MiniGame{
 	
 	public RaceGame(Scene container) {
 		super(container, "race");
+		backgroundHolder = new RaceBackgroundHolder(container);	
+	}
+
+	public void reset() {
+		backgroundHolder.reset();
 		racePlayer = new RacePlayer(container, 518, 250);
 		raceEnemy = new RaceEnemy(container, 713, 250);
-		backgroundHolder = new RaceBackgroundHolder(container);
 		questionfield = new Questionfield(container,
-			() ->{
-				racePlayer.boost();
-			},
-			() ->{
-				raceEnemy.boost();
-			});
+				() ->{
+					racePlayer.boost();
+				},
+				() ->{
+					raceEnemy.boost();
+				});
 		countdown = new Countdown(container);
 		state = "startDialog";
 		finishLine = null;
 		container.world.openDialog(new StartDialog(container.world));
 	}
-
+	
 	private class StartDialog extends Dialog{
 
 		public StartDialog(World world) {

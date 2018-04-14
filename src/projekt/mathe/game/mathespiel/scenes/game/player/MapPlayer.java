@@ -43,11 +43,16 @@ public class MapPlayer extends ScreenElement{
 	}
 
 	public Rectangle getInteractionBounds() {
+		Rectangle bounds = getBounds();
 		switch(direction) {
-			case "up" : return new Rectangle((int) getX(), (int) (getY() - getH()), (int) getW(), (int) getH());
-			case "down" : return new Rectangle((int) getX(), (int) (getY() + getH()), (int) getW(), (int) (getH() * 1.5));
-			case "left" : return new Rectangle((int) (getX() - getW()), (int) getY(), (int) getW(), (int) getH());
-			case "right" : return new Rectangle((int) (getX() + getW()), (int) getY(), (int) getW(), (int) getH());
+			case "up" :
+				return new Rectangle(bounds.x, bounds.y - bounds.width, bounds.width, bounds.width);
+			case "down" :
+				return new Rectangle(bounds.x, bounds.y + bounds.height, bounds.width, bounds.width);
+			case "left" : 
+				return new Rectangle(bounds.x - bounds.width, bounds.y, bounds.width, bounds.height);
+			case "right" :
+				return new Rectangle(bounds.x + bounds.width, bounds.y, bounds.width, bounds.height);
 			default : return null;
 		}
 	}
@@ -75,6 +80,8 @@ public class MapPlayer extends ScreenElement{
 		if(Settings.HITBOXEN_ANZEIGEN) {
 			g2d.setColor(Color.CYAN);
 			g2d.draw(getBounds());
+			g2d.setColor(Color.BLUE);
+			g2d.draw(getInteractionBounds());
 		}
 	}
 

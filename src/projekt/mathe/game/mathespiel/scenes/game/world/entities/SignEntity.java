@@ -21,7 +21,7 @@ public class SignEntity extends Entity{
 	};
 	
 	public SignEntity(Scene container, World world, int x, int y, Dialog dialog) {
-		super(container, world, x, y, Values.TILE_SIZE, Values.TILE_SIZE, true, true);
+		super(container, world, x, y + 1, Values.TILE_SIZE, Values.TILE_SIZE - 1, true, true);
 		textureHelper = new TextureHelper();
 		textureHelper.addState("normal", 10, textures);
 		this.dialog = dialog;
@@ -39,7 +39,9 @@ public class SignEntity extends Entity{
 
 	@Override
 	public void onInteract(MapPlayer player) {
-		world.openDialog(dialog.reset());
+		if(player.direction.equals("up")) {
+			world.openDialog(dialog.reset());
+		}
 	}
 
 }

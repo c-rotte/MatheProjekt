@@ -234,6 +234,19 @@ public class Helper {
 			StringSelection selection = new StringSelection(sb2.toString());
 			Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
 		}
+		System.exit(0);
+	}
+	
+	public static int countCharOccurrences(String s, char c){
+	    int count = 0;
+	    for (int i=0; i < s.length(); i++)
+	    {
+	        if (s.charAt(i) == c)
+	        {
+	             count++;
+	        }
+	    }
+	    return count;
 	}
 	
 }

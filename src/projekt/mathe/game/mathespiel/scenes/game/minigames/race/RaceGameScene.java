@@ -19,13 +19,14 @@ public class RaceGameScene extends Scene{
 	public RaceGameScene(Game container) {
 		super(container, "race", Values.SCENE_BG_COLOR);
 		registerWorld(new RaceWorld(this));
+		raceGame = new RaceGame(this);
 	}
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		camera.setX(0);
 		camera.setY(0);
-		raceGame = new RaceGame(this);
+		raceGame.reset();
 		mainSceneData = (MainSceneData) sceneData;
 	}
 

@@ -18,7 +18,7 @@ public class PausenhofWorld extends World{
 
 	public PausenhofWorld(Scene container, MapPlayer player) {
 		super(container, player);
-		addEntity(new SignEntity(container, this, 1430, 640, new TestDialog(this)));
+		addEntity(new SignEntity(container, this, 1445, 520, new TestDialog(this)));
 		addEntity(new TestMoving(container, this, 770, 530));
 		addLoadingZone(new LoadingZone(965, -113, 150, 50, this, "aula", 20f, "pausenhofEingang"));
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/pausenhof/lower/unten_01", 1750, "png"), 50);
