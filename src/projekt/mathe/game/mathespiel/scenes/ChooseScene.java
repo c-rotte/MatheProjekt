@@ -145,7 +145,7 @@ public class ChooseScene extends Scene{
 		if(gameLoading && !((Maingame) container).finishedLoading()) {
 			g2d.drawImage(loadingHelper.getCurrentImage(), 1200, 640, 70, 70, null);
 			int prozent = Math.round(Logger.getRelativeLoadedObjects() * 100);
-			Helper.drawStringFromLeft(1100, 690, prozent + "%", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
+			Helper.drawStringFromLeft(1110, 690, prozent + "%", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		}
 		if(newGameWarning.isOpen()) {
 			fillScene(g2d, Color.BLACK, .3f);
