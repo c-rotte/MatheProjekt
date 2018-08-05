@@ -13,11 +13,20 @@ public abstract class MiniGame {
 	private String id;
 	private HashMap<String, Object> stats;
 	public Scene container;
+	private boolean mouseBlocked;
 	
 	public MiniGame(Scene container, String id) {
 		this.id = id;
 		this.container = container;
 		stats = Saver.getMinigameStats(id);
+	}
+	
+	public void setMouseBlocked(boolean mouseBlocked) {
+		this.mouseBlocked = mouseBlocked;
+	}
+	
+	public boolean isMouseBlocked() {
+		return mouseBlocked;
 	}
 	
 	public void setStat(String id, Object object) {

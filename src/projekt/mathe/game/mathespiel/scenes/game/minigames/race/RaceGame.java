@@ -53,7 +53,7 @@ public class RaceGame extends MiniGame{
 
 		public StartDialog(World world) {
 			super(world);
-			addCard(new Card("Bla bla tut"));
+			addCard(new Card("Versuche, vor der anderen Person das Zeil zu erreichen. Beantworte dazu die Fragen innerhalb des Zeitlimits."));
 		}
 
 		@Override

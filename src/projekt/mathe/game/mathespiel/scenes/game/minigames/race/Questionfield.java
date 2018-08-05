@@ -349,7 +349,7 @@ public class Questionfield extends ScreenElement{
 				}
 				g2d.fill(getBounds());
 				if(answer != null) {
-					Helper.drawStringAroundPosition((int) getBounds().getCenterX(), (int) getBounds().getCenterY(), answer.toUpperCase(), Color.BLACK, 20, FONT.VCR, g2d, null, -1);
+					Helper.drawStringAroundPosition((int) getBounds().getCenterX(), (int) getBounds().getCenterY(), answer.toUpperCase(), Color.WHITE, 20, FONT.VCR, g2d, null, -1);
 				}else {
 					fraction.onPaint(g2d);
 				}
@@ -443,7 +443,6 @@ public class Questionfield extends ScreenElement{
 		int index = ThreadLocalRandom.current().nextInt(0, questions.size());
 		Question question = questions.get(index);
 		questions.remove(index);
-		System.out.println(question.getQuestion());
 		return question;
 	}
 	

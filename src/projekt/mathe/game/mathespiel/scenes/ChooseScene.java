@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
@@ -143,7 +144,8 @@ public class ChooseScene extends Scene{
 		buttonHolder.onPaint(g2d);
 		if(gameLoading && !((Maingame) container).finishedLoading()) {
 			g2d.drawImage(loadingHelper.getCurrentImage(), 1200, 640, 70, 70, null);
-			Helper.drawStringFromLeft(1050, 690, "Lädt...", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
+			int prozent = Math.round(Logger.getRelativeLoadedObjects() * 100);
+			Helper.drawStringFromLeft(1100, 690, prozent + "%", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		}
 		if(newGameWarning.isOpen()) {
 			fillScene(g2d, Color.BLACK, .3f);

@@ -215,7 +215,7 @@ public abstract class Dialog{
 		}
 	}
 	
-	public class Card{
+	public static class Card{
 
 		public String message;
 		public String[] selections;

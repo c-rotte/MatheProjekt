@@ -33,6 +33,12 @@ public class TextureHelper {
 		}
 	}
 	
+	public void resetCurrentState() {
+		tickCounter = 0;
+		positionCounter = 0;
+		i = currImages[0];
+	}
+	
 	public int getSize() {
 		return modes.size();
 	}

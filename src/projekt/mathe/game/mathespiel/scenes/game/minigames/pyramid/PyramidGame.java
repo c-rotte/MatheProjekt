@@ -25,7 +25,6 @@ public class PyramidGame extends MiniGame{
 	private BlockHolder blockHolder;
 	private TextureHelper backgroundHelper;
 	private boolean finished;
-	private boolean mouseBlocked;
 	private boolean notFinishedAgain;
 	
 	public PyramidGame(Scene container) {
@@ -36,10 +35,6 @@ public class PyramidGame extends MiniGame{
 		renewPyramid();
 	}
 
-	public void setMouseBlocked(boolean mouseBlocked) {
-		this.mouseBlocked = mouseBlocked;
-	}
-	
 	public void generateBlocks(int startX, int startY, int xSpace, int ySpace) {
 		ArrayList<LooseBlock> looseBlocks = new ArrayList<>();
 		float[][] values = generateValues();
@@ -199,7 +194,7 @@ public class PyramidGame extends MiniGame{
 			container.world.openDialog(new SuccessDialog(container.world));
 		}else if(!finished && !container.world.isDialogOpen()) {
 			if(getPlacedBlocks() == 15 && notFinishedAgain){
-				mouseBlocked = true;
+				setMouseBlocked(true);
 				notFinishedAgain = false;
 				container.world.openDialog(new FailedDialog(container.world));
 			}else if(getPlacedBlocks() != 15){
@@ -221,49 +216,49 @@ public class PyramidGame extends MiniGame{
 	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseClicked(e);
 		}
 	}
 	
 	@Override
 	public void onMouseDragged(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseDragged(e);
 		}
 	}
 
 	@Override
 	public void onMouseExited(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseExited(e);
 		}
 	}
 	
 	@Override
 	public void onMouseMoved(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseMoved(e);
 		}
 	}
 	
 	@Override
 	public void onMousePressed(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMousePressed(e);
 		}
 	}
 	
 	@Override
 	public void onMouseReleased(MouseEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseReleased(e);
 		}
 	}
 	
 	@Override
 	public void onMouseWheelMoved(MouseWheelEvent e) {
-		if(!mouseBlocked) {
+		if(!isMouseBlocked()) {
 			blockHolder.onMouseWheelMoved(e);
 		}
 	}
@@ -301,7 +296,7 @@ public class PyramidGame extends MiniGame{
 
 		@Override
 		public void onFinished(Card lastcard) {
-			mouseBlocked = false;
+			setMouseBlocked(false);
 		}
 		
 	}

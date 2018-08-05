@@ -22,7 +22,7 @@ public class Logger {
 	}
 	
 	public static int getAmountToLoad() {
-		return 10258;
+		return 6497;
 	}
 	
 }

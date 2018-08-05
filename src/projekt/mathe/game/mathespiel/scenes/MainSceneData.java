@@ -1,5 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes;
 
+import java.util.HashMap;
+
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.Camera;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -10,9 +12,11 @@ public class MainSceneData extends SceneData{
 	private MapPlayer mapPlayer;
 	private Camera camera;
 	private String minigameCompleted;
+	public HashMap<String, Object> additional;
 	
 	public MainSceneData() {
 		lastLoadingZone = "";
+		additional = new HashMap<>();
 	}
 	
 	public boolean hadMinigame() {
