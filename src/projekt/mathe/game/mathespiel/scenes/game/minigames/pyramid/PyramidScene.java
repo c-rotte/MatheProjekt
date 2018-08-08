@@ -26,7 +26,7 @@ public class PyramidScene extends GameScene{
 		super(container, "pyramid", Values.SCENE_BG_COLOR);
 		pyramidGame = new PyramidGame(this);
 		registerMiniGameMouseEvents(pyramidGame);
-		registerWorld(new PyramidWorld(this, null));
+		registerWorld(World.emptyInstance(this));
 	}
 
 	@Override

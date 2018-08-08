@@ -10,6 +10,7 @@ import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.Main;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
 public class RaceGameScene extends Scene{
 
@@ -18,7 +19,7 @@ public class RaceGameScene extends Scene{
 	
 	public RaceGameScene(Game container) {
 		super(container, "race", Values.SCENE_BG_COLOR);
-		registerWorld(new RaceWorld(this));
+		registerWorld(World.emptyInstance(this));
 		raceGame = new RaceGame(this);
 	}
 

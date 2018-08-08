@@ -117,4 +117,33 @@ public abstract class World{
 		this.dialog = null;
 	}
 	
+	public static final World emptyInstance(Scene container) {
+		return new World(container, null) {
+			
+			@Override
+			public void onTick(float delta) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPaintOnTop(Graphics2D g2d) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPaintMiddle(Graphics2D g2d) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPaintBelow(Graphics2D g2d) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+	}
+	
 }

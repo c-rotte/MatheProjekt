@@ -1,4 +1,4 @@
-package projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard;
+package projekt.mathe.game.mathespiel.scenes.game.minigames.angle;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -6,57 +6,54 @@ import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.GameScene;
-import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
-import projekt.mathe.game.mathespiel.Main;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
-public class BoardScene extends GameScene{
+public class AngleScene extends GameScene{
 
-	private BoardGame boardGame;
 	private MainSceneData mainSceneData;
+	private AngleGame angleGame;
 	
-	public BoardScene(Game container) {
-		super(container, "board", Values.SCENE_BG_COLOR);
-		boardGame = new BoardGame(this);
+	public AngleScene(Game container) {
+		super(container, "angle", Color.WHITE);
 		registerWorld(World.emptyInstance(this));
+		angleGame = new AngleGame(this);
 	}
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
-		mainSceneData = new MainSceneData();
-		boardGame = new BoardGame(this);
-		registerMiniGameMouseEvents(boardGame);
-		boardGame.setMouseBlocked(true);
+		mainSceneData = (MainSceneData) sceneData;
+		angleGame = new AngleGame(this);
+		registerMiniGameMouseEvents(angleGame);
 		world.openDialog(new ExplanationDialog(world));
 	}
 
 	@Override
 	public void onTick(float delta) {
-		boardGame.onTick(delta);
+		angleGame.onTick(delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		boardGame.onPaint(g2d);
+		angleGame.onPaint(g2d);
 	}
 
 	@Override
 	public SceneData getDataForNextScene() {
 		return mainSceneData;
 	}
-
+	
 	private class ExplanationDialog extends Dialog {
 
 		public ExplanationDialog(World world) {
 			super(world);
-			Card card1 = new Card("Der letzte Schüler, der ausgefragt wurde, hat einiges falsch gemacht.");
+			Card card1 = new Card("Bei der Pizzabestellung des Kiosks ist ein Fehler aufgetreten; nun wurden nur halbe Pizzen geliefert. Diese müssen jetzt genau aufgeteilt werden.");
 			addCard(card1);
-			Card card2 = new Card("Bitte entferne alle FALSCHEN Rechnungen. Klicke dazu mit dem Schwamm auf die entsprechende Gleichung. Durch ein erneutes Klicken machst du diese Aktion rückgängig.");
+			Card card2 = new Card("Für jede Pizza hast du 10 Sekunden Zeit. Bitte versuche, durch Drücken und Ziehen der Maus den angegebenen Winkel zu erraten.");
 			addCard(card2);
 			Card card3 = new Card("Hast du alles verstanden?");
 			card3.addSelection("Ja", "Nein");
@@ -96,9 +93,9 @@ public class BoardScene extends GameScene{
 
 		@Override
 		public void onFinished(Card lastcard) {
-			boardGame.setMouseBlocked(false);
+			
 		}
 		
 	}
-	
+
 }

@@ -17,6 +17,7 @@ import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
 import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
+import projekt.mathe.game.mathespiel.scenes.game.minigames.angle.AngleScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.area.AreaScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard.BoardScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid.PyramidScene;
@@ -29,8 +30,8 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		//this.registerScene(new BoardScene(this));
-		//setCurrentScene("board", new MainSceneData(), 60f);
+		//this.registerScene(new AngleScene(this));
+		//setCurrentScene("angle", new MainSceneData(), 40f);
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {
@@ -39,7 +40,7 @@ public class Maingame extends Game{
 		}).start();
 	}
 	
-	private void registerGameScenes(){
+	private void registerGameScenes() {
 		this.registerScene(new ChemieScene(this));
 		this.registerScene(new PausenhofScene(this));
 		this.registerScene(new AulaScene(this));
@@ -49,6 +50,7 @@ public class Maingame extends Game{
 		this.registerScene(new PyramidScene(this));
 		this.registerScene(new RaceGameScene(this));
 		this.registerScene(new BoardScene(this));
+		this.registerScene(new AngleScene(this));
 		//this.registerScene(new AreaScene(this));
 	}
 

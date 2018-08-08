@@ -45,7 +45,7 @@ public class BoardGame extends MiniGame{
 		if(calculationHolder.completed() && !container.world.isDialogOpen() && !container.fading) {
 			success++;
 			setMouseBlocked(true);
-			container.world.openDialog(new ContinueDialog(container.world, success, 5));
+			container.world.openDialog(new ContinueDialog(container.world, success, 3));
 		}else {
 			if(!calculationHolder.completed() && timeBar.isFinished() && !container.world.isDialogOpen() && !container.fading) {
 				setMouseBlocked(true);

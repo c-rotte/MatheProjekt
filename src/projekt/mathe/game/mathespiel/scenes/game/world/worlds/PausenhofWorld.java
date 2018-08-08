@@ -40,6 +40,23 @@ public class PausenhofWorld extends World{
 		dialog2.addCard(card);
 		addEntity(new SignEntity(container, this, 1555, 520, dialog2));
 		
+		Dialog dialog3 = new Dialog(this) {
+			@Override
+			public void onSelected(Card lastcard, boolean finished) {
+				if(finished) {
+					if(lastcard.selected.equals("ja")) {
+						world.container.callScene("angle", world.container.getDataForNextScene(), 40f);
+					}
+				}
+			}
+			@Override
+			public void onFinished(Card lastcard) {}
+		};
+		Card card2 = new Card("Das ist ein Test für das Pizzaspiel. Möchtest du beginnen?");
+		card2.addSelection("ja", "nein");
+		dialog3.addCard(card2);
+		addEntity(new SignEntity(container, this, 1665, 520, dialog3));
+		
 		addEntity(new TestMoving(container, this, 770, 530));
 		
 		addLoadingZone(new LoadingZone(965, -113, 150, 50, this, "aula", 20f, "pausenhofEingang"));

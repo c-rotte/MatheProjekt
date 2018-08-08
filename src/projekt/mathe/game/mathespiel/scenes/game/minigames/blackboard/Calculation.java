@@ -42,6 +42,9 @@ public class Calculation extends ClickElement{
 		BigDecimal decimal3 = new BigDecimal(f1);
 		decimal3 = decimal3.setScale(2, BigDecimal.ROUND_HALF_UP);
 		f1 = decimal3.floatValue();
+		if(c == '*') {
+			c = '•';
+		}
 		calc = f1 + " " + c + " " + f2 + " = " + f3;
 	}
 
