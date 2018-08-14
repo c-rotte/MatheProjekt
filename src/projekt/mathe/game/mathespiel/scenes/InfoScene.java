@@ -2,7 +2,6 @@ package projekt.mathe.game.mathespiel.scenes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
@@ -10,7 +9,6 @@ import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
-import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.particle.ParticleHolder;
 import projekt.mathe.game.mathespiel.scenes.menu.Button;
@@ -64,7 +62,6 @@ public class InfoScene extends Scene{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		particleHolder.onPaint(g2d);
-		buttonHolder.onPaint(g2d);
 		Helper.drawStringAroundPosition(640, 200, "Nachts im Bunker", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		Helper.drawStringAroundPosition(640, 250, "2017 - 2018", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		Helper.drawStringAroundPosition(640, 300, "~", Color.WHITE, 40, FONT.VCR, g2d, null, -1);

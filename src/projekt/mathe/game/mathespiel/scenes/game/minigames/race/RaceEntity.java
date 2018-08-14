@@ -3,12 +3,9 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.xml.soap.Text;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Animator;
-import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.mathespiel.Settings;
 
 public abstract class RaceEntity extends ScreenElement{

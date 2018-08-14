@@ -1,10 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
-import java.sql.ResultSet;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
-import projekt.mathe.game.engine.help.Camera;
 
 public class RaceBackgroundHolder extends Holder<RaceBackgroundHelper>{
 

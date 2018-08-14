@@ -1,7 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.mathespiel.scenes.game.minigames.race.RacePlayer.RacePlayerTextureHelper;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayerTextureHelper;
 
 public class RaceEnemy extends RaceEntity{

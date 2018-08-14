@@ -1,7 +1,5 @@
 package projekt.mathe.game.engine.titlebar;
 
-import java.awt.Color;
-
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;

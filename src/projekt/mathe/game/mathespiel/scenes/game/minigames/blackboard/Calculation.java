@@ -9,8 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ClickElement;
-import projekt.mathe.game.engine.elements.ScreenElement;
-import projekt.mathe.game.engine.elements.ClickElement.STATE;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
 

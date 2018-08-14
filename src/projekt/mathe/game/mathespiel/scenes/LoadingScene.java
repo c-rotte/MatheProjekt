@@ -5,13 +5,11 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Shape;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.Animator;
-import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 
 public class LoadingScene extends Scene{

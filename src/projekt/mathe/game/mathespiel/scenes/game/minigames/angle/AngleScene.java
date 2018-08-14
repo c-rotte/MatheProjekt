@@ -2,16 +2,13 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.angle;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.GameScene;
 import projekt.mathe.game.engine.SceneData;
-import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class AngleScene extends GameScene{
 
@@ -53,7 +50,7 @@ public class AngleScene extends GameScene{
 			super(world);
 			Card card1 = new Card("Bei der Pizzabestellung des Kiosks ist ein Fehler aufgetreten; nun wurden nur halbe Pizzen geliefert. Diese müssen jetzt genau aufgeteilt werden.");
 			addCard(card1);
-			Card card2 = new Card("Für jede Pizza hast du 10 Sekunden Zeit. Bitte versuche, durch Drücken und Ziehen der Maus den angegebenen Winkel zu erraten.");
+			Card card2 = new Card("Für jede Pizza hast du 20 Sekunden Zeit. Bitte versuche, durch Drücken und Ziehen der Maus den angegebenen Winkel zu erraten.");
 			addCard(card2);
 			Card card3 = new Card("Hast du alles verstanden?");
 			card3.addSelection("Ja", "Nein");

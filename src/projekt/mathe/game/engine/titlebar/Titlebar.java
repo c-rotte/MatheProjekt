@@ -10,7 +10,6 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
-import projekt.mathe.game.mathespiel.Settings;
 
 public class Titlebar {
 

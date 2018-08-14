@@ -13,8 +13,8 @@ import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.TestMovin
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.TestDialog;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.TestDialog;
 
 public class PausenhofWorld extends World{
 
@@ -56,6 +56,23 @@ public class PausenhofWorld extends World{
 		card2.addSelection("ja", "nein");
 		dialog3.addCard(card2);
 		addEntity(new SignEntity(container, this, 1665, 520, dialog3));
+		
+		Dialog dialog4 = new Dialog(this) {
+			@Override
+			public void onSelected(Card lastcard, boolean finished) {
+				if(finished) {
+					if(lastcard.selected.equals("ja")) {
+						world.container.callScene("boss", world.container.getDataForNextScene(), 40f);
+					}
+				}
+			}
+			@Override
+			public void onFinished(Card lastcard) {}
+		};
+		Card card3 = new Card("Das ist ein Test für den Bosskampf. Möchtest du beginnen?");
+		card3.addSelection("ja", "nein");
+		dialog4.addCard(card3);
+		addEntity(new SignEntity(container, this, 1775, 520, dialog4));
 		
 		addEntity(new TestMoving(container, this, 770, 530));
 		

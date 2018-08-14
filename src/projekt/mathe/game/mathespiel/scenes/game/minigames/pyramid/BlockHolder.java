@@ -1,9 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.UUID;
 

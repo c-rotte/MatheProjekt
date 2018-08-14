@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import projekt.mathe.game.engine.help.Logger;
@@ -58,6 +57,7 @@ public class Saver {
 		Settings.FPS_ANZEIGEN = Saver.containsData("fps") ? Saver.getBoolean("fps") : false;
 		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
 		Settings.DARKMODE = Saver.containsData("darkmode") ? Saver.getBoolean("darkmode") : false;
+		Settings.SMOOTH = Saver.containsData("smooth") ? Saver.getBoolean("smooth") : false;
 	}
 	
 	public static void setData(String key, Object data) {

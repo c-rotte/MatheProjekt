@@ -4,8 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import javax.swing.JOptionPane;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;

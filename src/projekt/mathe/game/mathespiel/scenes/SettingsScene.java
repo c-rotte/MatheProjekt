@@ -2,16 +2,13 @@ package projekt.mathe.game.mathespiel.scenes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
-import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.particle.ParticleHolder;
-import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.menu.Button;
 import projekt.mathe.game.mathespiel.scenes.menu.ButtonHolder;
@@ -30,7 +27,7 @@ public class SettingsScene extends Scene{
 		checkBoxHolder.addElement(new CheckBox(this, "fps", 50, 100, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("FPS anzeigen", Color.WHITE).setClicked(Settings.FPS_ANZEIGEN));
 		checkBoxHolder.addElement(new CheckBox(this, "hitbox", 50, 160, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Hitboxen anzeigen", Color.WHITE).setClicked(Settings.HITBOXEN_ANZEIGEN));
 		checkBoxHolder.addElement(new CheckBox(this, "darkmode", 50, 220, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Dunkler Modus", Color.WHITE).setClicked(Settings.DARKMODE));
-		checkBoxHolder.addElement(new CheckBox(this, "setting4", 50, 280, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Setting 4", Color.WHITE));
+		checkBoxHolder.addElement(new CheckBox(this, "smooth", 50, 280, 30, Color.LIGHT_GRAY, Color.DARK_GRAY).addText("Kanten glätten (Reduziert die Leistung)", Color.WHITE).setClicked(Settings.SMOOTH));
 		buttonHolder = new ButtonHolder(this);
 		buttonHolder.addElement(new Button(this, buttonHolder, 40, 40, 140, 40)
 				.setText("ZURÜCK", 40, 110, 57, new Color[] {new Color(0, 180, 255), new Color(0, 100, 141), new Color(0, 55, 78)}, 3.4f)
@@ -48,6 +45,7 @@ public class SettingsScene extends Scene{
 		Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
 		Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
 		Settings.DARKMODE = checkBoxHolder.wasClicked("darkmode");
+		Settings.SMOOTH = checkBoxHolder.wasClicked("smooth");
 	}
 	
 	@Override

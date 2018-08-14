@@ -9,15 +9,12 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 
-import com.sun.javafx.css.CalculatedValue;
-import com.sun.prism.image.Coords;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
-import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.Helper.FONT;
+import projekt.mathe.game.engine.help.ResLoader;
 
 public class AngleCalculator extends ScreenElement{
 

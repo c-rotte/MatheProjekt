@@ -1,7 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs;
 
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class MovingTestDialog extends Dialog{
 

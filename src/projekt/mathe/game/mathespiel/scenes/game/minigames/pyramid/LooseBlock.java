@@ -1,13 +1,10 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.ResLoader;

@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
+import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Frame;
 import projekt.mathe.game.engine.Popup;
@@ -16,8 +14,6 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.save.Saver;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class Main {
 	

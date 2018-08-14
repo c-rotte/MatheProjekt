@@ -1,10 +1,8 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.worlds;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;

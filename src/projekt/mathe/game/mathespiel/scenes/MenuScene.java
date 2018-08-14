@@ -1,28 +1,17 @@
 package projekt.mathe.game.mathespiel.scenes;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Shape;
 import java.awt.event.MouseEvent;
-import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
-import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
-import projekt.mathe.game.engine.help.Helper.FONT;
-import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.engine.particle.ParticleHolder;
-import projekt.mathe.game.mathespiel.Maingame;
 import projekt.mathe.game.mathespiel.scenes.menu.Button;
 import projekt.mathe.game.mathespiel.scenes.menu.ButtonHolder;
 

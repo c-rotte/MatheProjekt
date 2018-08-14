@@ -3,17 +3,14 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.angle;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.net.CookieHandler;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javafx.scene.layout.ConstraintsBase;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.minigame.MiniGame;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard.TimeBar;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
@@ -28,7 +25,7 @@ public class AngleGame extends MiniGame{
 	public AngleGame(Scene container) {
 		super(container, "angle");
 		angleCalculator = new AngleCalculator(container, 640, 600);
-		timeBar = new TimeBar(container, 100, 660, 1080, 30, 10 * 60, 10);
+		timeBar = new TimeBar(container, 100, 660, 1080, 30, 20 * 60, 10);
 		state = "starting";
 		pizzen = 1;
 		setMouseBlocked(true);
@@ -49,7 +46,7 @@ public class AngleGame extends MiniGame{
 						public void onFinished(Card lastcard) {
 							timeBar.reset();
 							angleCalculator.reset();
-							angleCalculator.setCorrectAngle(ThreadLocalRandom.current().nextInt(10, 171), false);
+							angleCalculator.setCorrectAngle(ThreadLocalRandom.current().nextInt(1, 18) * 10 + (ThreadLocalRandom.current().nextBoolean() ? 0 : 5), false);
 							state = "playing";
 							setMouseBlocked(false);
 						}
@@ -68,7 +65,7 @@ public class AngleGame extends MiniGame{
 				break;
 			case "finished":
 				angleCalculator.onTick(delta);
-				if(angleCalculator.finishedAnimation() && !container.world.isDialogOpen()) {
+				if(angleCalculator.finishedAnimation() && !container.world.isDialogOpen() && !container.fading) {
 					Dialog dialog = new Dialog(container.world) {
 						@Override
 						public void onSelected(Card lastcard, boolean finished) {
@@ -129,7 +126,7 @@ public class AngleGame extends MiniGame{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		angleCalculator.onPaint(g2d);
-		Helper.drawStringAroundPosition(640, 35, "Pizza " + pizzen, Color.WHITE, 30, FONT.VCR, g2d, Color.BLACK, 5f);
+		Helper.drawStringAroundPosition(640, 35, "Pizza " + pizzen + " von 5", Color.WHITE, 30, FONT.VCR, g2d, Color.BLACK, 5f);
 		timeBar.onPaint(g2d);
 	}
 

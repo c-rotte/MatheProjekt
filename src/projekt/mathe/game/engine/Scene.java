@@ -7,14 +7,11 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.util.ArrayList;
 
-import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Camera;
 import projekt.mathe.game.engine.help.KeyController;
 import projekt.mathe.game.engine.pause.PauseScreen;
-import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 

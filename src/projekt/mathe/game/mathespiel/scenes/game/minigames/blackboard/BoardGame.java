@@ -3,21 +3,17 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.engine.elements.Holder;
 import projekt.mathe.game.engine.help.Helper;
-import projekt.mathe.game.engine.help.ResLoader;
-import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.help.Helper.FONT;
+import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.minigame.MiniGame;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class BoardGame extends MiniGame{
 

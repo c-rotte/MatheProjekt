@@ -6,7 +6,6 @@ import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
-import projekt.mathe.game.engine.help.Animator;
 
 public abstract class PauseScreen extends ScreenElement{
 

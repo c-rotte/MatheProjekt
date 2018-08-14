@@ -1,8 +1,5 @@
 package projekt.mathe.game.mathespiel.scenes.menu;
 
-import java.awt.Graphics2D;
-import java.io.Closeable;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 

@@ -1,5 +1,7 @@
 package projekt.mathe.game.mathespiel;
 
+import java.util.Set;
+
 import projekt.mathe.game.engine.Frame;
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.help.Logger;
@@ -18,8 +20,9 @@ import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
 import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.angle.AngleScene;
-import projekt.mathe.game.mathespiel.scenes.game.minigames.area.AreaScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard.BoardScene;
+import projekt.mathe.game.mathespiel.scenes.game.minigames.boss.BossScene;
+import projekt.mathe.game.mathespiel.scenes.game.minigames.boss.WinScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid.PyramidScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.race.RaceGameScene;
 
@@ -30,8 +33,8 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		//this.registerScene(new AngleScene(this));
-		//setCurrentScene("angle", new MainSceneData(), 40f);
+		//this.registerScene(new BossScene(this));
+		//setCurrentScene("boss", new MainSceneData(), 40f);
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {
@@ -51,7 +54,8 @@ public class Maingame extends Game{
 		this.registerScene(new RaceGameScene(this));
 		this.registerScene(new BoardScene(this));
 		this.registerScene(new AngleScene(this));
-		//this.registerScene(new AreaScene(this));
+		this.registerScene(new BossScene(this));
+		this.registerScene(new WinScene(this));
 	}
 
 	private void registerMenuScenes() {
@@ -79,6 +83,7 @@ public class Maingame extends Game{
 		Saver.setData("fps", Settings.FPS_ANZEIGEN);
 		Saver.setData("hitbox", Settings.HITBOXEN_ANZEIGEN);
 		Saver.setData("darkmode", Settings.DARKMODE);
+		Saver.setData("smooth", Settings.SMOOTH);
 	}
 	
 }

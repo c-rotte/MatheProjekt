@@ -1,16 +1,10 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.io.BufferedWriter;
 import java.util.UUID;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
-import projekt.mathe.game.engine.help.ResLoader;
-import projekt.mathe.game.engine.help.TextureHelper;
 
 public class Place extends ScreenElement{
 

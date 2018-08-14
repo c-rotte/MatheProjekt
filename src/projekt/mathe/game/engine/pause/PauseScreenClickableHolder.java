@@ -1,7 +1,5 @@
 package projekt.mathe.game.engine.pause;
 
-import java.awt.event.MouseEvent;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.Holder;
 

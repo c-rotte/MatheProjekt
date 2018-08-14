@@ -2,16 +2,10 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
-import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
-
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.engine.Values;
-import projekt.mathe.game.engine.help.Animator;
-import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.minigame.MiniGame;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;

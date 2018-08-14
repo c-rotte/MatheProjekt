@@ -3,7 +3,6 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 import java.awt.Image;
 
 import projekt.mathe.game.engine.help.TextureHelper;
-import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayerTextureHelper;
 
 public abstract class RaceTextures{
 

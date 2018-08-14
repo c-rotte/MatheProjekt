@@ -18,6 +18,10 @@ public abstract class GameScene extends Scene{
 		this.miniGame = miniGame;
 	}
 	
+	public MiniGame getMouseRegisteredMiniGame() {
+		return miniGame;
+	}
+	
 	@Override
 	public void onMouseClicked(MouseEvent e) {
 		if(miniGame != null) {

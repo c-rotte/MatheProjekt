@@ -3,7 +3,6 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.RenderingHints.Key;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -192,7 +191,7 @@ public abstract class Dialog{
 		int y = 435;
 		for(String string : lines) {
 			if(string != null && !string.equals("null")) {
-				Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(200), world.container.camera.translateAbsolutY(y), string.trim(), Color.BLACK, 30, FONT.FreePixel, g2d, null, -1);
+				Helper.drawStringFromLeft(world.container.camera.translateAbsolutX(200), world.container.camera.translateAbsolutY(y), string.trim(), currCard.getTextColor(), 30, FONT.FreePixel, g2d, null, -1);
 				y += 25;
 			}
 		}
@@ -224,12 +223,22 @@ public abstract class Dialog{
 		public int currIndex;
 		private String longestSelection;
 		
+		private Color textColor;
 		
 		public Card(String message) {
 			this.message = message;
 			currIndex = 0;
+			textColor = Color.BLACK;
 		}
 
+		public void setTextColor(Color textColor) {
+			this.textColor = textColor;
+		}
+		
+		public Color getTextColor() {
+			return textColor;
+		}
+		
 		public void addSelection(String... selections) {
 			this.selections = selections;
 			longestSelection = selections[0];

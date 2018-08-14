@@ -5,17 +5,10 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
-import java.awt.List;
 import java.awt.event.MouseEvent;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ThreadLocalRandom;
-
-import javax.security.auth.x500.X500Principal;
-import javax.swing.JOptionPane;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;

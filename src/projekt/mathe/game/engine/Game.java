@@ -250,7 +250,7 @@ public abstract class Game extends JPanel implements ActionListener{
 			return;
 		}
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setRenderingHints(Values.RENDERING_HINTS);
+		g2d.setRenderingHints(Settings.SMOOTH ? Values.SMOOTH_RENDERING_HINTS : Values.RENDERING_HINTS);
 		g2d.clipRect(0, 0, (int) (Values.WINDOW_WIDTH * xRatio + 2 * xOffset), (int) (Values.WINDOW_HEIGHT * yRatio + 2 * yOffset + Values.TITLEBAR_HEIGHT));
 		g2d.setColor(currScene.backgroundcolor);
 		g2d.fillRect(0, fullscreen ? 0 : Values.TITLEBAR_HEIGHT, (int) (Values.WINDOW_WIDTH * xRatio) + xOffset*2, (int) (Values.WINDOW_HEIGHT * yRatio) + yOffset*2);
