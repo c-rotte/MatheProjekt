@@ -41,6 +41,7 @@ public class BossGame extends MiniGame{
 	public void onPaint(Graphics2D g2d) {
 		wand.onPaint(g2d);
 		slingshot.onPaint(g2d);
+		wand.drawBubble(g2d);
 	}
 	
 	@Override

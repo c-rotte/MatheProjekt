@@ -175,32 +175,6 @@ public class Wand extends ScreenElement{
 		g2d.fillRect(120, 29, 1040, 11);
 		g2d.fillRect(120, 480, 1040, 12);
 		fensterHolder.onPaint(g2d);
-		if(!getContainer().world.isDialogOpen() && fensterHolder.getCurrBossFenster() != null && fensterHolder.getCurrBossFenster().isHittable() && !fensterHolder.getCurrBossFenster().wasBossHit() && !getContainer().world.isDialogOpen()) {
-			g2d.setColor(Color.WHITE);
-			g2d.fillRect(446, 495, 18, 30);
-			g2d.fillRoundRect(60, 520, 450, 150, 30, 30);
-			g2d.setColor(Color.BLACK);
-			g2d.setStroke(new BasicStroke(10f));
-			g2d.drawRoundRect(60, 520, 450, 150, 30, 30);
-			g2d.setColor(Color.WHITE);
-			g2d.setStroke(new BasicStroke(10f));
-			g2d.drawLine(440, 520, 470, 520);
-			g2d.setColor(Color.BLACK);
-			g2d.setStroke(new BasicStroke(10f));
-			g2d.drawLine(480, 530, 455, 490);
-			g2d.drawLine(455, 490, 430, 530);
-			String[] split = currMessage[0].toString().split(" ");
-			String line1 = "", line2 = "";
-			for(int i = 0; i < split.length; i++) {
-				if(i < (split.length + 1) / 2) {
-					line1 += split[i] + " ";
-				}else {
-					line2 += split[i] + " ";
-				}
-			}
-			Helper.drawStringAroundPosition(285, 575, line1.trim(), Color.RED, 24, FONT.VCR, g2d, null, -1);
-			Helper.drawStringAroundPosition(285, 615, line2.trim(), Color.RED, 24, FONT.VCR, g2d, null, -1);
-		}
 		getContainer().fillScene(g2d, new Color(21, 12, 21), 0.5f);
 		timeBar.onPaint(g2d);
 		if(fensterHolder.getCurrBossFenster().isHittable() && openDelay.getCurrValue() <= 60f && openDelay.getCurrValue() > 0f && fensterHolder.firstCloseFix) {
@@ -216,6 +190,36 @@ public class Wand extends ScreenElement{
 		}
 		for(int x = 0; x < bosslife; x++) {
 			g2d.drawImage(heart, 875 + x * 40, 675, null);
+		}
+	}
+	
+	public void drawBubble(Graphics2D g2d) {
+		if(!getContainer().world.isDialogOpen() && fensterHolder.getCurrBossFenster() != null && fensterHolder.getCurrBossFenster().isHittable() && !fensterHolder.getCurrBossFenster().wasBossHit() && !getContainer().world.isDialogOpen()) {
+			g2d.setColor(Color.WHITE);
+			g2d.fillRect(446, 495, 18, 30);
+			g2d.fillRoundRect(60, 520, 450, 150, 30, 30);
+			g2d.setColor(Color.BLACK);
+			g2d.setStroke(new BasicStroke(10f));
+			g2d.drawRoundRect(60, 520, 450, 150, 30, 30);
+			g2d.setColor(Color.WHITE);
+			int[] xTri = {480, 455, 430};
+			int[] yTri = {530, 490, 530};
+			g2d.fillPolygon(xTri, yTri, 3);
+			g2d.setColor(Color.BLACK);
+			g2d.setStroke(new BasicStroke(10f));
+			g2d.drawLine(480, 530, 455, 490);
+			g2d.drawLine(455, 490, 430, 530);
+			String[] split = currMessage[0].toString().split(" ");
+			String line1 = "", line2 = "";
+			for(int i = 0; i < split.length; i++) {
+				if(i < (split.length + 1) / 2) {
+					line1 += split[i] + " ";
+				}else {
+					line2 += split[i] + " ";
+				}
+			}
+			Helper.drawStringAroundPosition(285, 575, line1.trim(), Color.RED, 24, FONT.VCR, g2d, null, -1);
+			Helper.drawStringAroundPosition(285, 615, line2.trim(), Color.RED, 24, FONT.VCR, g2d, null, -1);
 		}
 	}
 	
