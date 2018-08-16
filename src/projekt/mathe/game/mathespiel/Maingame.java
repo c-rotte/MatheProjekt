@@ -22,7 +22,7 @@ import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.angle.AngleScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard.BoardScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.boss.BossScene;
-import projekt.mathe.game.mathespiel.scenes.game.minigames.boss.WinScene;
+import projekt.mathe.game.mathespiel.scenes.game.minigames.boss.win.WinScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.pyramid.PyramidScene;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.race.RaceGameScene;
 
@@ -33,8 +33,8 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		//this.registerScene(new BossScene(this));
-		//setCurrentScene("boss", new MainSceneData(), 40f);
+		//this.registerScene(new WinScene(this));
+		//setCurrentScene("boss_win", new MainSceneData(), 0f);
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {

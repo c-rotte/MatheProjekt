@@ -1,4 +1,4 @@
-package projekt.mathe.game.mathespiel.scenes.game.minigames.boss;
+package projekt.mathe.game.mathespiel.scenes.game.minigames.boss.win;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -14,9 +14,11 @@ import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 public class WinScene extends Scene{
 
 	private MainSceneData mainSceneData;
+	private WinAnimation winAnimation;
 	
 	public WinScene(Game container) {
 		super(container, "boss_win", Values.SCENE_BG_COLOR);
+		winAnimation = new WinAnimation(this);
 	}
 
 	@Override
@@ -26,12 +28,12 @@ public class WinScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-		
+		winAnimation.onTick(delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		Helper.drawStringFromLeft(10, 100, "Platzhalter für die Win-Animation", Color.WHITE, 30, FONT.Chrobot, g2d, null, -1);
+		winAnimation.onPaint(g2d);
 	}
 
 	@Override
