@@ -16,6 +16,7 @@ import projekt.mathe.game.mathespiel.scenes.SettingsScene;
 import projekt.mathe.game.mathespiel.scenes.game.AulaScene;
 import projekt.mathe.game.mathespiel.scenes.game.ChemieScene;
 import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
+import projekt.mathe.game.mathespiel.scenes.game.LehrerzimmerScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
 import projekt.mathe.game.mathespiel.scenes.game.TischeScene;
@@ -33,14 +34,15 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		//this.registerScene(new WinScene(this));
-		//setCurrentScene("boss_win", new MainSceneData(), 0f);
+		//this.registerScene(new LehrerzimmerScene(this));
+		//setCurrentScene("lehrerzimmer", new MainSceneData(), 40f);
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {
 			registerGameScenes();
 			finishedLoading = true;
 		}).start();
+		
 	}
 	
 	private void registerGameScenes() {
@@ -49,7 +51,7 @@ public class Maingame extends Game{
 		this.registerScene(new AulaScene(this));
 		this.registerScene(new TischeScene(this));
 		this.registerScene(new SekScene(this));
-		this.registerScene(new DrawingScene(this));
+		this.registerScene(new LehrerzimmerScene(this));
 		this.registerScene(new PyramidScene(this));
 		this.registerScene(new RaceGameScene(this));
 		this.registerScene(new BoardScene(this));

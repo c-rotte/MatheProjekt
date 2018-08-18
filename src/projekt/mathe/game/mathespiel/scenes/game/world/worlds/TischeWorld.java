@@ -19,11 +19,11 @@ public class TischeWorld extends World{
 		Barrier.addBarriersFromFile(ResLoader.getFile("game/tiles/tische/barrier.txt"), this);
 		addLoadingZone(new LoadingZone(-205, -180, 50, 200, this, "aula", 20f, "aulaEingang"));
 		addLoadingZone(new LoadingZone(520, -280, 50, 180, this, "sek", 20f, "sekEingang"));
+		addLoadingZone(new LoadingZone(100, -450, 150, 50, this, "lehrerzimmer", 20f, "lehrerzimmerEingang"));
 	}
 
 	@Override
 	public void onTick(float delta) {
-		// TODO Auto-generated method stuba
 		
 	}
 
