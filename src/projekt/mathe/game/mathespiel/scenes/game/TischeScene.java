@@ -17,7 +17,7 @@ public class TischeScene extends Scene{
 
 	public TischeScene(Game container) {
 		super(container, "tische", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		registerWorld(new TischeWorld(this, player));
 		player.setWorld(world);
 		registerPlayer(player);
@@ -26,11 +26,12 @@ public class TischeScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1100, 1443));
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
 			camera.focusX(50);
 			camera.focusY(-68);
-			player.setX(-123);
+			player.setX(-50);
 			player.setY(-136);
 			player.direction = "right";
 		}else if(lastID.equals("sek") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {

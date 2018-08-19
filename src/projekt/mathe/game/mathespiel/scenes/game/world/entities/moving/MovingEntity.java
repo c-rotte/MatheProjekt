@@ -22,6 +22,8 @@ public abstract class MovingEntity extends Entity{
 		this.speed = speed;
 	}
 
+	protected abstract void aimChanged(int[] oldAim, int[] newAim);
+	
 	public void addAim(int xAim, int yAim) {
 		int[] i = {xAim, yAim};
 		aims.add(i);
@@ -43,7 +45,9 @@ public abstract class MovingEntity extends Entity{
 			return;
 		}
 		if(Math.abs(getX() - currAim[0]) <= speed && Math.abs(getY() - currAim[1]) <= speed) {
+			int[] oldAim = currAim;
 			nextAim();
+			aimChanged(oldAim, currAim);
 		}
 		float oldX = getX();
 		if(getX() - currAim[0] < -speed) {

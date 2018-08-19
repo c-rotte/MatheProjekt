@@ -17,7 +17,7 @@ public class LehrerzimmerScene extends Scene {
 
 	public LehrerzimmerScene(Game container) {
 		super(container, "lehrerzimmer", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		LehrerzimmerWorld world = new LehrerzimmerWorld(this, player);
 		player.setWorld(world);
 		registerPlayer(player);
@@ -27,6 +27,7 @@ public class LehrerzimmerScene extends Scene {
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1350, 844));
 		player.setX(474);
 		player.setY(175);

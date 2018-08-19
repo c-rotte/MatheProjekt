@@ -16,7 +16,7 @@ public class ChemieScene extends Scene{
 
 	public ChemieScene(Game container) {
 		super(container, "chemie", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		ChemieWorld world = new ChemieWorld(this, player);
 		player.setWorld(world);
 		registerPlayer(player);
@@ -26,6 +26,7 @@ public class ChemieScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1360, 1443));
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("chemieOben")) {
 			camera.focusX(220);

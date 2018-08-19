@@ -16,7 +16,7 @@ public class SekScene extends Scene{
 
 	public SekScene(Game container) {
 		super(container, "sek", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		registerWorld(new SekWorld(this, player));
 		player.setWorld(world);
 		registerPlayer(player);
@@ -25,6 +25,7 @@ public class SekScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1558));
 		if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("sekEingang")) {
 			camera.focusX(140);

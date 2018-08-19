@@ -37,4 +37,9 @@ public class TestMoving extends MovingEntity{
 		g2d.fillRect((int) getX(), (int) getY(), (int) getW(), (int) getH());
 	}
 
+	@Override
+	protected void aimChanged(int[] oldAim, int[] newAim) {
+		System.out.println(oldAim[0] + " " + oldAim[1] + " " + newAim[0] + " " + newAim[1]);
+	}
+
 }

@@ -17,7 +17,7 @@ public class PausenhofScene extends Scene{
 
 	public PausenhofScene(Game game) {
 		super(game, "pausenhof", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		PausenhofWorld world = new PausenhofWorld(this, player);
 		player.setWorld(world);
 		registerWorld(world);
@@ -27,6 +27,7 @@ public class PausenhofScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1750));
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("aulaAusgang")) {
 			player.setX(1010);

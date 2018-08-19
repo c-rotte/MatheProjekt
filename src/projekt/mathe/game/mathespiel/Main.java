@@ -34,7 +34,7 @@ public class Main {
 		frame.addGame(game);
 		loading.close();
 		try {
-			Thread.sleep(0);//500);
+			Thread.sleep(0);
 		} catch (InterruptedException e) {}
 		frame.show();
 	}

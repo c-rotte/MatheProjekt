@@ -86,6 +86,7 @@ public class Maingame extends Game{
 		Saver.setData("hitbox", Settings.HITBOXEN_ANZEIGEN);
 		Saver.setData("darkmode", Settings.DARKMODE);
 		Saver.setData("smooth", Settings.SMOOTH);
+		Saver.setData("girl", Settings.GIRL);
 	}
 	
 }

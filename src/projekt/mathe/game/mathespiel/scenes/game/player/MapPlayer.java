@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import com.sun.javafx.runtime.VersionInfo;
+
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.mathespiel.Settings;
@@ -17,11 +19,16 @@ public class MapPlayer extends ScreenElement{
 	public boolean running;
 	public static MapPlayerTextureHelper textureHelper = new MapPlayerTextureHelper();
 	
-	public MapPlayer(Scene container, boolean girl) {
+	public MapPlayer(Scene container) {
 		super(container, 0, 0, 54, 75);
 		direction = "down";
 		playerController = new PlayerController(this);
-		textureHelper.setGender(girl);
+		textureHelper.setGender(Settings.GIRL);
+	}
+	
+	public void reloadGender() {
+		textureHelper.setGender(Settings.GIRL);
+		textureHelper.switchPlayerState(textureHelper.getRawState());
 	}
 	
 	public void setWorld(World world) {

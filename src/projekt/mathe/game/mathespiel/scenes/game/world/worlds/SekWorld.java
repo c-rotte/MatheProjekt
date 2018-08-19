@@ -30,7 +30,7 @@ public class SekWorld extends World{
 			@Override
 			public void onFinished(Card lastcard) {}
 		};
-		Card card = new Card("Der zweite und dritte Stock wurden aufgrund von Renovierungsarbeiten gesperrt. Deshalb werden nun Klasse 5 - 10 zusammen mit der Oberstufe im Container unterrichtet.");
+		Card card = new Card("Aufgrund von Renovierungsarbeiten im zweiten und dritten Stock werden ab sofort die Klassen 5 bis 10 zusammen mit der Oberstufe im Container unterrichtet.");
 		card.setTextColor(new Color(255, 93, 0));
 		borderDialog.addCard(card);
 		addEntity(new SignEntity(container, this, -175, -263, borderDialog));

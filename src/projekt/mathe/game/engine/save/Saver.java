@@ -58,6 +58,7 @@ public class Saver {
 		Settings.HITBOXEN_ANZEIGEN = Saver.containsData("hitbox") ? Saver.getBoolean("hitbox") : false;
 		Settings.DARKMODE = Saver.containsData("darkmode") ? Saver.getBoolean("darkmode") : false;
 		Settings.SMOOTH = Saver.containsData("smooth") ? Saver.getBoolean("smooth") : false;
+		Settings.GIRL = Saver.containsData("girl") ? Saver.getBoolean("girl") : false;
 	}
 	
 	public static void setData(String key, Object data) {

@@ -16,7 +16,7 @@ public class AulaScene extends Scene{
 
 	public AulaScene(Game container) {
 		super(container, "aula", Values.SCENE_BG_COLOR);
-		MapPlayer player = new MapPlayer(this, true);
+		MapPlayer player = new MapPlayer(this);
 		registerWorld(new AulaWorld(this, player));
 		player.setWorld(world);
 		registerPlayer(player);
@@ -25,6 +25,7 @@ public class AulaScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 2400, 2043));
 		if(lastID.equals("pausenhof") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("pausenhofEingang")) {
 			camera.focusX(620);

@@ -17,8 +17,10 @@ import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.particle.ParticleHolder;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.Maingame;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.menu.Button;
 import projekt.mathe.game.mathespiel.scenes.menu.ButtonHolder;
+import projekt.mathe.game.mathespiel.scenes.menu.GenderWarning;
 import projekt.mathe.game.mathespiel.scenes.menu.NewGameWarning;
 
 public class ChooseScene extends Scene{
@@ -26,10 +28,12 @@ public class ChooseScene extends Scene{
 	private ButtonHolder buttonHolder;
 	private ParticleHolder particleHolder;
 
-	private boolean gameLoading;
 	private TextureHelper loadingHelper;
 
 	private NewGameWarning newGameWarning;
+	private GenderWarning genderWarning;
+	
+	private String state; //normal, gender, warning, loading
 	
 	public ChooseScene(Game container) {
 		super(container, "choose", Color.BLACK);
@@ -42,6 +46,8 @@ public class ChooseScene extends Scene{
 		loadingHelper.addState("normal", 10, loadingIMG);
 		buttonHolder = new ButtonHolder(this);
 		newGameWarning = new NewGameWarning(this);
+		genderWarning = new GenderWarning(this);
+		state = "normal";
 	}
 	
 	private void reloadButtons() {
@@ -60,7 +66,7 @@ public class ChooseScene extends Scene{
 					.addOnClickListener(new Runnable() {
 						@Override
 						public void run() {
-							continueGame();
+							state = "loading";
 						}
 					}));
 			buttonHolder.addElement(new Button(this, buttonHolder, 480, 375, 320, 40)
@@ -68,7 +74,8 @@ public class ChooseScene extends Scene{
 					.addOnClickListener(new Runnable() {
 						@Override
 						public void run() {
-							startNewGame(true);
+							newGameWarning.open();
+							state = "warning";
 						}
 					}));
 		}else {
@@ -77,71 +84,75 @@ public class ChooseScene extends Scene{
 					.addOnClickListener(new Runnable() {
 						@Override
 						public void run() {
-							startNewGame(false);
+							genderWarning.open();
+							state = "gender";
 						}
 					}));
 		}
 	}
 
-	private void startNewGame(boolean warning) {
-		if(warning) {
-			newGameWarning.reset();
-			newGameWarning.open();
-		}else {
-			Saver.setData("existingGame", true);
-			gameLoading = true;
-		}
-	}
-	
-	private void continueGame() {
-		gameLoading = true;
-	}
-	
-	private void loadGame() {
-		//hier wird die scene und co. entschieden (nach dem spielstand)
-		callScene("pausenhof", getDataForNextScene(), 80f);
+	private void reset() {
+		newGameWarning.reset();
+		genderWarning.reset();
+		state = "normal";
+		buttonHolder.reset();
 	}
 	
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		reloadButtons();
-		newGameWarning.reset();
-		gameLoading = false;
+		state = "normal";
 	}
 
 	@Override
 	public void onTick(float delta) {
 		particleHolder.onTick(delta);
 		buttonHolder.onTick(delta);
-		if(gameLoading) {
-			if(((Maingame) container).finishedLoading()) {
-				gameLoading = false;
-				loadGame();
-			}else {
+		switch (state) {
+			case "normal":
+			
+				break;
+			case "gender":
+				if(genderWarning.getGender() != null) {
+					Settings.GIRL = genderWarning.getGender().equals("girl");
+					genderWarning.reset();
+					genderWarning.close();
+					Saver.setData("existingGame", true);
+					state = "loading";
+				}
+				break;
+			case "warning":
+				if(newGameWarning.getState().equals("continued")) {
+					newGameWarning.reset();
+					newGameWarning.close();
+					state = "gender";
+					//daten löschen
+					genderWarning.open();
+				}else if(newGameWarning.getState().equals("cancelled")){
+					newGameWarning.reset();
+					newGameWarning.close();
+					state = "normal";
+					reset();
+				}
+				break;
+			case "loading":
 				loadingHelper.onTick(delta);
-			}
+				if(((Maingame) container).finishedLoading()) {
+					state = "normal";
+					//hier wird die scene und co. entschieden (nach dem spielstand)
+					callScene("pausenhof", getDataForNextScene(), 70f);
+					reset();
+				}
+				break;
 		}
-		if(newGameWarning.isOpen()) {
-			newGameWarning.onTick(delta);
-		}
-		if(newGameWarning.getState().equals("continued")) {
-			newGameWarning.reset();
-			gameLoading = true;
-			
-			//daten löschen
-			
-			startNewGame(false);
-		}else if(newGameWarning.getState().equals("cancelled")) {
-			newGameWarning.reset();
-			buttonHolder.reset();
-		}
+		
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		particleHolder.onPaint(g2d);
 		buttonHolder.onPaint(g2d);
-		if(gameLoading && !((Maingame) container).finishedLoading()) {
+		if(state.equals("loading") && !((Maingame) container).finishedLoading()) {
 			g2d.drawImage(loadingHelper.getCurrentImage(), 1200, 640, 70, 70, null);
 			int prozent = Math.round(Logger.getRelativeLoadedObjects() * 100);
 			Helper.drawStringFromLeft(1110, 690, prozent + "%", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
@@ -149,6 +160,9 @@ public class ChooseScene extends Scene{
 		if(newGameWarning.isOpen()) {
 			fillScene(g2d, Color.BLACK, .3f);
 			newGameWarning.onPaint(g2d);
+		}else if(genderWarning.isOpen()) {
+			fillScene(g2d, Color.BLACK, .3f);
+			genderWarning.onPaint(g2d);
 		}
 	}
 
@@ -156,6 +170,8 @@ public class ChooseScene extends Scene{
 	public void onMouseDragged(MouseEvent e) {
 		if(newGameWarning.isOpen()) {
 			newGameWarning.onMouseDragged(e);
+		}else if(genderWarning.isOpen()) {
+			genderWarning.onMouseDragged(e);
 		}else {
 			buttonHolder.onMouseDragged(e);
 		}
@@ -165,6 +181,8 @@ public class ChooseScene extends Scene{
 	public void onMouseMoved(MouseEvent e) {
 		if(newGameWarning.isOpen()) {
 			newGameWarning.onMouseMoved(e);
+		}else if(genderWarning.isOpen()) {
+			genderWarning.onMouseMoved(e);
 		}else {
 			buttonHolder.onMouseMoved(e);
 		}
@@ -174,6 +192,8 @@ public class ChooseScene extends Scene{
 	public void onMouseClicked(MouseEvent e) {
 		if(newGameWarning.isOpen()) {
 			newGameWarning.onMouseClicked(e);
+		}else if(genderWarning.isOpen()) {
+			genderWarning.onMouseClicked(e);
 		}else {
 			buttonHolder.onMouseClicked(e);
 		}

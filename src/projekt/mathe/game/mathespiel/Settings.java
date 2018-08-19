@@ -6,5 +6,6 @@ public class Settings {
 	public static boolean HITBOXEN_ANZEIGEN;
 	public static boolean DARKMODE;
 	public static boolean SMOOTH;
+	public static boolean GIRL;
 	
 }
