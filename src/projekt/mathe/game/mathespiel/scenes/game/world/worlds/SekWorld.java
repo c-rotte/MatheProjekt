@@ -9,6 +9,7 @@ import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.Border;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.Safe;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
@@ -36,6 +37,7 @@ public class SekWorld extends World{
 		addEntity(new SignEntity(container, this, -175, -263, borderDialog));
 		
 		addEntity(new Border(container, this, -240, -316));
+		addEntity(new Safe(container, this, 1700, 370));
 	}
 
 	@Override

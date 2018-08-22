@@ -33,6 +33,12 @@ public class SekScene extends Scene{
 			player.setX(-454);
 			player.setY(360);
 			player.direction = "right";
+		}else if(lastID.equals("safe")) {
+			camera.focusX(1360);
+			camera.focusY(617);
+			player.setX(1752);
+			player.setY(521);
+			player.direction = "up";
 		}else {
 			camera.focusX(1000);
 			camera.focusY(300);
@@ -43,7 +49,7 @@ public class SekScene extends Scene{
 
 	@Override
 	public void onTick(float delta) {
-		//Settings.HITBOXEN_ANZEIGEN = keyController.isPressed(KeyEvent.VK_H);
+	
 	}
 
 	@Override

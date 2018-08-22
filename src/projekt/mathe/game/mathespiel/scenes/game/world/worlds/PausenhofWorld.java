@@ -9,19 +9,32 @@ import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
-import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.TestMoving;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.TestDialog;
 
 public class PausenhofWorld extends World{
 
 	public PausenhofWorld(Scene container, MapPlayer player) {
 		super(container, player);
 		
-		addEntity(new SignEntity(container, this, 1445, 520, new TestDialog(this)));
+		Dialog dialog = new Dialog(this) {
+			@Override
+			public void onSelected(Card lastcard, boolean finished) {
+				if(finished) {
+					if(lastcard.selected.equals("ja")) {
+						world.container.callScene("pyramid", world.container.getDataForNextScene(), 40f);
+					}
+				}
+			}
+			@Override
+			public void onFinished(Card lastcard) {}
+		};
+		Card card1 = new Card("Das ist ein Test für das Pyramidenspiel. Möchtest du beginnen?");
+		card1.addSelection("ja", "nein");
+		dialog.addCard(card1);
+		addEntity(new SignEntity(container, this, 1445, 520, dialog));
 		
 		Dialog dialog2 = new Dialog(this) {
 			@Override
@@ -73,8 +86,6 @@ public class PausenhofWorld extends World{
 		card3.addSelection("ja", "nein");
 		dialog4.addCard(card3);
 		addEntity(new SignEntity(container, this, 1775, 520, dialog4));
-		
-		addEntity(new TestMoving(container, this, 770, 530));
 		
 		addLoadingZone(new LoadingZone(965, -113, 150, 50, this, "aula", 20f, "pausenhofEingang"));
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/pausenhof/lower/unten_01", 1750, "png"), 50);

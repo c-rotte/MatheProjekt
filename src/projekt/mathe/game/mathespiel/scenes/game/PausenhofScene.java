@@ -11,10 +11,13 @@ import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.PETeacher;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.PausenhofWorld;
 
 public class PausenhofScene extends Scene{
 
+	private PETeacher peTeacher;
+	
 	public PausenhofScene(Game game) {
 		super(game, "pausenhof", Values.SCENE_BG_COLOR);
 		MapPlayer player = new MapPlayer(this);
@@ -23,6 +26,7 @@ public class PausenhofScene extends Scene{
 		registerWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
+		peTeacher = new PETeacher(container, world, x, y);
 	}
 
 	@Override
@@ -52,6 +56,23 @@ public class PausenhofScene extends Scene{
 			camera.focusX(1360);
 			camera.focusY(600);
 		}
+		/*
+		 * Wenn lastId == rennen:
+		 * 		wenn success:
+		 * 			setstate success
+		 * 			Saver.rennengeschafft = true
+		 * 			player pos zum lehrer (unterhalb der zone)
+		 * 			Dialog: kannst rein
+		 * 		wenn fail:
+		 * 			setstate activated
+		 * 			player pos zum lehrer (unterhalb der zone)
+		 * 			Dialog:  versuchs nochmal
+		 * sonst:
+		 * 		wenn Saver.rennengeschafft:
+		 * 			setstate success
+		 * sonst:
+		 * 	setstate normal
+		 */
 	}
 
 	@Override
@@ -61,12 +82,12 @@ public class PausenhofScene extends Scene{
 	
 	@Override
 	public void onTick(float delta) {
-		
+		peTeacher.onTick(delta);
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		
+		peTeacher.onPaint(g2d);
 	}
 
 	@Override

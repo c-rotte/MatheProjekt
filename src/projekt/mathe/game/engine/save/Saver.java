@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.mathespiel.Settings;
 
@@ -59,6 +60,10 @@ public class Saver {
 		Settings.DARKMODE = Saver.containsData("darkmode") ? Saver.getBoolean("darkmode") : false;
 		Settings.SMOOTH = Saver.containsData("smooth") ? Saver.getBoolean("smooth") : false;
 		Settings.GIRL = Saver.containsData("girl") ? Saver.getBoolean("girl") : false;
+	}
+	
+	public static void removeData(String key) {
+		data.remove(key);
 	}
 	
 	public static void setData(String key, Object data) {
@@ -118,18 +123,13 @@ public class Saver {
 		return String.valueOf(data.get(key)).equals("true");
 	}
 	
-	public static HashMap<String, Object> getMinigameStats(String id) {
-		HashMap<String, Object> stats = new HashMap<>();
-		for(String string : data.keySet()) {
-			if(string.contains(id + "_")) {
-				stats.put(string.replaceAll(id + "_", ""), data.get(string));
-			}
-		}
-		return stats;
-	}
-	
 	public static boolean containsData(String key) {
 		return data.containsKey(key);
+	}
+
+	public static void newGame() {
+		setData("existingGame", true);
+		setData("safeCode", Helper.generateRandomString(5));
 	}
 	
 }

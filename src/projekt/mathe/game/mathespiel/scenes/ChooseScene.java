@@ -117,7 +117,7 @@ public class ChooseScene extends Scene{
 					Settings.GIRL = genderWarning.getGender().equals("girl");
 					genderWarning.reset();
 					genderWarning.close();
-					Saver.setData("existingGame", true);
+					Saver.newGame();
 					state = "loading";
 				}
 				break;
@@ -126,7 +126,6 @@ public class ChooseScene extends Scene{
 					newGameWarning.reset();
 					newGameWarning.close();
 					state = "gender";
-					//daten löschen
 					genderWarning.open();
 				}else if(newGameWarning.getState().equals("cancelled")){
 					newGameWarning.reset();

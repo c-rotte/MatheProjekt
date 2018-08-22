@@ -16,12 +16,22 @@ public abstract class MovingEntity extends Entity{
 	private int[] currAim;
 	private float speed;
 	
+	private boolean moving;
+	
 	public MovingEntity(Scene container, World world, int x, int y, int w, int h, float speed, boolean collider, boolean belowPlayer) {
 		super(container, world, x, y, w, h, collider, belowPlayer);
 		aims = new ArrayList<>();
 		this.speed = speed;
 	}
 
+	public boolean isMoving() {
+		return moving;
+	}
+	
+	public void setMoving(boolean moving) {
+		this.moving = moving;
+	}
+	
 	protected abstract void aimChanged(int[] oldAim, int[] newAim);
 	
 	public void addAim(int xAim, int yAim) {
@@ -40,8 +50,8 @@ public abstract class MovingEntity extends Entity{
 		}
 	}
 	
-	public void moveToAim(float delta) {
-		if(currAim == null) {
+	private void moveToAim(float delta) {
+		if(currAim == null || !moving) {
 			return;
 		}
 		if(Math.abs(getX() - currAim[0]) <= speed && Math.abs(getY() - currAim[1]) <= speed) {
@@ -68,4 +78,10 @@ public abstract class MovingEntity extends Entity{
 			setY(oldY);
 		}
 	}
+	
+	@Override
+	public void onTick(float delta) {
+		moveToAim(delta);
+	}
+	
 }
