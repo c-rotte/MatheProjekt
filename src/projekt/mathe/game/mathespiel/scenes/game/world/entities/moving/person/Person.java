@@ -1,5 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -9,6 +10,7 @@ import org.w3c.dom.css.Rect;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.MovingEntity;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
@@ -30,7 +32,7 @@ public abstract class Person extends MovingEntity {
 	private boolean playerInArea;
 	
 	public Person(Scene container, World world, TYPE type, int x, int y, float speed) {
-		super(container, world, x, y, 42, 50, speed, true, true);
+		super(container, world, x, y, 54, 75, speed, true, true);
 		direction = "left";
 		textureHelper = TextureGenerator.generateTextureHelper(type);
 	}
@@ -47,10 +49,14 @@ public abstract class Person extends MovingEntity {
 		textureHelper.switchState(direction + (isMoving() ? "_running" : ""));
 	}
 	
+	public String getDirection() {
+		return direction;
+	}
+	
 	@Override
 	public void setMoving(boolean moving) {
-		textureHelper.switchState(direction + (isMoving() ? "_running" : ""));
 		super.setMoving(moving);
+		textureHelper.switchState(direction + (isMoving() ? "_running" : ""));
 	}
 	
 	@Override
@@ -69,10 +75,12 @@ public abstract class Person extends MovingEntity {
 	@Override
 	public void onTick(float delta) {
 		textureHelper.onTick(delta);
-		if(!playerInArea && playerListenerArea != null) {
+		if(playerListenerArea != null) {
 			if(getContainer().world.player.getBounds().intersects(playerListenerArea)) {
-				onPlayerEntersListenerArea(getContainer().world.player);
-				playerInArea = true;
+				if(!playerInArea) {
+					onPlayerEntersListenerArea(getContainer().world.player);
+					playerInArea = true;
+				}
 			}else {
 				playerInArea = false;
 			}
@@ -82,10 +90,16 @@ public abstract class Person extends MovingEntity {
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		g2d.drawImage(textureHelper.getCurrentImage(), (int) getX(), (int) getY(), null);
+		if(Settings.HITBOXEN_ANZEIGEN) {
+			g2d.setColor(Color.YELLOW);
+			g2d.draw(playerListenerArea);
+		}
+		g2d.drawImage(textureHelper.getCurrentImage(), (int) (getX() + getW()/2 - 33), (int) getY(), 65, 75, null);
 	}
 
-	private static class TextureGenerator {
+	public static class TextureGenerator {
+		
+		private static final int running_Step = 8;
 		
 		private static Image[][] images;
 		
@@ -108,22 +122,17 @@ public abstract class Person extends MovingEntity {
 			}
 		}
 		
-		private static final TextureHelper generateTextureHelper(TYPE type) {
+		public static final TextureHelper generateTextureHelper(TYPE type) {
 			TextureHelper textureHelper = new TextureHelper();
-			int index = 0;
-			for(TYPE t : TYPE.values()) {
-				if(!t.equals(type)) {
-					index++;
-				}
-			}
+			int index = type.ordinal();
 			textureHelper.addState("left", 10000, images[index][0]);
 			textureHelper.addState("right", 10000, images[index][1]);
 			textureHelper.addState("up", 10000, images[index][2]);
 			textureHelper.addState("down", 10000, images[index][3]);
-			textureHelper.addState("left_running", 10000, images[index][4], images[index][5]);
-			textureHelper.addState("right_running", 10000, images[index][6], images[index][7]);
-			textureHelper.addState("up_running", 10000, images[index][8], images[index][9]);
-			textureHelper.addState("down_running", 10000, images[index][10], images[index][11]);
+			textureHelper.addState("left_running", running_Step, images[index][4], images[index][0], images[index][5]);
+			textureHelper.addState("right_running", running_Step, images[index][6], images[index][1], images[index][7]);
+			textureHelper.addState("up_running", running_Step, images[index][8], images[index][2], images[index][9]);
+			textureHelper.addState("down_running", running_Step, images[index][10], images[index][3], images[index][11]);
 			return textureHelper;
 		}
 		

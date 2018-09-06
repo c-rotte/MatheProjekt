@@ -97,7 +97,7 @@ public class AngleGame extends MiniGame{
 							if(pizzen >= 5) {
 								MainSceneData mainSceneData = (MainSceneData) container.getDataForNextScene();
 								mainSceneData.setMinigameCompleted(true);
-								container.callScene("pausenhof", mainSceneData, 40f);	
+								container.callScene("aula", mainSceneData, 40f);	
 							}else {
 								state = "starting";
 								pizzen++;
@@ -105,7 +105,8 @@ public class AngleGame extends MiniGame{
 						}
 					};
 					if(angleCalculator.chosenWasRight()) {
-						dialog.addCard(new Card("Der Unterschied betrug nur " + Math.round(Math.abs(angleCalculator.getChosenAngle() - angleCalculator.getCorrectAngle())) + "°. Super!"));
+						int a = Math.round(Math.abs(angleCalculator.getChosenAngle() - angleCalculator.getCorrectAngle()));
+						dialog.addCard(new Card("Der Unterschied betrug " + (a == 0 ? "" : "gerade einmal") + " " + a + "°. Super!"));
 						if(pizzen >= 5) {
 							dialog.addCard(new Card("Das war die letzte Pizza. Vielen Dank für deine Hilfe!"));
 						}else {

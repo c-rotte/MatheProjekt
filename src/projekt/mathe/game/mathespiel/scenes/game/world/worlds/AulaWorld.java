@@ -7,6 +7,7 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Chef;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 
@@ -21,6 +22,7 @@ public class AulaWorld extends World{
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/aula/lower/unten_01", 1968, "png"), 48);
 		CutTile.addSplicedTiles(container, this, -500, -500, false, Helper.getImagesBySplices("game/tiles/aula/upper/oben_01", 1968, "png"), 48);
 		Barrier.addBarriersFromFile(ResLoader.getFile("game/tiles/aula/barrier.txt"), this);
+		addEntity(new Chef(container, this, 1430, 945));
 	}
 
 	@Override

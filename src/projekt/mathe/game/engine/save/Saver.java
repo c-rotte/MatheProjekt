@@ -130,6 +130,7 @@ public class Saver {
 	public static void newGame() {
 		setData("existingGame", true);
 		setData("safeCode", Helper.generateRandomString(5));
+		setData("currCode", "-----");
 	}
 	
 }

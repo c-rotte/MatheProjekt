@@ -8,11 +8,14 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.PETeacher;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.PausenhofWorld;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class PausenhofScene extends Scene{
 
@@ -26,12 +29,15 @@ public class PausenhofScene extends Scene{
 		registerWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
-		peTeacher = new PETeacher(container, world, x, y);
+		peTeacher = new PETeacher(this, world, -1, -1);
+		world.addEntity(peTeacher);
+		enableCodeDisplay();
 	}
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
+		player.playerController.setActivated(true);
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1750));
 		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("aulaAusgang")) {
 			player.setX(1010);
@@ -56,23 +62,61 @@ public class PausenhofScene extends Scene{
 			camera.focusX(1360);
 			camera.focusY(600);
 		}
-		/*
-		 * Wenn lastId == rennen:
-		 * 		wenn success:
-		 * 			setstate success
-		 * 			Saver.rennengeschafft = true
-		 * 			player pos zum lehrer (unterhalb der zone)
-		 * 			Dialog: kannst rein
-		 * 		wenn fail:
-		 * 			setstate activated
-		 * 			player pos zum lehrer (unterhalb der zone)
-		 * 			Dialog:  versuchs nochmal
-		 * sonst:
-		 * 		wenn Saver.rennengeschafft:
-		 * 			setstate success
-		 * sonst:
-		 * 	setstate normal
-		 */
+		
+		if(lastID.equals("race")) {
+			if(((MainSceneData) sceneData).hadMinigame() && ((MainSceneData) sceneData).minigameCompleted()) {
+				
+				peTeacher.setState("success");
+				player.setX(820);
+				player.setY(10);
+				player.direction = "left";
+				camera.focusX(1035);
+				camera.focusY(100);
+				
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
+						builder.setCharAt(0, Saver.getString("safeCode").charAt(0));
+						Saver.setData("currCode", builder.toString());
+					}
+				};
+				dialog.addCard(new Card("Na gut, du kannst rein. Aber mach bloﬂ keinen Unsinn!"));
+				dialog.addCard(new Card("Ach ja, ich habe hier einen Zettel, mit einem Zeichen gefunden: \"" + Saver.getString("safeCode").charAt(0) + "\". Vielleicht kannst du damit etwas anfangen..."));
+				world.openDialog(dialog);
+			}else {
+				peTeacher.setState("activated");
+				player.setX(820);
+				player.setY(10);
+				player.direction = "left";
+				camera.focusX(1035);
+				camera.focusY(100);
+				
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						
+					}
+				};
+				dialog.addCard(new Card("Dich lasse ich nicht ins Geb‰ude, bei so einer Kondition!"));
+				world.openDialog(dialog);
+			}
+		}else {
+			if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(0) == Saver.getString("safeCode").charAt(0)) {
+				peTeacher.setState("success");
+			}else {
+				peTeacher.setState("normal");
+			}
+		}
+		
 	}
 
 	@Override
@@ -86,16 +130,16 @@ public class PausenhofScene extends Scene{
 	}
 
 	@Override
-	public void onPaint(Graphics2D g2d) {
-		peTeacher.onPaint(g2d);
-	}
-
-	@Override
 	public SceneData getDataForNextScene() {
 		MainSceneData mainSceneData = new MainSceneData();
 		mainSceneData.setMapPlayer(player);
 		mainSceneData.setCamera(camera);
 		return mainSceneData;
+	}
+
+	@Override
+	public void onPaint(Graphics2D g2d) {
+		
 	}
 
 }

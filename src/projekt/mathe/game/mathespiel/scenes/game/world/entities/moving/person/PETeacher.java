@@ -1,27 +1,34 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class PETeacher extends Person {
 
 	private String state; //normal, activated, success
 	
 	public PETeacher(Scene container, World world, int x, int y) {
-		super(container, world, TYPE.SPORTS, x, y, 5);
+		super(container, world, TYPE.SPORTS, x, y, 3);
 		state = "normal";
-		addPlayerListenerArea(0, 0, 0, 0);
+		addPlayerListenerArea(980, -35, 110, 30);
 	}
 
 	public void setState(String state) {
 		this.state = state;
 		switch (state) {
 			case "normal" : 
-				//irgendwo unten außerhalb der cam
+				setX(760);
+				setY(995);
+				setDirection("left");
 				break;
+				
 			default :
-				//neben dem eingang
+				setX(750);
+				setY(10);
 				setDirection("right");
 				break;
 		}
@@ -31,7 +38,48 @@ public class PETeacher extends Person {
 	protected void aimChanged(int[] oldAim, int[] newAim) {
 		super.aimChanged(oldAim, newAim);
 		setMoving(false);
-		//open minigamedialog
+		Dialog dialog = new Dialog(world) {
+			@Override
+			public void onSelected(Card lastcard, boolean finished) {
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						Dialog dialog = new Dialog(world) {
+							@Override
+							public void onSelected(Card lastcard, boolean finished) {
+								getContainer().callScene("race", getContainer().getDataForNextScene(), 40f);
+							}
+							@Override
+							public void onFinished(Card lastcard) {
+								
+							}
+						};
+						Card card3 = new Card("Was? Nun gut, da mir langweilig ist, pass auf: Wenn du mich in einem Rennen besiegst, lasse ich dich ins Gebäude, andernfalls musst du gehen.");
+						card3.addSelection("Okay", "Los!");
+						dialog.addCard(card3);
+						world.openDialog(dialog);;
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						
+					}
+				};
+				Card card2 = new Card("Du darfst hier überhaupt nicht sein! Geh schnell wieder nach Hause!");
+				card2.addSelection("Nein!");
+				dialog.addCard(card2);
+				world.openDialog(dialog);
+			}
+			@Override
+			public void onFinished(Card lastcard) {
+				
+			}
+		};
+		Card card = new Card("Nanu? Was machst du denn hier?");
+		card.addSelection("Ähm");
+		card.addSelection("Ich..");
+		dialog.addCard(card);
+		
+		world.openDialog(dialog);
 	}
 	
 	@Override
@@ -45,23 +93,89 @@ public class PETeacher extends Person {
 			setMoving(true);
 			setDirection("up");
 		}else if(state.equals("activated")) {
-			//open try again dialog
+			player.setY(-42);
+			Dialog dialog = new Dialog(world) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					if(lastcard.selected.equals("Ja")) {
+						getContainer().callScene("race", getContainer().getDataForNextScene(), 40f);
+					}
+				}
+				@Override
+				public void onFinished(Card lastcard) {
+					
+				}
+			};
+			Card card = new Card("Willst du es nochmal versuchen? Denn so kommst du nicht herein!");
+			card.addSelection("Ja", "Nein");
+			dialog.addCard(card);
+			world.openDialog(dialog);
 		}
 	}
 	
 	@Override
 	public void onInteract(MapPlayer player) {
 		if(state.equals("normal")) {
-			//mürrischer anfangsdialog
+			if(player.direction.equals("right")) {
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						Dialog dialog = new Dialog(world) {
+							@Override
+							public void onSelected(Card lastcard, boolean finished) {
+								
+							}
+							@Override
+							public void onFinished(Card lastcard) {
+								
+							}
+						};
+						dialog.addCard(new Card("Wie bitte? Ich bin doch kein Schüler! Ich bin der neue Sportlehrer! Mein Name lautet Herr Langsam. Frechheit!"));
+						world.openDialog(dialog);
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						
+					}
+				};
+				Card card = new Card("Was willst du denn?");
+				card.addSelection("Hi", "Moin");
+				dialog.addCard(card);
+				world.openDialog(dialog);
+			}
+		}else if(state.equals("activated") && player.direction.equals("left")) {
+			Dialog dialog = new Dialog(world) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					if(lastcard.selected.equals("Ja")) {
+						getContainer().callScene("race", getContainer().getDataForNextScene(), 40f);
+					}else {
+						
+					}
+				}
+				@Override
+				public void onFinished(Card lastcard) {
+					
+				}
+			};
+			Card card = new Card("Willst du es nochmal versuchen? Denn so kommst du nicht herein!");
+			card.addSelection("Ja", "Nein");
+			dialog.addCard(card);
+			world.openDialog(dialog);
 		}else if(state.equals("success")) {
-			//was willst du noch - dialog
+			Dialog dialog = new Dialog(world) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					
+				}
+				@Override
+				public void onFinished(Card lastcard) {
+					
+				}
+			};
+			dialog.addCard(new Card("Ich lasse dich schon hinein, keine Sorge."));
+			world.openDialog(dialog);
 		}
-	}
-
-	@Override
-	public void onTick(float delta) {
-		super.onTick(delta);
-		
 	}
 	
 }

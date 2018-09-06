@@ -1,6 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.mathespiel.Settings;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayerTextureHelper;
 
 public class RacePlayer extends RaceEntity{
@@ -15,6 +16,7 @@ public class RacePlayer extends RaceEntity{
 
 		public RacePlayerTextureHelper() {
 			super(new MapPlayerTextureHelper());
+			((MapPlayerTextureHelper) getTextureHelper()).setGender(Settings.GIRL);
 		}
 
 		@Override

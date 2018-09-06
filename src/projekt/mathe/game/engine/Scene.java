@@ -1,17 +1,22 @@
 package projekt.mathe.game.engine;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Camera;
+import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.KeyController;
+import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.pause.PauseScreen;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 
@@ -33,12 +38,18 @@ public abstract class Scene {
 	
 	private PauseScreen pauseScreen;
 	
+	private boolean codeDisplayed; 
+	
 	public Scene(Game container, String id, Color backgroundcolor){
 		this.container = container;
 		this.id = id;
 		this.backgroundcolor = backgroundcolor;
 		this.camera = new Camera(0, 0, this);
 		this.keyController = new KeyController();
+	}
+	
+	public void enableCodeDisplay() {
+		codeDisplayed = true;
 	}
 	
 	public void registerPauseScreen(PauseScreen pauseScreen) {
@@ -104,6 +115,21 @@ public abstract class Scene {
 		onPaint(g2d);
 		if(world != null) {
 			world.onWorldPaintOnTop(g2d);
+		}
+		if(codeDisplayed && Saver.containsData("currCode")) {
+			String currCode = Saver.getString("currCode");
+			for(int i = 0; i < 5; i++) {
+				g2d.setColor(new Color(120, 120, 120, 150));
+				Rectangle rectangle = new Rectangle(camera.translateAbsolutX(1030 + i * (40 + 10)), camera.translateAbsolutY(10), 40, 40);
+				g2d.fill(rectangle);
+				g2d.setColor(Color.BLACK);
+				g2d.setStroke(new BasicStroke(3f));
+				g2d.draw(rectangle);
+				String c = String.valueOf(currCode.charAt(i));
+				if(!c.equals("-")) {
+					Helper.drawStringAroundPosition(camera.translateAbsolutX(1030 + i * (40 + 10)) + 20, camera.translateAbsolutY(30), c, Color.WHITE, 30, FONT.VCR, g2d, null, -1);
+				}
+			}
 		}
 		if(pauseScreen != null && !pauseScreen.getState().equals("hidden")) {
 			pauseScreen.onPerformacePaint(g2d);

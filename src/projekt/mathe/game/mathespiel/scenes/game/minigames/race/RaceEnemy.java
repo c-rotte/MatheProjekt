@@ -2,6 +2,8 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayerTextureHelper;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Person;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Person.TYPE;
 
 public class RaceEnemy extends RaceEntity{
 
@@ -15,17 +17,17 @@ public class RaceEnemy extends RaceEntity{
 	public static class RaceEnemyTextureHelper extends RaceTextures{
 
 		public RaceEnemyTextureHelper() {
-			super(new MapPlayerTextureHelper());
+			super(Person.TextureGenerator.generateTextureHelper(TYPE.SPORTS));
 		}
 
 		@Override
 		public void setSprinting() {
-			((MapPlayerTextureHelper) getTextureHelper()).switchPlayerState("up_running");
+			getTextureHelper().switchState("up_running");
 		}
 
 		@Override
 		public void setStill() {
-			((MapPlayerTextureHelper) getTextureHelper()).switchPlayerState("up_standing");
+			getTextureHelper().switchState("up");
 		}
 		
 	}

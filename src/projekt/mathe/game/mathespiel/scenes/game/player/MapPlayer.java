@@ -3,6 +3,7 @@ package projekt.mathe.game.mathespiel.scenes.game.player;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.ObjectInputStream.GetField;
 
 import com.sun.javafx.runtime.VersionInfo;
 
@@ -79,6 +80,10 @@ public class MapPlayer extends ScreenElement{
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int) getX(), (int) (getY() + getH()/2), (int) getW(), (int) (getH()/2));
+	}
+	
+	public Rectangle getOriginalBounds() {
+		return super.getBounds();
 	}
 	
 	@Override

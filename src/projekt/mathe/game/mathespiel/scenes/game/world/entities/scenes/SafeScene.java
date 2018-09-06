@@ -21,6 +21,7 @@ public class SafeScene extends Scene{
 	public SafeScene(Game container) {
 		super(container, "safe", Values.SCENE_BG_COLOR);
 		passwordInput = new PasswordInput(this);
+		enableCodeDisplay();
 	}
 
 	@Override

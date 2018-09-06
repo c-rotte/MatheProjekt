@@ -115,8 +115,8 @@ public class PasswordInput extends ScreenElement{
 						addElement(new Character(container, (int) PasswordInput.this.getX() + (50 + 20) * x, (int) PasswordInput.this.getY() + (50 + 20) * y, 120, 50, "OK") {
 							@Override
 							public void onClicked(MouseEvent e) {
-								if(Saver.containsData("safeCode")) {
-									if(Saver.getString("safeCode").equals(password)) {
+								if(Saver.containsData("safeCode") && Saver.containsData("currCode")) {
+									if(Saver.getString("safeCode").equals(password) && Saver.getString("currCode").equals(password)) {
 										passwordColor = Color.CYAN;
 										//erfolgreich
 									}else {

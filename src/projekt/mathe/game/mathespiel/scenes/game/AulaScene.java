@@ -7,10 +7,14 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.help.Helper;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.AulaWorld;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class AulaScene extends Scene{
 
@@ -21,6 +25,7 @@ public class AulaScene extends Scene{
 		player.setWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
+		enableCodeDisplay();
 	}
 
 	@Override
@@ -57,6 +62,56 @@ public class AulaScene extends Scene{
 			player.setX(67);
 			player.setY(127);
 			player.direction = "down";
+		}
+		if(lastID.equals("angle")) {
+			camera.focusX(1260);
+			camera.focusY(930);
+			player.setX(1350);
+			player.setY(945);
+			if(((MainSceneData) sceneData).minigameCompleted()) {
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
+						builder.setCharAt(1, Saver.getString("safeCode").charAt(1));
+						Saver.setData("currCode", builder.toString());
+						Dialog dialog = new Dialog(world) {
+							@Override
+							public void onSelected(Card lastcard, boolean finished) {
+								
+							}
+							@Override
+							public void onFinished(Card lastcard) {
+								
+							}
+						};
+						dialog.addCard(new Card("Ach ja, falls du etwas suchst: Ich habe gehört, dass im Büro des Rektors wichtige Dokumente oder so aufbewahrt werd... ups, das darf ich eigentlich nicht verraten."));
+						dialog.addCard(new Card("Vergiss es einfach."));
+						world.openDialog(dialog);
+					}
+				};
+				dialog.addCard(new Card("Vielen Dank! Du hast mir sehr geholfen!"));
+				dialog.addCard(new Card("Moment, bevor du gehst, gehört dieser Zettel dir?"));
+				dialog.addCard(new Card("Hier steht nur \"" + Saver.getString("safeCode").charAt(1) + "\". Merkwürdig."));
+				world.openDialog(dialog);
+			}else {
+				Dialog dialog = new Dialog(world) {
+					@Override
+					public void onSelected(Card lastcard, boolean finished) {
+						
+					}
+					@Override
+					public void onFinished(Card lastcard) {
+						
+					}
+				};
+				dialog.addCard(new Card("*schluchz* Oje so wird das doch nichts!"));
+				world.openDialog(dialog);
+			}
 		}
 	}
 
