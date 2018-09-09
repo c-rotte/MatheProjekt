@@ -10,10 +10,13 @@ import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Mathteacher;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.ChemieWorld;
 
 public class ChemieScene extends Scene{
 
+	private Mathteacher mathteacher;
+	
 	public ChemieScene(Game container) {
 		super(container, "chemie", Values.SCENE_BG_COLOR);
 		MapPlayer player = new MapPlayer(this);
@@ -22,6 +25,9 @@ public class ChemieScene extends Scene{
 		registerPlayer(player);
 		registerWorld(world);
 		registerPauseScreen(new MainPauseScreen(this));
+		mathteacher = new Mathteacher(this, world);
+		world.addEntity(mathteacher);
+		enableCodeDisplay();
 	}
 
 	@Override
@@ -46,6 +52,7 @@ public class ChemieScene extends Scene{
 			player.setX(200);
 			player.setY(-171);
 		}
+		mathteacher.onCall(lastID, (MainSceneData) sceneData);
 	}
 
 	@Override

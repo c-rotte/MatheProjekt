@@ -22,16 +22,13 @@ public class BoardGame extends MiniGame{
 	private CalculationHolder calculationHolder;
 	private int success;
 	
-	private TimeBar timeBar;
-	
 	private Schwamm schwamm;
 	
 	public BoardGame(Scene container) {
 		super(container, "board");
 		success = 0;
 		calculationHolder = new CalculationHolder(container);
-		loadNewCalcs(120, 120, 77, 77);
-		timeBar = new TimeBar(container, 95, 600, 1090, 25, 60 * 5 * 12, 8);
+		loadNewCalcs(120, 128, 77, 77);
 		schwamm = new Schwamm(container, 640, 360);
 	}
 
@@ -42,13 +39,6 @@ public class BoardGame extends MiniGame{
 			success++;
 			setMouseBlocked(true);
 			container.world.openDialog(new ContinueDialog(container.world, success, 3));
-		}else {
-			if(!calculationHolder.completed() && timeBar.isFinished() && !container.world.isDialogOpen() && !container.fading) {
-				setMouseBlocked(true);
-				container.world.openDialog(new FailDialog(container.world));
-			}else if(!container.world.isDialogOpen()){
-				timeBar.onTick(delta);
-			}
 		}
 		schwamm.onTick(delta);
 	}
@@ -57,7 +47,6 @@ public class BoardGame extends MiniGame{
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(tafel, 0, 0, null);
 		calculationHolder.onPaint(g2d);
-		timeBar.onPaint(g2d);
 		Helper.drawStringAroundPosition(640, 35, "Tafeln gewischt: " + success, Color.WHITE, 25, FONT.VCR, g2d, null, -1);
 		schwamm.onPaint(g2d);
 	}
@@ -115,51 +104,6 @@ public class BoardGame extends MiniGame{
 		}
 	}
 	
-	private class FailDialog extends Dialog {
-
-		public FailDialog(World world) {
-			super(world);
-			Card card1 = new Card("Das war leider zu langsam. Möchtest du es weiter versuchen?");
-			card1.addSelection("Ja", "Nein");
-			addCard(card1);
-		}
-
-		@Override
-		public void onSelected(Card lastcard, boolean finished) {
-			if(lastcard.selected.equals("Nein")) {
-				world.closeDialog();
-				MainSceneData mainSceneData = (MainSceneData) container.getDataForNextScene();
-				mainSceneData.setMinigameCompleted(false);
-				container.callScene("pausenhof", mainSceneData, 40f);
-			}else {
-				Dialog dialog = new Dialog(world) {
-					
-					@Override
-					public void onSelected(Card lastcard, boolean finished) {
-						
-					}
-					
-					@Override
-					public void onFinished(Card lastcard) {
-						loadNewCalcs(120, 120, 77, 77);
-						timeBar.reset();
-						setMouseBlocked(false);
-					}
-				};
-				dialog.addCard(new Card("Super! Hier kommt die nächste Tafel!"));
-				world.openDialog(dialog);
-			}
-		}
-
-		@Override
-		public void onFinished(Card lastcard) {
-			world.closeDialog();
-			timeBar.reset();
-			loadNewCalcs(120, 120, 77, 77);
-		}
-		
-	}
-	
 	private class ContinueDialog extends Dialog {
 
 		private int success;
@@ -188,10 +132,9 @@ public class BoardGame extends MiniGame{
 			if(success == max) {
 				MainSceneData mainSceneData = (MainSceneData) container.getDataForNextScene();
 				mainSceneData.setMinigameCompleted(true);
-				container.callScene("pausenhof", mainSceneData, 40f);
+				container.callScene("chemie", mainSceneData, 40f);
 			}else {
-				loadNewCalcs(120, 120, 77, 77);
-				timeBar.reset();
+				loadNewCalcs(120, 128, 77, 77);
 			}
 		}
 		

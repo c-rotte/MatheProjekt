@@ -115,6 +115,20 @@ public class PETeacher extends Person {
 	
 	@Override
 	public void onInteract(MapPlayer player) {
+		switch (player.direction) {
+			case "up": 
+				setDirection("down");
+				break;
+			case "down":
+				setDirection("up");
+				break;
+			case "left":
+				setDirection("right");
+				break;
+			case "right":
+				setDirection("left");
+				break;
+		}
 		if(state.equals("normal")) {
 			if(player.direction.equals("right")) {
 				Dialog dialog = new Dialog(world) {

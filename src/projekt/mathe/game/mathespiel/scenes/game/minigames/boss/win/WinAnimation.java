@@ -23,7 +23,7 @@ public class WinAnimation extends ScreenElement{
 		super(container, 0, 0, 0, 0);
 		defeatedBoss = new DefeatedBoss(container);
 		fragments = new Fragments(container, 300, 320);
-		callAnimator = new Animator(260f, 1);
+		callAnimator = new Animator(180f, 1);
 	}
 
 	@Override

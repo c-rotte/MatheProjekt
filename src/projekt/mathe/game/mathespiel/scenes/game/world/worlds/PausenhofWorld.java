@@ -111,7 +111,7 @@ public class PausenhofWorld extends World{
 	
 	@Override
 	public void onPaintOnTop(Graphics2D g2d) {
-		
+		container.fillScene(g2d, new Color(0, 54, 142), .5f);
 	}
 
 }

@@ -92,7 +92,7 @@ public class Chef extends Person {
 			float xDiff = playerMidX - midX;
 			float yDiff = playerMidY - midY;
 			
-			if(Math.abs(xDiff) <= 100 || Math.abs(yDiff) <= 100) {
+			if(Math.abs(xDiff) <= 60 || Math.abs(yDiff) <= 60) {
 				if(Math.abs(xDiff) > Math.abs(yDiff)) {
 					if(xDiff < 0) {
 						setDirection("left");

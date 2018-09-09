@@ -32,6 +32,10 @@ public abstract class MovingEntity extends Entity{
 		this.moving = moving;
 	}
 	
+	public void clearAims() {
+		aims.clear();
+	}
+	
 	protected abstract void aimChanged(int[] oldAim, int[] newAim);
 	
 	public void addAim(int xAim, int yAim) {
