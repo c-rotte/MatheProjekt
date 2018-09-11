@@ -274,7 +274,7 @@ public class PyramidGame extends MiniGame{
 
 		@Override
 		public void onFinished(Card lastcard) {
-			container.callScene("pausenhof", container.getDataForNextScene(), 40f);
+			container.callScene("tische", container.getDataForNextScene(), 40f);
 		}
 		
 	}

@@ -72,7 +72,7 @@ public abstract class ScreenElement {
 	public abstract void onTick(float delta);
 	
 	//Fürs aufrufen aus der Scene
-	public final void onPerformacePaint(Graphics2D g2d) {
+	public void onPerformacePaint(Graphics2D g2d) {
 		if(container.camera.inRangeOfCamera(x, y, w, h)) {
 			onPaint(g2d);
 		}

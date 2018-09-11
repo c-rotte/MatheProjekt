@@ -38,10 +38,6 @@ public class MainSceneData extends SceneData{
 	public String getLastLoadingZoneID() {
 		return lastLoadingZone;
 	}
-	
-	public void setLastLoadingZone(String lastLoadingZone) {
-		this.lastLoadingZone = lastLoadingZone;
-	}
 
 	public MapPlayer getMapPlayer() {
 		return mapPlayer;

@@ -11,10 +11,13 @@ import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Policeman;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.TischeWorld;
 
 public class TischeScene extends Scene{
 
+	private Policeman policeman;
+	
 	public TischeScene(Game container) {
 		super(container, "tische", Values.SCENE_BG_COLOR);
 		MapPlayer player = new MapPlayer(this);
@@ -22,6 +25,8 @@ public class TischeScene extends Scene{
 		player.setWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
+		policeman = new Policeman(this, world);
+		world.addEntity(policeman);
 	}
 
 	@Override
@@ -53,6 +58,9 @@ public class TischeScene extends Scene{
 			player.setY(222);
 			player.direction = "down";
 		}
+		
+		policeman.onCall(lastID, (MainSceneData) sceneData);
+		
 	}
 
 	@Override

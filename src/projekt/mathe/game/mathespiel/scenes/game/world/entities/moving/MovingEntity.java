@@ -24,6 +24,18 @@ public abstract class MovingEntity extends Entity{
 		this.speed = speed;
 	}
 
+	public int[] getCurrAim() {
+		return currAim;
+	}
+	
+	public int getIndexOfCurrAim(){
+		return aims.indexOf(getCurrAim());
+	}
+	
+	public ArrayList<int[]> getAims() {
+		return aims;
+	}
+	
 	public boolean isMoving() {
 		return moving;
 	}
@@ -46,7 +58,7 @@ public abstract class MovingEntity extends Entity{
 		}
 	}
 	
-	private void nextAim() {
+	protected void nextAim() {
 		if(aims.indexOf(currAim) == aims.size() - 1) {
 			currAim = aims.get(0);
 		}else {
