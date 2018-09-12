@@ -131,6 +131,8 @@ public class Saver {
 		setData("existingGame", true);
 		setData("safeCode", Helper.generateRandomString(5));
 		setData("currCode", "-----");
+		
+		removeData("readFemale");
 	}
 	
 }

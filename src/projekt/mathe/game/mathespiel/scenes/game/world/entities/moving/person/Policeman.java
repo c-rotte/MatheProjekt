@@ -100,7 +100,7 @@ public class Policeman extends Person {
 					public void onFinished(Card lastcard) {
 						
 						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
-						builder.setCharAt(0, Saver.getString("safeCode").charAt(0));
+						builder.setCharAt(3, Saver.getString("safeCode").charAt(3));
 						Saver.setData("currCode", builder.toString());
 						
 						finishedMinigame = true;

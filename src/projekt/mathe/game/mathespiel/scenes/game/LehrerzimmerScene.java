@@ -23,6 +23,7 @@ public class LehrerzimmerScene extends Scene {
 		registerPlayer(player);
 		registerWorld(world);
 		registerPauseScreen(new MainPauseScreen(this));
+		enableCodeDisplay();
 	}
 
 	@Override

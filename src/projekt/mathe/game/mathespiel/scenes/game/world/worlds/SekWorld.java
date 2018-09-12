@@ -11,6 +11,8 @@ import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.Border;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.Safe;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Female;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.FemaleSign;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
@@ -38,6 +40,8 @@ public class SekWorld extends World{
 		
 		addEntity(new Border(container, this, -240, -316));
 		addEntity(new Safe(container, this, 1700, 370));
+		
+		addEntity(new Female(container, this, 100, 0));
 	}
 
 	@Override

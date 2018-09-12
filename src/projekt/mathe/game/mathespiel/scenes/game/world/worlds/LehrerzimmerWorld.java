@@ -7,6 +7,7 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.FemaleSign;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 
@@ -19,6 +20,8 @@ public class LehrerzimmerWorld extends World {
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/lehrerzimmer/lower/unten_01", 459, "png"), 27);
 		CutTile.addSplicedTiles(container, this, -500, -500, false, Helper.getImagesBySplices("game/tiles/lehrerzimmer/upper/oben_01", 459, "png"), 27);
 		Barrier.addBarriersFromFile(ResLoader.getFile("game/tiles/lehrerzimmer/barrier.txt"), this);
+		
+		addEntity(new FemaleSign(container, this, 600, -365));
 	}
 
 	@Override

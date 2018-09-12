@@ -27,6 +27,7 @@ public class TischeScene extends Scene{
 		registerPauseScreen(new MainPauseScreen(this));
 		policeman = new Policeman(this, world);
 		world.addEntity(policeman);
+		enableCodeDisplay();
 	}
 
 	@Override

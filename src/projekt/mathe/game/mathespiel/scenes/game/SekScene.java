@@ -21,6 +21,7 @@ public class SekScene extends Scene{
 		player.setWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
+		enableCodeDisplay();
 	}
 
 	@Override
