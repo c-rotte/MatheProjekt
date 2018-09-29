@@ -53,7 +53,6 @@ public class Saver {
 		}else {
 			return System.getProperty("user.home");
 		}
-		
 	}
 	
 	private static void loadSettings() {
