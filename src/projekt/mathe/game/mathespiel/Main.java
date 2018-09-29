@@ -39,7 +39,7 @@ public class Main {
 		frame.show();
 	}
 	
-	private static class LoadingPanel extends PopupPanel{
+	private static class LoadingPanel extends PopupPanel {
 
 		private static final Font font = new Font("Verdana", Font.BOLD, 20);
 		private static final GradientPaint paint = new GradientPaint(10, 10, Color.GREEN, 180, 10, new Color(0, 255, 255), true);

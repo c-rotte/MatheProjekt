@@ -99,6 +99,8 @@ public class Policeman extends Person {
 					@Override
 					public void onFinished(Card lastcard) {
 						
+						Saver.saveCurrentState(getContainer().player, getContainer());
+						
 						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
 						builder.setCharAt(3, Saver.getString("safeCode").charAt(3));
 						Saver.setData("currCode", builder.toString());
@@ -234,7 +236,7 @@ public class Policeman extends Person {
 									dialog.addCard(new Card("Genau! Blau ist die einzige Farbe, die zu einem Matheheft passt!"));
 									dialog.addCard(new Card("Du bist mir irgendwie sympathisch. Ganz im Gegensatz zu den Frechdachsen, die gestern eine Wand hier im Geb‰ude besch‰digt haben."));
 									dialog.addCard(new Card("..."));
-									dialog.addCard(new Card("Ich habe eine Idee: Wenn du mir hilfst, die Wand zu reparieren darfst du bleiben."));
+									dialog.addCard(new Card("Ich habe eine Idee: Wenn du mir hilfst, die Wand zu reparieren, darfst du bleiben. Auﬂerdem bekommst du diesen Zettel, den ich vorhin gefunden habe."));
 									Card card = new Card("Bist du dabei?");
 									card.addSelection("Ja", "Nein");
 									dialog.addCard(card);

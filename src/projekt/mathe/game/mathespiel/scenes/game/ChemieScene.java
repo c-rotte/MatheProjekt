@@ -7,6 +7,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -34,7 +35,15 @@ public class ChemieScene extends Scene{
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1360, 1443));
-		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("chemieOben")) {
+		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
+				player.setX(Saver.getFloat("lastPosX"));
+				player.setY(Saver.getFloat("lastPosY"));
+				player.direction = Saver.getString("lastDir");
+				camera.focusX(Saver.getFloat("lastCamFocusX"));
+				camera.focusY(Saver.getFloat("lastCamFocusY"));
+			}
+		}else if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("chemieOben")) {
 			camera.focusX(220);
 			camera.focusY(-140);
 			player.setX(720);

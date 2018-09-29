@@ -38,7 +38,7 @@ public class BoardGame extends MiniGame{
 		if(calculationHolder.completed() && !container.world.isDialogOpen() && !container.fading) {
 			success++;
 			setMouseBlocked(true);
-			container.world.openDialog(new ContinueDialog(container.world, success, 3));
+			container.world.openDialog(new ContinueDialog(container.world, success, 2));
 		}
 		schwamm.onTick(delta);
 	}
@@ -47,7 +47,8 @@ public class BoardGame extends MiniGame{
 	public void onPaint(Graphics2D g2d) {
 		g2d.drawImage(tafel, 0, 0, null);
 		calculationHolder.onPaint(g2d);
-		Helper.drawStringAroundPosition(640, 35, "Tafeln gewischt: " + success, Color.WHITE, 25, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 35, "Tafeln gewischt: " + success + " von 2", Color.WHITE, 25, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 680, "Falsche Rechnungen: " + calculationHolder.getWrong(), Color.RED, 25, FONT.VCR, g2d, null, -1);
 		schwamm.onPaint(g2d);
 	}
 
@@ -55,7 +56,8 @@ public class BoardGame extends MiniGame{
 		calculationHolder.clear();
 		for(int i = 0; i < 4; i++) {
 			for(int o = 0; o < 3; o++) {
-				calculationHolder.addElement(Calculation.generateInstance(container, startX + i * (200 + xOff), startY + o * (100 + yOff), ThreadLocalRandom.current().nextBoolean()));
+				boolean b = ThreadLocalRandom.current().nextBoolean();
+				calculationHolder.addElement(Calculation.generateInstance(container, startX + i * (200 + xOff), startY + o * (100 + yOff), b));
 			}
 		}
 		
@@ -116,7 +118,7 @@ public class BoardGame extends MiniGame{
 			if(success == max) {
 				addCard(new Card("Super! Du hast es geschafft!"));
 			}else {
-				addCard(new Card("Super! Das war Tafel Nummer " + success + "! Es verbleiben nur noch " + (max - success) + "."));
+				addCard(new Card("Super! Das war die erste Tafel."));
 			}
 		}
 

@@ -25,6 +25,16 @@ public class CalculationHolder extends Holder<Calculation>{
 		return false;
 	}
 
+	public int getWrong() {
+		int wrong = 0;
+		for(Calculation calculation : getElements()) {
+			if(!calculation.isRight()) {
+				wrong++;
+			}
+		}
+		return wrong;
+	}
+	
 	public boolean completed() {
 		for(Calculation calculation : getElements()) {
 			if(calculation.isRight() && calculation.isSelected()) {

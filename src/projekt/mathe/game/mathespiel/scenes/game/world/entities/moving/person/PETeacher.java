@@ -163,8 +163,6 @@ public class PETeacher extends Person {
 				public void onSelected(Card lastcard, boolean finished) {
 					if(lastcard.selected.equals("Ja")) {
 						getContainer().callScene("race", getContainer().getDataForNextScene(), 40f);
-					}else {
-						
 					}
 				}
 				@Override

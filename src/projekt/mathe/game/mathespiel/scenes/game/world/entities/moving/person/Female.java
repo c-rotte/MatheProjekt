@@ -1,7 +1,5 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
-import java.awt.event.MouseWheelEvent;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -11,11 +9,21 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Car
 
 public class Female extends Person {
 
-	public Female(Scene container, World world, int x, int y) {
+	private boolean done;
+	
+	private Boss boss;
+	
+	public Female(Scene container, World world, int x, int y, Boss boss) {
 		super(container, world, TYPE.FEMALE, x, y, 3);
+		this.boss = boss;
 		setDirection("down");
+		done = Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(4) == Saver.getString("safeCode").charAt(4);
 	}
 
+	public boolean isDone() {
+		return done;
+	}
+	
 	@Override
 	public void onTick(float delta) {
 		MapPlayer mapPlayer = world.player;
@@ -26,10 +34,10 @@ public class Female extends Person {
 			float midX = (float) getBounds().getCenterX();
 			float midY = (float) getBounds().getCenterY();
 			
-			float xDiff = playerMidX - midX;
-			float yDiff = playerMidY - midY;
+			float xDiff = Math.abs(playerMidX) - Math.abs(midX);
+			float yDiff = Math.abs(playerMidY) - Math.abs(midY);
 			
-			if(Math.abs(xDiff) <= 50 || Math.abs(yDiff) <= 50) {
+			if(Math.abs(xDiff) <= 40 || Math.abs(yDiff) <= 40) {
 				if(Math.abs(xDiff) > Math.abs(yDiff)) {
 					if(xDiff < 0) {
 						setDirection("left");
@@ -64,6 +72,7 @@ public class Female extends Person {
 				break;
 		}
 		if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(4) == Saver.getString("safeCode").charAt(4)) {
+			done = true;
 			Dialog dialog = new Dialog(world) {
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {
@@ -88,9 +97,15 @@ public class Female extends Person {
 							}
 							@Override
 							public void onFinished(Card lastcard) {
+								Saver.saveCurrentState(getContainer().player, getContainer());
 								StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
 								builder.setCharAt(4, Saver.getString("safeCode").charAt(4));
 								Saver.setData("currCode", builder.toString());
+								done = true;
+								setDirection("down");
+								//
+								boss.trigger();
+								//
 							}
 						};
 						dialog.addCard(new Card("Ja! Das war es! Um 7:50 beginnt meine Mathestunde!"));

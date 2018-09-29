@@ -90,7 +90,7 @@ public abstract class Person extends MovingEntity {
 	
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		if(Settings.HITBOXEN_ANZEIGEN) {
+		if(Settings.HITBOXEN_ANZEIGEN && playerListenerArea != null) {
 			g2d.setColor(Color.YELLOW);
 			g2d.draw(playerListenerArea);
 		}

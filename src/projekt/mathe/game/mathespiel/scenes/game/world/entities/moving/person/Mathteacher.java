@@ -46,10 +46,10 @@ public class Mathteacher extends Person {
 	}
 	
 	public void onCall(String lastID, MainSceneData sceneData) {
-		if(lastID.equals("aula")) {
+		if(lastID.equals("aula") || lastID.equals("choose")) {
 			if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(2) == Saver.getString("safeCode").charAt(2)) {
 				state = "finished";
-				if(sceneData.getLastLoadingZoneID().equals("chemieOben")) {
+				if(sceneData.getLastLoadingZoneID().equals("chemieOben") || lastID.equals("choose")) {
 					setX(-350);
 					setY(260);
 					setDirection("up");
@@ -111,6 +111,7 @@ public class Mathteacher extends Person {
 					}
 					@Override
 					public void onFinished(Card lastcard) {
+						Saver.saveCurrentState(getContainer().player, getContainer());
 						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
 						builder.setCharAt(2, Saver.getString("safeCode").charAt(2));
 						Saver.setData("currCode", builder.toString());

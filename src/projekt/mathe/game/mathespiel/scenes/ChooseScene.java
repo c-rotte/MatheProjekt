@@ -35,6 +35,8 @@ public class ChooseScene extends Scene{
 	
 	private String state; //normal, gender, warning, loading
 	
+	private boolean continued;
+	
 	public ChooseScene(Game container) {
 		super(container, "choose", Color.BLACK);
 		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.WHITE);
@@ -66,6 +68,7 @@ public class ChooseScene extends Scene{
 					.addOnClickListener(new Runnable() {
 						@Override
 						public void run() {
+							continued = true;
 							state = "loading";
 						}
 					}));
@@ -96,12 +99,14 @@ public class ChooseScene extends Scene{
 		genderWarning.reset();
 		state = "normal";
 		buttonHolder.reset();
+		continued = false;
 	}
 	
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		reloadButtons();
 		state = "normal";
+		continued = false;
 	}
 
 	@Override
@@ -138,8 +143,15 @@ public class ChooseScene extends Scene{
 				loadingHelper.onTick(delta);
 				if(((Maingame) container).finishedLoading()) {
 					state = "normal";
-					//hier wird die scene und co. entschieden (nach dem spielstand)
-					callScene("pausenhof", getDataForNextScene(), 70f);
+					if(continued) {
+						if(Saver.containsData("lastScene")) {
+							MainSceneData mainSceneData = (MainSceneData) getDataForNextScene();
+							mainSceneData.additional.put("continue", true);
+							callScene(Saver.getString("lastScene"), mainSceneData, 70f);
+						}else {
+							callScene("pausenhof", getDataForNextScene(), 70f);
+						}
+					}
 					reset();
 				}
 				break;

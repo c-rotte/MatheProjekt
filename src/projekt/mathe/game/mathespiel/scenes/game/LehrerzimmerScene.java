@@ -8,6 +8,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -30,11 +31,21 @@ public class LehrerzimmerScene extends Scene {
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1350, 844));
-		player.setX(474);
-		player.setY(175);
-		player.direction = "up";
-		camera.focusX(210);
-		camera.focusY(-16);
+		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
+				player.setX(Saver.getFloat("lastPosX"));
+				player.setY(Saver.getFloat("lastPosY"));
+				player.direction = Saver.getString("lastDir");
+				camera.focusX(Saver.getFloat("lastCamFocusX"));
+				camera.focusY(Saver.getFloat("lastCamFocusY"));
+			}
+		}else {
+			player.setX(474);
+			player.setY(175);
+			player.direction = "up";
+			camera.focusX(210);
+			camera.focusY(-16);
+		}
 	}
 
 	@Override

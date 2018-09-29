@@ -7,6 +7,7 @@ import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.ResLoader;
+import projekt.mathe.game.engine.save.Saver;
 
 public class WinAnimation extends ScreenElement{
 
@@ -23,7 +24,7 @@ public class WinAnimation extends ScreenElement{
 		super(container, 0, 0, 0, 0);
 		defeatedBoss = new DefeatedBoss(container);
 		fragments = new Fragments(container, 300, 320);
-		callAnimator = new Animator(180f, 1);
+		callAnimator = new Animator(50f, 1);
 	}
 
 	@Override
@@ -33,7 +34,8 @@ public class WinAnimation extends ScreenElement{
 		callAnimator.calculate(delta);
 		if(callAnimator.finished() && !called) {
 			called = true;
-			getContainer().callScene("pausenhof", getContainer().getDataForNextScene(), 180f);
+			Saver.setData("bossdefeated", true);
+			getContainer().callScene("pausenhof", getContainer().getDataForNextScene(), 100f);
 		}
 	}
 

@@ -2,11 +2,13 @@ package projekt.mathe.game.mathespiel.scenes.game;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -14,10 +16,13 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.SekWorld;
 
 public class SekScene extends Scene{
 
+	private SekWorld sekWorld;
+	
 	public SekScene(Game container) {
 		super(container, "sek", Values.SCENE_BG_COLOR);
 		MapPlayer player = new MapPlayer(this);
-		registerWorld(new SekWorld(this, player));
+		sekWorld = new SekWorld(this, player);
+		registerWorld(sekWorld);
 		player.setWorld(world);
 		registerPlayer(player);
 		registerPauseScreen(new MainPauseScreen(this));
@@ -28,7 +33,15 @@ public class SekScene extends Scene{
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1558));
-		if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("sekEingang")) {
+		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
+				player.setX(Saver.getFloat("lastPosX"));
+				player.setY(Saver.getFloat("lastPosY"));
+				player.direction = Saver.getString("lastDir");
+				camera.focusX(Saver.getFloat("lastCamFocusX"));
+				camera.focusY(Saver.getFloat("lastCamFocusY"));
+			}
+		}else if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("sekEingang")) {
 			camera.focusX(140);
 			camera.focusY(422);
 			player.setX(-454);
@@ -46,6 +59,7 @@ public class SekScene extends Scene{
 			player.setX(1000);
 			player.setY(300);
 		}
+		sekWorld.onCall();
 	}
 
 	@Override

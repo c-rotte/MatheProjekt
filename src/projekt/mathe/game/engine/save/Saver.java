@@ -8,9 +8,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
+import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Logger;
 import projekt.mathe.game.mathespiel.Settings;
+import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 
 public class Saver {
 
@@ -106,7 +108,7 @@ public class Saver {
 		if(!data.containsKey(key)) {
 			throw new NullPointerException("Couldn't find Data!");
 		}
-		return (float) data.get(key);
+		return Float.parseFloat((String) data.get(key));
 	}
 	
 	public static short getShort(String key) {
@@ -133,6 +135,22 @@ public class Saver {
 		setData("currCode", "-----");
 		
 		removeData("readFemale");
+		
+		removeData("lastPosX");
+		removeData("lastPosY");
+		removeData("lastCamFocusX");
+		removeData("lastCamFocusY");
+		removeData("lastScene");
+		removeData("lastDir");
+	}
+	
+	public static void saveCurrentState(MapPlayer player, Scene scene) {
+		setData("lastPosX", player.getX());
+		setData("lastPosY", player.getY());
+		setData("lastCamFocusX", scene.camera.getFocusX());
+		setData("lastCamFocusY", scene.camera.getFocusY());
+		setData("lastScene", scene.getId());
+		setData("lastDir", player.direction);
 	}
 	
 }

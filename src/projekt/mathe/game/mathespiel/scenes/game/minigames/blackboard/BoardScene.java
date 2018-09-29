@@ -49,7 +49,7 @@ public class BoardScene extends GameScene{
 
 		public ExplanationDialog(World world) {
 			super(world);
-			Card card1 = new Card("Du musst drei Tafeln wischen. Der letzte Schüler, der ausgefragt wurde, hat einiges falsch gemacht.");
+			Card card1 = new Card("Du musst zwei Tafeln wischen. Der letzte Schüler, der ausgefragt wurde, hat einiges falsch gemacht.");
 			addCard(card1);
 			Card card2 = new Card("Bitte entferne alle FALSCHEN Rechnungen. Klicke dazu mit dem Schwamm auf die entsprechende Gleichung. Durch ein erneutes Klicken machst du diese Aktion rückgängig.");
 			addCard(card2);

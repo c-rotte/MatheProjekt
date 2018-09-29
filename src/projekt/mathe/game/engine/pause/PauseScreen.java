@@ -115,6 +115,9 @@ public abstract class PauseScreen extends ScreenElement{
 		}
 		switch (state) {
 			case "hidden": 
+				if(!getContainer().player.playerController.isActivated() || getContainer().world.isDialogOpen()) {
+					break;
+				}
 				if(interacted) {
 					startX = getContainer().camera.translateAbsolutX(0) - getW();
 					setX(startX);

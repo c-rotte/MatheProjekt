@@ -32,7 +32,15 @@ public class AulaScene extends Scene{
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 2400, 2043));
-		if(lastID.equals("pausenhof") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("pausenhofEingang")) {
+		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
+				player.setX(Saver.getFloat("lastPosX"));
+				player.setY(Saver.getFloat("lastPosY"));
+				player.direction = Saver.getString("lastDir");
+				camera.focusX(Saver.getFloat("lastCamFocusX"));
+				camera.focusY(Saver.getFloat("lastCamFocusY"));
+			}
+		}else if(lastID.equals("pausenhof") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("pausenhofEingang")) {
 			camera.focusX(620);
 			camera.focusY(1100);
 			player.setX(620);
@@ -76,6 +84,7 @@ public class AulaScene extends Scene{
 					}
 					@Override
 					public void onFinished(Card lastcard) {
+						Saver.saveCurrentState(player, AulaScene.this);
 						StringBuilder builder = new StringBuilder(Saver.getString("currCode"));
 						builder.setCharAt(1, Saver.getString("safeCode").charAt(1));
 						Saver.setData("currCode", builder.toString());
@@ -106,7 +115,7 @@ public class AulaScene extends Scene{
 					}
 					@Override
 					public void onFinished(Card lastcard) {
-						
+						Saver.saveCurrentState(player, AulaScene.this);
 					}
 				};
 				dialog.addCard(new Card("*schluchz* Oje so wird das doch nichts!"));

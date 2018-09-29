@@ -75,6 +75,10 @@ public class Camera {
 		return Math.round(x);
 	}
 
+	public float getRawX() {
+		return x;
+	}
+	
 	public void setX(float x) {
 		this.x = x;
 	}
@@ -83,6 +87,10 @@ public class Camera {
 		return Math.round(y);
 	}
 
+	public float getRawY() {
+		return y;
+	}
+	
 	public void setY(float y) {
 		this.y = y;
 	}

@@ -2,6 +2,7 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Helper;
@@ -11,6 +12,7 @@ import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.Border;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.Safe;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Boss;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Female;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.FemaleSign;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
@@ -20,6 +22,9 @@ import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Car
 
 public class SekWorld extends World{
 
+	private Female female;
+	private Boss boss;
+	
 	public SekWorld(Scene container, MapPlayer player) {
 		super(container, player);
 		CutTile.addSplicedTiles(container, this, -500, -500, true, Helper.getImagesBySplices("game/tiles/sek/lower/unten_01", 1600, "png"), 50);
@@ -41,13 +46,19 @@ public class SekWorld extends World{
 		addEntity(new Border(container, this, -240, -316));
 		addEntity(new Safe(container, this, 1700, 370));
 		
-		addEntity(new Female(container, this, 100, 0));
+		boss = new Boss(container, this);
+		
+		female = new Female(container, this, 100, 0, boss);
+		addEntity(female);
 	}
 
+	public void onCall() {
+		boss.onCall();
+	}
+	
 	@Override
 	public void onTick(float delta) {
-		// TODO Auto-generated method stub
-		
+		boss.onTick(delta);
 	}
 
 	@Override
@@ -64,8 +75,7 @@ public class SekWorld extends World{
 
 	@Override
 	public void onPaintOnTop(Graphics2D g2d) {
-		// TODO Auto-generated method stub
-		
+		boss.onPaint(g2d);
 	}
 
 }

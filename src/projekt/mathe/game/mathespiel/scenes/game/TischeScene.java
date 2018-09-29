@@ -8,6 +8,7 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.Values;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
@@ -34,7 +35,16 @@ public class TischeScene extends Scene{
 	public void onCall(String lastID, SceneData sceneData) {
 		player.reloadGender();
 		camera.setMaxBounds(new Rectangle(-500, -500, 1100, 1443));
-		if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
+		
+		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
+				player.setX(Saver.getFloat("lastPosX"));
+				player.setY(Saver.getFloat("lastPosY"));
+				player.direction = Saver.getString("lastDir");
+				camera.focusX(Saver.getFloat("lastCamFocusX"));
+				camera.focusY(Saver.getFloat("lastCamFocusY"));
+			}
+		}else if(lastID.equals("aula") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("tischeEingang")) {
 			camera.focusX(50);
 			camera.focusY(-68);
 			player.setX(-50);
