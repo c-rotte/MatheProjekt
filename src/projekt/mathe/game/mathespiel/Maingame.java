@@ -41,6 +41,7 @@ public class Maingame extends Game{
 			registerGameScenes();
 			finishedLoading = true;
 		}).start();
+		//
 	}
 	
 	private void registerGameScenes() {
