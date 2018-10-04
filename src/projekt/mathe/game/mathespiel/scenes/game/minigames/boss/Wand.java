@@ -4,24 +4,16 @@ import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Composite;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import projekt.mathe.game.engine.GameScene;
 import projekt.mathe.game.engine.Scene;
@@ -29,9 +21,9 @@ import projekt.mathe.game.engine.elements.Holder;
 import projekt.mathe.game.engine.elements.ScreenElement;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
+import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
-import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard.TimeBar;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
@@ -418,7 +410,7 @@ public class Wand extends ScreenElement{
 		
 	}
 	
-	private static class Fenster extends ScreenElement {
+	public static class Fenster extends ScreenElement {
 
 		private static final Image bg = ResLoader.getImageByName("game/minigames/boss/windowbg.jpg");
 		private static final Image rollade = ResLoader.getImageByName("game/minigames/boss/rollade.jpg");
@@ -630,7 +622,7 @@ public class Wand extends ScreenElement{
 			g2d.setClip(shape);
 		}
 		
-		private class ShapeAnimator {
+		public static class ShapeAnimator {
 
 			private Animator shapeAnimator;
 			private float shapeAmount;
@@ -688,7 +680,7 @@ public class Wand extends ScreenElement{
 			
 		}
 		
-		private static class BossTextureHelper extends TextureHelper {
+		public static class BossTextureHelper extends TextureHelper {
 			
 			private static final Image bossImage = ResLoader.getImageByName("game/minigames/boss/boss.png");
 			private static final Image bossHitImage = ResLoader.getImageByName("game/minigames/boss/boss_hit.png"); 

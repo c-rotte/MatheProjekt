@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
-import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Frame;
 import projekt.mathe.game.engine.Popup;

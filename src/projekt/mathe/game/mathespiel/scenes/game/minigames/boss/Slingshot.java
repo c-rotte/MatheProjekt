@@ -7,8 +7,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import projekt.mathe.game.engine.GameScene;

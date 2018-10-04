@@ -1,6 +1,5 @@
 package projekt.mathe.game.mathespiel.scenes.game;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 

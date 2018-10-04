@@ -1,9 +1,5 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
-import java.awt.Point;
-
-import javax.jws.WebParam;
-
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;

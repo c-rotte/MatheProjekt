@@ -1,7 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;

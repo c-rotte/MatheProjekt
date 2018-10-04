@@ -2,7 +2,6 @@ package projekt.mathe.game.mathespiel.scenes.game.world.entities.scenes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 

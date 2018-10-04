@@ -2,7 +2,6 @@ package projekt.mathe.game.mathespiel.scenes.game.world.worlds;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Helper;
@@ -14,7 +13,6 @@ import projekt.mathe.game.mathespiel.scenes.game.world.entities.Safe;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Boss;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Female;
-import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.FemaleSign;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
@@ -54,6 +52,14 @@ public class SekWorld extends World{
 
 	public void onCall() {
 		boss.onCall();
+	}
+	
+	public Boss getBoss() {
+		return boss;
+	}
+	
+	public Female getFemale() {
+		return female;
 	}
 	
 	@Override

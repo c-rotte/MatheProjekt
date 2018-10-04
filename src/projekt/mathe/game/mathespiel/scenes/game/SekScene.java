@@ -2,7 +2,6 @@ package projekt.mathe.game.mathespiel.scenes.game;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
@@ -13,6 +12,8 @@ import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.pause.MainPauseScreen;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.SekWorld;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
+import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class SekScene extends Scene{
 
@@ -41,6 +42,10 @@ public class SekScene extends Scene{
 				camera.focusX(Saver.getFloat("lastCamFocusX"));
 				camera.focusY(Saver.getFloat("lastCamFocusY"));
 			}
+			if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(4) == Saver.getString("safeCode").charAt(4) && !Saver.containsData("bossdefeated")) {
+				((SekWorld) world).getBoss().reset();
+				((SekWorld) world).getBoss().trigger();
+			}
 		}else if(lastID.equals("tische") && ((MainSceneData) sceneData).getLastLoadingZoneID().equals("sekEingang")) {
 			camera.focusX(140);
 			camera.focusY(422);
@@ -53,6 +58,27 @@ public class SekScene extends Scene{
 			player.setX(1752);
 			player.setY(521);
 			player.direction = "up";
+		}else if(lastID.equals("boss_win")){
+			((SekWorld) world).getBoss().reset();
+			camera.focusX(522);
+			camera.focusY(94);
+			player.setX(154);
+			player.setY(-5);
+			player.direction = "left";
+			((SekWorld) world).getFemale().setDirection("right");
+			Dialog dialog = new Dialog(world) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					
+				}
+				@Override
+				public void onFinished(Card lastcard) {
+					Saver.saveCurrentState(player, SekScene.this);
+				}
+			};
+			dialog.addCard(new Card("Wie gut, dass du diesen Störenfried vertrieben hast!"));
+			dialog.addCard(new Card("Der traut sich so schnell nicht mehr hierher. Aber nun muss ich mich auf meinen Unterricht vorbereiten."));
+			world.openDialog(dialog);
 		}else {
 			camera.focusX(1000);
 			camera.focusY(300);

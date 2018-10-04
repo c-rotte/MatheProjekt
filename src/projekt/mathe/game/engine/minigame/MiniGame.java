@@ -3,10 +3,8 @@ package projekt.mathe.game.engine.minigame;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.util.HashMap;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.engine.save.Saver;
 
 public abstract class MiniGame {
 

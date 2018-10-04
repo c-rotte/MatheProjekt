@@ -1,7 +1,5 @@
 package projekt.mathe.game.mathespiel;
 
-import java.util.Set;
-
 import projekt.mathe.game.engine.Frame;
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.help.Logger;
@@ -15,7 +13,6 @@ import projekt.mathe.game.mathespiel.scenes.MenuScene;
 import projekt.mathe.game.mathespiel.scenes.SettingsScene;
 import projekt.mathe.game.mathespiel.scenes.game.AulaScene;
 import projekt.mathe.game.mathespiel.scenes.game.ChemieScene;
-import projekt.mathe.game.mathespiel.scenes.game.DrawingScene;
 import projekt.mathe.game.mathespiel.scenes.game.LehrerzimmerScene;
 import projekt.mathe.game.mathespiel.scenes.game.PausenhofScene;
 import projekt.mathe.game.mathespiel.scenes.game.SekScene;
@@ -35,14 +32,16 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		//this.registerScene(new SafeScene(this));
-		//setCurrentScene("safe", new MainSceneData(), 40f);
+		//this.registerScene(new WinScene(this));
+		//setCurrentScene("boss_win", new MainSceneData(), 40f);
+		///*
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {
 			registerGameScenes();
 			finishedLoading = true;
 		}).start();
+		//*/
 	}
 	
 	private void registerGameScenes() {

@@ -1,7 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.race;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayerTextureHelper;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Person;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.Person.TYPE;
 

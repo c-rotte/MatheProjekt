@@ -1,9 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.boss;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-
-import javax.xml.bind.ValidationEvent;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.GameScene;

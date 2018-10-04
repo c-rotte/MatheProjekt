@@ -1,15 +1,10 @@
 package projekt.mathe.game.mathespiel.scenes.game.minigames.boss;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 import projekt.mathe.game.engine.Scene;
-import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.minigame.MiniGame;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class BossGame extends MiniGame{
 
