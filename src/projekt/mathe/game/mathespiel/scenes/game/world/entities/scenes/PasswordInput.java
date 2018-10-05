@@ -117,7 +117,7 @@ public class PasswordInput extends ScreenElement{
 								if(Saver.containsData("safeCode") && Saver.containsData("currCode")) {
 									if(Saver.getString("safeCode").equals(password) && Saver.getString("currCode").equals(password)) {
 										passwordColor = Color.CYAN;
-										//erfolgreich
+										getContainer().callScene("safe_end", getContainer().getDataForNextScene(), 50f);
 									}else {
 										passwordColor = Color.RED;
 									}

@@ -24,7 +24,7 @@ public class FemaleSign extends SignEntity{
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {
 					boolean b = true;
-					for(int i = 0; i < 5; i++) {
+					for(int i = 0; i < 4; i++) {
 						if(Saver.containsData("currCode") && Saver.containsData("safeCode")) {
 							if(Saver.getString("currCode").charAt(i) != Saver.getString("safeCode").charAt(i)) {
 								b = false;
@@ -73,18 +73,36 @@ public class FemaleSign extends SignEntity{
 							world.openDialog(dialog);
 						}
 					}else {
-						Dialog dialog = new Dialog(world) {
-							@Override
-							public void onSelected(Card lastcard, boolean finished) {
-								
-							}
-							@Override
-							public void onFinished(Card lastcard) {
-								
-							}
-						};
-						dialog.addCard(new Card("Der Vertretungsplan für morgen wurde noch nicht festgelegt. Komme später wieder."));
-						world.openDialog(dialog);
+						if(lastcard.selected.equals("3")) {
+							Dialog dialog = new Dialog(world) {
+								@Override
+								public void onSelected(Card lastcard, boolean finished) {
+									
+								}
+								@Override
+								public void onFinished(Card lastcard) {
+									Saver.setData("readFemale", true);
+								}
+							};
+							dialog.addCard(new Card("Der Vertretungsplan für morgen wurde noch nicht festgelegt. Versuchen Sie es später noch einmal."));
+							world.openDialog(dialog);
+						}else {
+							Dialog dialog = new Dialog(world) {
+								@Override
+								public void onSelected(Card lastcard, boolean finished) {
+									
+								}
+								@Override
+								public void onFinished(Card lastcard) {
+									
+								}
+							};
+							dialog.addCard(new Card("Falsche Antwort. Sie sind kein Lehrer!"));
+							Card card = new Card("Zugriff verweigert!");
+							card.setTextColor(Color.RED);
+							dialog.addCard(card);
+							world.openDialog(dialog);
+						}
 					}
 				}
 				@Override

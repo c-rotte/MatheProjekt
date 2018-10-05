@@ -141,6 +141,8 @@ public class Saver {
 		removeData("lastCamFocusY");
 		removeData("lastScene");
 		removeData("lastDir");
+		
+		removeData("bossdefeated");
 	}
 	
 	public static void saveCurrentState(MapPlayer player, Scene scene) {
@@ -150,6 +152,15 @@ public class Saver {
 		setData("lastCamFocusY", scene.camera.getFocusY());
 		setData("lastScene", scene.getId());
 		setData("lastDir", player.direction);
+	}
+	
+	public static void clearPlayerState() {
+		removeData("lastPosX");
+		removeData("lastPosY");
+		removeData("lastCamFocusX");
+		removeData("lastCamFocusY");
+		removeData("lastScene");
+		removeData("lastDir");
 	}
 	
 }

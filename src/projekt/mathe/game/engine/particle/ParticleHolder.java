@@ -24,6 +24,13 @@ public class ParticleHolder extends Holder<Particle>{
 		}
 	}
 
+	public void setColor(Color color) {
+		COLOR = color;
+		for(Particle particle : getElements()) {
+			particle.setCOLOR(color);
+		}
+	}
+	
 	@Override
 	public void onTick(float delta) {
 		super.onTick(delta);

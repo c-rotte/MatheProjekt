@@ -151,6 +151,8 @@ public class ChooseScene extends Scene{
 						}else {
 							callScene("pausenhof", getDataForNextScene(), 70f);
 						}
+					}else {
+						callScene("intro", getDataForNextScene(), 70f);
 					}
 					reset();
 				}

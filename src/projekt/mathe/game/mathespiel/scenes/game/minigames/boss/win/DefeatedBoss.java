@@ -25,7 +25,7 @@ public class DefeatedBoss extends ScreenElement {
 	public DefeatedBoss(Scene container) {
 		super(container, 0, 0, 1280, 720);
 		bossTextureHelper = new BossTextureHelper();
-		bossTextureHelper.switchState("hit");
+		bossTextureHelper.switchState("boss");
 		animator = new Animator(80, 1);
 		yImg = -400;
 	}
@@ -42,6 +42,7 @@ public class DefeatedBoss extends ScreenElement {
 				}
 				@Override
 				public void onFinished(Card lastcard) {
+					Saver.clearPlayerState();
 					Saver.setData("bossdefeated", true);
 					getContainer().callScene("sek", getContainer().getDataForNextScene(), 150f);
 				}

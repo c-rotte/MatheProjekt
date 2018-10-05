@@ -34,7 +34,7 @@ public class SettingsScene extends Scene{
 					@Override
 					public void run() {
 						saveSettings();
-						callScene("menu", getDataForNextScene(), Values.MENU_FADING);	
+						callScene("menu", getDataForNextScene(), Values.MENU_FADING);
 					}
 				}));
 		particleHolder = new ParticleHolder(this, 1.2f, 1, 80, Color.WHITE);
@@ -44,7 +44,6 @@ public class SettingsScene extends Scene{
 		Settings.FPS_ANZEIGEN = checkBoxHolder.wasClicked("fps");
 		Settings.HITBOXEN_ANZEIGEN = checkBoxHolder.wasClicked("hitbox");
 		Settings.DARKMODE = checkBoxHolder.wasClicked("darkmode");
-		Settings.SMOOTH = checkBoxHolder.wasClicked("smooth");
 	}
 	
 	@Override

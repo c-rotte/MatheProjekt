@@ -12,6 +12,7 @@ import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.help.TextureHelper;
 import projekt.mathe.game.engine.particle.ParticleHolder;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.menu.Button;
 import projekt.mathe.game.mathespiel.scenes.menu.ButtonHolder;
 
@@ -59,6 +60,9 @@ public class MenuScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		if(Saver.containsData("gamefinished")) {
+			particleHolder.setColor(Color.CYAN);
+		}
 		camera.setX(0);
 		camera.setY(0);
 		buttonHolder.reset();

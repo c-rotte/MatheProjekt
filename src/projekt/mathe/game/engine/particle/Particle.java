@@ -24,6 +24,10 @@ public class Particle extends ScreenElement{
 		yDist /= length;
 	}
 
+	public void setCOLOR(Color cOLOR) {
+		COLOR = cOLOR;
+	}
+	
 	public boolean outOfBounds() {
 		return !getContainer().camera.inRangeOfCamera(getX(), getY(), getW(), getH());
 	}

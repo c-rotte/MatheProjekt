@@ -36,10 +36,11 @@ public class PausenhofScene extends Scene{
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
+		
 		player.reloadGender();
 		player.playerController.setActivated(true);
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1750));
-		if(lastID.equals("choose") && ((MainSceneData) sceneData).additional.containsKey("continue")) {
+		if((lastID.equals("intro") || lastID.equals("choose")) && ((MainSceneData) sceneData).additional.containsKey("continue")) {
 			if(Saver.containsData("lastPosX") && Saver.containsData("lastPosY")) {
 				player.setX(Saver.getFloat("lastPosX"));
 				player.setY(Saver.getFloat("lastPosY"));

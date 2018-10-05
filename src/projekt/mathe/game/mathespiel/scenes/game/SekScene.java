@@ -74,6 +74,7 @@ public class SekScene extends Scene{
 				@Override
 				public void onFinished(Card lastcard) {
 					Saver.saveCurrentState(player, SekScene.this);
+					player.playerController.setActivated(true);
 				}
 			};
 			dialog.addCard(new Card("Wie gut, dass du diesen Störenfried vertrieben hast!"));

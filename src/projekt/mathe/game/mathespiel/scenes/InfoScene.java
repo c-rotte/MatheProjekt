@@ -62,6 +62,7 @@ public class InfoScene extends Scene{
 	@Override
 	public void onPaint(Graphics2D g2d) {
 		particleHolder.onPaint(g2d);
+		buttonHolder.onPaint(g2d);
 		Helper.drawStringAroundPosition(640, 200, "Nachts im Bunker", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		Helper.drawStringAroundPosition(640, 250, "2017 - 2018", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		Helper.drawStringAroundPosition(640, 300, "~", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
