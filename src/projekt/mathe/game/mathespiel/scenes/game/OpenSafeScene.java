@@ -3,7 +3,6 @@ package projekt.mathe.game.mathespiel.scenes.game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.util.spi.CalendarDataProvider;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
@@ -45,6 +44,7 @@ public class OpenSafeScene extends Scene {
 				}
 				@Override
 				public void onFinished(Card lastcard) {
+					Saver.clearPlayerState();
 					Saver.setData("gamefinished", true);
 					callScene("ending", getDataForNextScene(), 240f);
 				}

@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
-import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.help.Animator;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;

@@ -73,7 +73,6 @@ public class Boss extends Entity {
 			case "cameramoving" : 
 				if(getContainer().camera.translateAbsolutX(getContainer().camera.getX()) < 550) {
 					getContainer().camera.setX(getContainer().camera.getRawX() + delta * CAMERA_SPEED);
-					System.out.println(getContainer().camera.getFocusX());
 				}else {
 					getContainer().camera.focusX(915);
 					Dialog dialog = new Dialog(world) {

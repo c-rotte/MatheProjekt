@@ -323,7 +323,7 @@ public class Policeman extends Person {
 	
 	@Override
 	public void onInteract(MapPlayer player) {
-		if(finishedMinigame) {
+		if(finishedMinigame || (Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(3) == Saver.getString("safeCode").charAt(3))) {
 			Dialog dialog = new Dialog(world) {
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {

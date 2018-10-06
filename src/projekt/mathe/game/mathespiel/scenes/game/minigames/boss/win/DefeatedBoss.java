@@ -42,7 +42,6 @@ public class DefeatedBoss extends ScreenElement {
 				}
 				@Override
 				public void onFinished(Card lastcard) {
-					Saver.clearPlayerState();
 					Saver.setData("bossdefeated", true);
 					getContainer().callScene("sek", getContainer().getDataForNextScene(), 150f);
 				}

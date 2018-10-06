@@ -7,7 +7,6 @@ import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.Animator;
-import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;

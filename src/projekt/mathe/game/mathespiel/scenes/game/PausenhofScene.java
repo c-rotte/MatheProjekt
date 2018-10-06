@@ -37,6 +37,8 @@ public class PausenhofScene extends Scene{
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		
+		((PausenhofWorld) world).onCall();
+		
 		player.reloadGender();
 		player.playerController.setActivated(true);
 		camera.setMaxBounds(new Rectangle(-500, -500, 2500, 1750));
