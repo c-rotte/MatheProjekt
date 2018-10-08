@@ -162,7 +162,7 @@ public abstract class Game extends JPanel implements ActionListener{
 				if(currScene != null) {
 					currScene.onKeyPressed(e);
 				}
-				if(fullscreen && e.getKeyCode() == KeyEvent.VK_F) {
+				if(fullscreen && e.getKeyCode() == KeyEvent.VK_F11) {
 					toggleFullScreen(1);
 				}
 			}

@@ -35,7 +35,7 @@ public abstract class Dialog{
 		index = 0;
 		currText = "";
 		currTextCounter = 0;
-		wasPressedLastFrame.add(KeyEvent.VK_ENTER);
+		wasPressedLastFrame.add(KeyEvent.VK_SPACE);
 	}
 	
 	public abstract void onSelected(Card lastcard, boolean finished);
@@ -51,7 +51,7 @@ public abstract class Dialog{
 		currCard = cards.get(0);
 		currText = "";
 		currTextCounter = 0;
-		wasPressedLastFrame.add(KeyEvent.VK_ENTER);
+		wasPressedLastFrame.add(KeyEvent.VK_SPACE);
 		return this;
 	}
 	
@@ -134,9 +134,9 @@ public abstract class Dialog{
 		
 		boolean up = world.container.keyController.isPressed(KeyEvent.VK_UP);
 		boolean down = world.container.keyController.isPressed(KeyEvent.VK_DOWN);
-		boolean enter = world.container.keyController.isPressed(KeyEvent.VK_ENTER);
+		boolean enter = world.container.keyController.isPressed(KeyEvent.VK_SPACE);
 		
-		press(up && !wasPressedLastFrame.contains(KeyEvent.VK_UP), down && !wasPressedLastFrame.contains(KeyEvent.VK_DOWN), enter && !wasPressedLastFrame.contains(KeyEvent.VK_ENTER));
+		press(up && !wasPressedLastFrame.contains(KeyEvent.VK_UP), down && !wasPressedLastFrame.contains(KeyEvent.VK_DOWN), enter && !wasPressedLastFrame.contains(KeyEvent.VK_SPACE));
 		
 		if(up) {
 			if(!wasPressedLastFrame.contains(KeyEvent.VK_UP)) {
@@ -155,11 +155,11 @@ public abstract class Dialog{
 		}
 		
 		if(enter) {
-			if(!wasPressedLastFrame.contains(KeyEvent.VK_ENTER)) {
-				wasPressedLastFrame.add(KeyEvent.VK_ENTER);
+			if(!wasPressedLastFrame.contains(KeyEvent.VK_SPACE)) {
+				wasPressedLastFrame.add(KeyEvent.VK_SPACE);
 			}
 		}else {
-			wasPressedLastFrame.remove(Integer.valueOf(KeyEvent.VK_ENTER));
+			wasPressedLastFrame.remove(Integer.valueOf(KeyEvent.VK_SPACE));
 		}
 		
 	}
