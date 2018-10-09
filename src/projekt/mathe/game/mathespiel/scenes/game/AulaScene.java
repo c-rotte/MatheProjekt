@@ -117,7 +117,7 @@ public class AulaScene extends Scene{
 						Saver.saveCurrentState(player, AulaScene.this);
 					}
 				};
-				dialog.addCard(new Card("*schluchz* Oje so wird das doch nichts!"));
+				dialog.addCard(new Card("*Schluchz* Oje so wird das doch nichts!"));
 				world.openDialog(dialog);
 			}
 		}

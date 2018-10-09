@@ -88,7 +88,7 @@ public class AngleGame extends MiniGame{
 							}else {
 								MainSceneData mainSceneData = (MainSceneData) container.getDataForNextScene();
 								mainSceneData.setMinigameCompleted(false);
-								container.callScene("pausenhof", mainSceneData, 40f);
+								container.callScene("aula", mainSceneData, 40f);
 							}
 						}
 						@Override
