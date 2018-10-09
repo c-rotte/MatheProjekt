@@ -30,6 +30,24 @@ public class PausenhofWorld extends World{
 
 	public void onCall() {
 		if(!hasSigns && Saver.containsData("bossdefeated")) {
+			
+			Dialog dialog0 = new Dialog(this) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					if(finished) {
+						if(lastcard.selected.equals("ja")) {
+							world.container.callScene("race", world.container.getDataForNextScene(), 40f);
+						}
+					}
+				}
+				@Override
+				public void onFinished(Card lastcard) {}
+			};
+			Card card0 = new Card("Hier kannst du das Wettrennen wiederholen. Willst du beginnen?");
+			card0.addSelection("ja", "nein");
+			dialog0.addCard(card0);
+			addEntity(new SignEntity(container, this, 1335, 520, dialog0));
+			
 			Dialog dialog = new Dialog(this) {
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {
