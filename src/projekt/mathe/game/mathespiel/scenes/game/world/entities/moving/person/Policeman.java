@@ -171,7 +171,7 @@ public class Policeman extends Person {
 		playerBounds.width += 2;
 		playerBounds.height += 2;
 		
-		if(playerInZone && playerBounds.intersects(getBounds()) && !world.isDialogOpen() && !getContainer().fading) {
+		if(playerInZone && playerBounds.intersects(getBounds()) && !world.isDialogOpen() && !getContainer().fading && !finishedMinigame) {
 			switch (getDirection()) {
 				case "up": 
 					player.direction = "down";

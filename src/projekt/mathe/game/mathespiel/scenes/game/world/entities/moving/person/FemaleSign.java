@@ -113,7 +113,7 @@ public class FemaleSign extends SignEntity{
 			Card card = new Card("[Stundenplan der Lehrer]");
 			card.setTextColor(Color.BLUE);
 			dialog.addCard(card);
-			dialog.addCard(new Card("Ich stelle nun eine Testfragen zur Authentifikation."));
+			dialog.addCard(new Card("Ich stelle nun eine Testfrage zur Authentifikation."));
 			Card card2 = new Card("Wie viele Ecken hat eine Figur, deren Fläche man mit [0,5 • g • h] berechnet?");
 			card2.addSelection("2", "3", "5", "4");
 			dialog.addCard(card2);
