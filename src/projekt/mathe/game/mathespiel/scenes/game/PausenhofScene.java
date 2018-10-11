@@ -56,16 +56,10 @@ public class PausenhofScene extends Scene{
 			player.direction = "down";
 			camera.focusX(1035);
 			camera.focusY(0);
-		}else if(lastID.equals("pyramid")) {
-			if(((MainSceneData) sceneData).getMapPlayer() != null) {
-				player = ((MainSceneData) sceneData).getMapPlayer();
-			}
-			System.out.println("Game completed: " + ((MainSceneData) sceneData).minigameCompleted());
 		}else if(lastID.equals("race")) {
 			if(((MainSceneData) sceneData).getMapPlayer() != null) {
 				player = ((MainSceneData) sceneData).getMapPlayer();
 			}
-			System.out.println("Game completed: " + ((MainSceneData) sceneData).minigameCompleted());
 		}else {
 			player.setX(1900);
 			player.setY(600);

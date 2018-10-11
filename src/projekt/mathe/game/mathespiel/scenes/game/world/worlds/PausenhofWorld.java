@@ -6,19 +6,13 @@ import java.awt.Graphics2D;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
-import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
-import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
-import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog.Card;
 
 public class PausenhofWorld extends World{
 
-	private boolean hasSigns;
-	
 	public PausenhofWorld(Scene container, MapPlayer player) {
 		super(container, player);
 		addLoadingZone(new LoadingZone(965, -113, 150, 50, this, "aula", 20f, "pausenhofEingang"));
@@ -29,95 +23,7 @@ public class PausenhofWorld extends World{
 	}
 
 	public void onCall() {
-		if(!hasSigns && Saver.containsData("bossdefeated")) {
-			
-			Dialog dialog0 = new Dialog(this) {
-				@Override
-				public void onSelected(Card lastcard, boolean finished) {
-					if(finished) {
-						if(lastcard.selected.equals("ja")) {
-							world.container.callScene("race", world.container.getDataForNextScene(), 40f);
-						}
-					}
-				}
-				@Override
-				public void onFinished(Card lastcard) {}
-			};
-			Card card0 = new Card("Hier kannst du das Wettrennen wiederholen. Willst du beginnen?");
-			card0.addSelection("ja", "nein");
-			dialog0.addCard(card0);
-			addEntity(new SignEntity(container, this, 1335, 520, dialog0));
-			
-			Dialog dialog = new Dialog(this) {
-				@Override
-				public void onSelected(Card lastcard, boolean finished) {
-					if(finished) {
-						if(lastcard.selected.equals("ja")) {
-							world.container.callScene("pyramid", world.container.getDataForNextScene(), 40f);
-						}
-					}
-				}
-				@Override
-				public void onFinished(Card lastcard) {}
-			};
-			Card card1 = new Card("Hier kannst du das Pyramidenspiel spielen. Willst du beginnen?");
-			card1.addSelection("ja", "nein");
-			dialog.addCard(card1);
-			addEntity(new SignEntity(container, this, 1445, 520, dialog));
-			
-			Dialog dialog2 = new Dialog(this) {
-				@Override
-				public void onSelected(Card lastcard, boolean finished) {
-					if(finished) {
-						if(lastcard.selected.equals("ja")) {
-							world.container.callScene("board", world.container.getDataForNextScene(), 40f);
-						}
-					}
-				}
-				@Override
-				public void onFinished(Card lastcard) {}
-			};
-			Card card = new Card("Hier kannst du das Tafelspiel spielen. Willst du beginnen?");
-			card.addSelection("ja", "nein");
-			dialog2.addCard(card);
-			addEntity(new SignEntity(container, this, 1555, 520, dialog2));
-			
-			Dialog dialog3 = new Dialog(this) {
-				@Override
-				public void onSelected(Card lastcard, boolean finished) {
-					if(finished) {
-						if(lastcard.selected.equals("ja")) {
-							world.container.callScene("angle", world.container.getDataForNextScene(), 40f);
-						}
-					}
-				}
-				@Override
-				public void onFinished(Card lastcard) {}
-			};
-			Card card2 = new Card("Hier kannst du das Pizzaspiel spielen. Willst du beginnen?");
-			card2.addSelection("ja", "nein");
-			dialog3.addCard(card2);
-			addEntity(new SignEntity(container, this, 1665, 520, dialog3));
-			
-			Dialog dialog4 = new Dialog(this) {
-				@Override
-				public void onSelected(Card lastcard, boolean finished) {
-					if(finished) {
-						if(lastcard.selected.equals("ja")) {
-							world.container.callScene("boss", world.container.getDataForNextScene(), 40f);
-						}
-					}
-				}
-				@Override
-				public void onFinished(Card lastcard) {}
-			};
-			Card card3 = new Card("Hier kannst du den Bosskampf wiederholen. Willst du beginnen?");
-			card3.addSelection("ja", "nein");
-			dialog4.addCard(card3);
-			addEntity(new SignEntity(container, this, 1775, 520, dialog4));
-
-			hasSigns = true;
-		}
+		
 	}
 	
 	@Override

@@ -35,7 +35,9 @@ public class EndingScene extends Scene{
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		Helper.drawStringAroundPosition(640, 360, "~", Color.WHITE, 50, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 310, "Nachts im Bunker", Color.WHITE, 50, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 360, "P-Seminar Mathespiele", Color.WHITE, 50, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 410, "2017 - 2018", Color.WHITE, 50, FONT.VCR, g2d, null, -1);
 	}
 
 	@Override

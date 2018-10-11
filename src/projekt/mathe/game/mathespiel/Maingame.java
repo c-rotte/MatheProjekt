@@ -35,16 +35,18 @@ public class Maingame extends Game{
 	
 	public Maingame(Frame frame) {
 		super(60, frame, ResLoader.getImageByName("general/frameicon.png"));
-		/*this.registerScene(new OpenSafeScene(this));
-		this.registerScene(new EndingScene(this));
-		setCurrentScene("safe_end", new MainSceneData(), 40f);
+		/*
+		this.registerScene(new BoardScene(this));
+		setCurrentScene("board", new MainSceneData(), 40f);
 		*/
+
 		registerMenuScenes();
 		setCurrentScene("loading", new MainSceneData(), 60f);
 		new Thread(() -> {
 			registerGameScenes();
 			finishedLoading = true;
 		}).start();
+		
 	}
 	
 	private void registerGameScenes() {

@@ -56,7 +56,7 @@ public class IntroScene extends Scene {
 			Card card5 = new Card("...");
 			card5.setTextColor(Color.GRAY);
 			dialog.addCard(card5);
-			Card card6 = new Card("Zeit zu lernen habe ich keine mehr.");
+			Card card6 = new Card("Zeit zum Lernen habe ich jetzt keine mehr.");
 			card6.setTextColor(Color.GRAY);
 			dialog.addCard(card6);
 			Card card7= new Card("Na ja.");
@@ -65,6 +65,9 @@ public class IntroScene extends Scene {
 			Card card8= new Card("Ich werde ja hoffentlich niemanden treffen.");
 			card8.setTextColor(Color.GRAY);
 			dialog.addCard(card8);
+			Card card9 = new Card("Sollte ich doch jemanden treffen, indem ich mit den PFEILTASTEN hin- und herlaufe, kann ich ihn zum Glück mit der LEERTASTE ansprechen.");
+			card9.setTextColor(Color.GRAY);
+			dialog.addCard(card9);
 			world.openDialog(dialog);
 		}
 	}

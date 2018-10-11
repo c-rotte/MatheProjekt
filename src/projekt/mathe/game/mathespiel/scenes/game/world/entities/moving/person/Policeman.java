@@ -334,7 +334,7 @@ public class Policeman extends Person {
 					setMoving(true);
 				}
 			};
-			dialog.addCard(new Card("Auch wenn ich nichts dagegen habe, dass du hier bleibts, solltest du lieber verschwinden. Wer weiﬂ, wer sich hier herumtreibt."));
+			dialog.addCard(new Card("Auch wenn ich nichts dagegen habe, dass du hier bleibst, solltest du lieber verschwinden. Wer weiﬂ, wer sich hier herumtreibt."));
 			world.openDialog(dialog);
 			setMoving(false);
 		}

@@ -3,11 +3,12 @@ package projekt.mathe.game.mathespiel.scenes.game.minigames.blackboard;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
-import java.math.BigDecimal;
 import java.util.concurrent.ThreadLocalRandom;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.Values;
 import projekt.mathe.game.engine.elements.ClickElement;
 import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.Helper.FONT;
@@ -16,11 +17,11 @@ public class Calculation extends ClickElement{
 
 	private String calc;
 	private boolean selected;
-	private float f1, f2, f3;
+	private int f1, f2, f3;
 	private char c;
 	private boolean right;
 	
-	public Calculation(Scene container, int x, int y, float f1, float f2, float f3, char c) {
+	public Calculation(Scene container, int x, int y, int f1, int f2, int f3, char c) {
 		super(container, x, y, 200, 100);
 		this.f1 = f1;
 		this.f2 = f2;
@@ -31,19 +32,11 @@ public class Calculation extends ClickElement{
 			case '-' : right = f1 - f2 == f3; break;
 			case '*' : right = f1 * f2 == f3; break;
 		}
-		BigDecimal decimal = new BigDecimal(f3);
-		decimal = decimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-		f3 = decimal.floatValue();
-		BigDecimal decimal2 = new BigDecimal(f2);
-		decimal2 = decimal2.setScale(2, BigDecimal.ROUND_HALF_UP);
-		f2 = decimal2.floatValue();
-		BigDecimal decimal3 = new BigDecimal(f1);
-		decimal3 = decimal3.setScale(2, BigDecimal.ROUND_HALF_UP);
-		f1 = decimal3.floatValue();
 		if(c == '*') {
 			c = '•';
 		}
-		calc = f1 + " " + c + " " + f2 + " = " + f3;
+		calc = (f1 >= 0 ? f1 : "(" + f1 + ")") + " " + c + " " + (f2 >= 0 ? f2 : "(" + f2 + ")") + " = " + f3;
+		//calc = f1 + " " + c + " " + f2 + " = " + f3;		
 	}
 
 	public boolean isSelected() {
@@ -64,7 +57,11 @@ public class Calculation extends ClickElement{
 		g2d.setColor(selected ? new Color(255, 255, 255, 100) : Color.WHITE);
 		g2d.setStroke(new BasicStroke(5));
 		g2d.draw(getBounds());
-		Helper.drawStringAroundPosition(getMiddle().x, getMiddle().y, calc, g2d.getColor(), 20, FONT.VCR, g2d, null, -1);
+		
+		RenderingHints renderingHints = g2d.getRenderingHints();
+		g2d.setRenderingHints(Values.SMOOTH_RENDERING_HINTS);
+		Helper.drawStringAroundPosition(getMiddle().x, getMiddle().y, calc, g2d.getColor(), 19, FONT.VCR, g2d, null, -1);
+		g2d.setRenderingHints(renderingHints);
 	}
 
 	@Override
@@ -78,11 +75,9 @@ public class Calculation extends ClickElement{
 	}
 	
 	public static final Calculation generateInstance(Scene container, int x, int y, boolean right) {
-		int i1 = ThreadLocalRandom.current().nextInt(1, 10);
-		int i2 = ThreadLocalRandom.current().nextInt(1, 10);
-		float f1 = Float.valueOf("0." + i1);
-		float f2 = Float.valueOf("0." + i2);
-		float f3 = 0;
+		int f1 = ThreadLocalRandom.current().nextInt(-9, 10);
+		int f2 = ThreadLocalRandom.current().nextInt(-9, 10);
+		int f3 = 0;
 		char c = '?';
 		switch (ThreadLocalRandom.current().nextInt(0, 3)) {
 			case 0 :
