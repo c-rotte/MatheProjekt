@@ -4,7 +4,7 @@
 
 Ein Adventure-Spiel, welches auf mathematischen Aufgaben aufbaut.
 
-### Build (Aktuelle Version) ###
+### Build (Download der aktuellen Version) ###
 
 https://www.mediafire.com/folder/b1hycig3c9bwb/Mathe
 
