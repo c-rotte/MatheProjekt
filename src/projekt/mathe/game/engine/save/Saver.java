@@ -142,6 +142,8 @@ public class Saver {
 		removeData("lastScene");
 		removeData("lastDir");
 		
+		removeData("peState");
+		
 		removeData("bossdefeated");
 	}
 	

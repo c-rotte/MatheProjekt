@@ -72,6 +72,7 @@ public class PausenhofScene extends Scene{
 			if(((MainSceneData) sceneData).hadMinigame() && ((MainSceneData) sceneData).minigameCompleted()) {
 				
 				peTeacher.setState("success");
+				Saver.setData("peState", "success");
 				player.setX(820);
 				player.setY(10);
 				player.direction = "left";
@@ -116,10 +117,14 @@ public class PausenhofScene extends Scene{
 				world.openDialog(dialog);
 			}
 		}else {
-			if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(0) == Saver.getString("safeCode").charAt(0)) {
-				peTeacher.setState("success");
+			if(Saver.containsData("peState")) {
+				peTeacher.setState(Saver.getString("peState"));
 			}else {
-				peTeacher.setState("normal");
+				if(Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(0) == Saver.getString("safeCode").charAt(0)) {
+					peTeacher.setState("success");
+				}else {
+					peTeacher.setState("normal");
+				}
 			}
 		}
 		

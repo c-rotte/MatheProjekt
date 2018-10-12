@@ -28,6 +28,8 @@ public abstract class World{
 	private LoadingZoneHolder loadingZoneHolder;
 	private BarrierHolder barrierHolder;
 	
+	private int lastFrameDialogOpen;
+	
 	public World(Scene container, MapPlayer player) {
 		this.player = player;
 		this.container = container;
@@ -35,6 +37,7 @@ public abstract class World{
 		entityholder = new EntityHolder(container, this);
 		loadingZoneHolder = new LoadingZoneHolder(container);
 		barrierHolder = new BarrierHolder(container);
+		lastFrameDialogOpen = 0;
 	}
 
 	public final void onWorldTick(float delta) {
@@ -43,8 +46,17 @@ public abstract class World{
 		loadingZoneHolder.onTick(delta);
 		if(dialog != null) {
 			dialog.onTick(delta);
+			lastFrameDialogOpen = 2;
+		}else {
+			if(lastFrameDialogOpen != 0) {
+				lastFrameDialogOpen--;
+			}
 		}
 		onTick(delta);
+	}
+	
+	public boolean lastFrameDialogOpen() {
+		return lastFrameDialogOpen != 0;
 	}
 	
 	public abstract void onTick(float delta);

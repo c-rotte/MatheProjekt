@@ -1,6 +1,7 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
@@ -18,6 +19,7 @@ public class PETeacher extends Person {
 
 	public void setState(String state) {
 		this.state = state;
+		Saver.setData("peState", state);
 		switch (state) {
 			case "normal" : 
 				setX(760);
@@ -85,6 +87,7 @@ public class PETeacher extends Person {
 	public void onPlayerEntersListenerArea(MapPlayer player) {
 		if(state.equals("normal")) {
 			state = "activated";
+			Saver.setData("peState", "activated");
 			player.playerController.setActivated(false);
 			player.direction = "down";
 			setX(player.getX());

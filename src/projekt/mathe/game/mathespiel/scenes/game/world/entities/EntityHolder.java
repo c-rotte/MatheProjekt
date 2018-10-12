@@ -54,6 +54,9 @@ public class EntityHolder extends Holder<Entity>{
 	}
 	
 	public Entity doesPlayerInteractCollide(MapPlayer player) {
+		if(world.lastFrameDialogOpen()) {
+			return null;
+		}
 		for(Entity entity : getElements()) {
 			if(entity.collider) {
 				if(entity.onScreen()) {
