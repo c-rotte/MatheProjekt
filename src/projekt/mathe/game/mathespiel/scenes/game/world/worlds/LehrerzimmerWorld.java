@@ -7,6 +7,8 @@ import projekt.mathe.game.engine.help.Helper;
 import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.mathespiel.scenes.game.player.MapPlayer;
 import projekt.mathe.game.mathespiel.scenes.game.world.barrier.Barrier;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.Can;
+import projekt.mathe.game.mathespiel.scenes.game.world.entities.Table;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person.FemaleSign;
 import projekt.mathe.game.mathespiel.scenes.game.world.loadingzone.LoadingZone;
 import projekt.mathe.game.mathespiel.scenes.game.world.tiles.CutTile;
@@ -21,7 +23,24 @@ public class LehrerzimmerWorld extends World {
 		CutTile.addSplicedTiles(container, this, -500, -500, false, Helper.getImagesBySplices("game/tiles/lehrerzimmer/upper/oben_01", 459, "png"), 27);
 		Barrier.addBarriersFromFile(ResLoader.getFile("game/tiles/lehrerzimmer/barrier.txt"), this);
 		
-		addEntity(new FemaleSign(container, this, 600, -365));
+		addEntity(new FemaleSign(container, this, 475, -365));
+		
+		addEntity(new Table(container, this, 350, -330));
+		addEntity(new Table(container, this, 550, -330));
+		
+		addEntity(new Table(container, this, -350, -270));
+		addEntity(new Table(container, this, -250, -270));
+		addEntity(new Table(container, this, -150, -270));
+		
+		addEntity(new Table(container, this, -350, -120));
+		addEntity(new Table(container, this, -250, -120));
+		addEntity(new Table(container, this, -150, -120));
+		
+		addEntity(new Table(container, this, -350, 30));
+		addEntity(new Table(container, this, -250, 30));
+		addEntity(new Table(container, this, -150, 30));
+		
+		addEntity(new Can(container, this, -350, -30));
 	}
 
 	@Override

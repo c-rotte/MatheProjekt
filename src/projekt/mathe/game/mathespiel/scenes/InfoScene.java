@@ -1,5 +1,6 @@
 package projekt.mathe.game.mathespiel.scenes;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -65,7 +66,20 @@ public class InfoScene extends Scene{
 		buttonHolder.onPaint(g2d);
 		Helper.drawStringAroundPosition(640, 200, "Nachts im Bunker", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
 		Helper.drawStringAroundPosition(640, 250, "2017 - 2018", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
-		Helper.drawStringAroundPosition(640, 300, "~", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 300, "P-Seminar Mathespiele", Color.WHITE, 40, FONT.VCR, g2d, null, -1);
+	
+		g2d.setColor(Color.LIGHT_GRAY);
+		g2d.setStroke(new BasicStroke(4f));
+		g2d.drawRect(315, 370, 650, 210);
+		g2d.setColor(Color.GRAY);
+		g2d.setStroke(new BasicStroke(2f));
+		g2d.drawLine(545, 417, 730, 417);
+		Helper.drawStringAroundPosition(640, 400, "Steuerung:", Color.GRAY, 30, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 435, "Bewegung: [Pfeiltasten]", Color.LIGHT_GRAY, 30, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 470, "Interaktion: [Leertaste]", Color.LIGHT_GRAY, 30, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 505, "Menü: [Escape (Esc)]", Color.LIGHT_GRAY, 30, FONT.VCR, g2d, null, -1);
+		Helper.drawStringAroundPosition(640, 540, "Verlassen des Vollbildschirms: [F]", Color.LIGHT_GRAY, 30, FONT.VCR, g2d, null, -1);
+	
 	}
 
 	@Override

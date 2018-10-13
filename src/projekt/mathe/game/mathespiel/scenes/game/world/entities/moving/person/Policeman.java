@@ -324,6 +324,7 @@ public class Policeman extends Person {
 	@Override
 	public void onInteract(MapPlayer player) {
 		if(finishedMinigame || (Saver.containsData("currCode") && Saver.containsData("safeCode") && Saver.getString("currCode").charAt(3) == Saver.getString("safeCode").charAt(3))) {
+			String dir = getDirection();
 			Dialog dialog = new Dialog(world) {
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {
@@ -331,10 +332,25 @@ public class Policeman extends Person {
 				}
 				@Override
 				public void onFinished(Card lastcard) {
+					setDirection(dir);
 					setMoving(true);
 				}
 			};
 			dialog.addCard(new Card("Auch wenn ich nichts dagegen habe, dass du hier bleibst, solltest du lieber verschwinden. Wer weiﬂ, wer sich hier herumtreibt."));
+			switch (player.direction) {
+				case "up": 
+					setDirection("down");
+					break;
+				case "down":
+					setDirection("up");
+					break;
+				case "left":
+					setDirection("right");
+					break;
+				case "right":
+					setDirection("left");
+					break;
+			}
 			world.openDialog(dialog);
 			setMoving(false);
 		}

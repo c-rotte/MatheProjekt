@@ -34,10 +34,10 @@ public class Female extends Person {
 			float midX = (float) getBounds().getCenterX();
 			float midY = (float) getBounds().getCenterY();
 			
-			float xDiff = Math.abs(playerMidX) - Math.abs(midX);
-			float yDiff = Math.abs(playerMidY) - Math.abs(midY);
+			float xDiff = playerMidX - midX;
+			float yDiff = playerMidY - midY;
 			
-			if(Math.abs(xDiff) <= 40 || Math.abs(yDiff) <= 40) {
+			if(Math.abs(xDiff) <= 100 && Math.abs(yDiff) <= 100) {
 				if(Math.abs(xDiff) > Math.abs(yDiff)) {
 					if(xDiff < 0) {
 						setDirection("left");
@@ -52,6 +52,7 @@ public class Female extends Person {
 					}
 				}
 			}
+			
 		}
 	}
 	

@@ -1,8 +1,11 @@
 package projekt.mathe.game.mathespiel.scenes.game.world.entities.moving.person;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Image;
 
 import projekt.mathe.game.engine.Scene;
+import projekt.mathe.game.engine.help.ResLoader;
 import projekt.mathe.game.engine.save.Saver;
 import projekt.mathe.game.mathespiel.scenes.game.world.entities.SignEntity;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
@@ -13,11 +16,18 @@ public class FemaleSign extends SignEntity{
 
 	private static Dialog dialog;
 	
+	private static final Image femSign = ResLoader.getImageByName("game/entities/femSign.png");
+	
 	public FemaleSign(Scene container, World world, int x, int y) {
 		super(container, world, x, y, getDialog(world));
 		
 	}
 
+	@Override
+	public void onPaint(Graphics2D g2d) {
+		g2d.drawImage(femSign, (int) getX(), (int) getY(), (int) getW(), (int) getH(), null);
+	}
+	
 	private static final Dialog getDialog(World world) {
 		if(dialog == null) {
 			dialog = new Dialog(world) {
@@ -120,5 +130,7 @@ public class FemaleSign extends SignEntity{
 		}
 		return dialog;
 	}
+	
+	
 	
 }

@@ -42,7 +42,7 @@ public class MenuScene extends Scene{
 					}
 				}));
 		buttonHolder.addElement(new Button(this, buttonHolder, 580, 537, 120, 43)
-				.setText("ÜBER", 50, 640, 555, new Color[] {new Color(0, 180, 255), new Color(0, 100, 141), new Color(0, 55, 78)}, 3.4f)
+				.setText("INFORMATIONEN", 50, 640, 555, new Color[] {new Color(0, 180, 255), new Color(0, 100, 141), new Color(0, 55, 78)}, 3.4f)
 				.addOnClickListener(new Runnable() {
 					@Override
 					public void run() {
