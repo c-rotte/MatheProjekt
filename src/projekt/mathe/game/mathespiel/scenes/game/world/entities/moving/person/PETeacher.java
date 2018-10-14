@@ -108,6 +108,7 @@ public class PETeacher extends Person {
 					
 				}
 			};
+			setDirection("right");
 			Card card = new Card("Willst du es nochmal versuchen? Denn so kommst du nicht herein!");
 			card.addSelection("Ja", "Nein");
 			dialog.addCard(card);
@@ -132,34 +133,32 @@ public class PETeacher extends Person {
 				break;
 		}
 		if(state.equals("normal")) {
-			if(player.direction.equals("right")) {
-				Dialog dialog = new Dialog(world) {
-					@Override
-					public void onSelected(Card lastcard, boolean finished) {
-						Dialog dialog = new Dialog(world) {
-							@Override
-							public void onSelected(Card lastcard, boolean finished) {
-								
-							}
-							@Override
-							public void onFinished(Card lastcard) {
-								
-							}
-						};
-						dialog.addCard(new Card("Wie bitte? Ich bin doch kein Schüler! Ich bin der neue Sportlehrer! Mein Name lautet Herr Langsam. Frechheit!"));
-						world.openDialog(dialog);
-					}
-					@Override
-					public void onFinished(Card lastcard) {
-						
-					}
-				};
-				Card card = new Card("Was willst du denn?");
-				card.addSelection("Hi", "Moin");
-				dialog.addCard(card);
-				world.openDialog(dialog);
-			}
-		}else if(state.equals("activated") && player.direction.equals("left")) {
+			Dialog dialog = new Dialog(world) {
+				@Override
+				public void onSelected(Card lastcard, boolean finished) {
+					Dialog dialog = new Dialog(world) {
+						@Override
+						public void onSelected(Card lastcard, boolean finished) {
+							
+						}
+						@Override
+						public void onFinished(Card lastcard) {
+							
+						}
+					};
+					dialog.addCard(new Card("Wie bitte? Ich bin doch kein Schüler! Ich bin der neue Sportlehrer! Mein Name lautet Herr Langsam. Frechheit!"));
+					world.openDialog(dialog);
+				}
+				@Override
+				public void onFinished(Card lastcard) {
+					
+				}
+			};
+			Card card = new Card("Was willst du denn?");
+			card.addSelection("Hi", "Moin");
+			dialog.addCard(card);
+			world.openDialog(dialog);
+		}else if(state.equals("activated")) {
 			Dialog dialog = new Dialog(world) {
 				@Override
 				public void onSelected(Card lastcard, boolean finished) {
