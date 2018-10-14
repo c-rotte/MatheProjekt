@@ -76,7 +76,7 @@ public class AulaWorld extends World{
 				
 			}
 		};
-		Card card2 = new Card("Links: Erster Stock");
+		Card card2 = new Card("Eingänge zu den Chemie-, Physik- und Biologiesälen");
 		card2.setTextColor(new Color(255, 93, 0));
 		dialog2.addCard(card2);
 		addEntity(new SignEntity(container, this, -450, 881, dialog2));
@@ -91,7 +91,7 @@ public class AulaWorld extends World{
 				
 			}
 		};
-		Card card3 = new Card("Eingänge zu den Chemie-, Physik- und Biologiesälen");
+		Card card3 = new Card("Links: Erster Stock");
 		card3.setTextColor(new Color(255, 93, 0));
 		dialog3.addCard(card3);
 		addEntity(new SignEntity(container, this, -350, -315, dialog3));

@@ -24,6 +24,8 @@ public class PyramidGame extends MiniGame{
 	private boolean finished;
 	private boolean notFinishedAgain;
 	
+	private static final int ZAEHLER = 3, NENNER = 4;
+	
 	public PyramidGame(Scene container) {
 		super(container, "pyramid");
 		backgroundHelper = new TextureHelper();
@@ -101,8 +103,8 @@ public class PyramidGame extends MiniGame{
 			float z;
 			float n;
 			do {
-				n = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-				z = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+				n = ThreadLocalRandom.current().nextInt(1, NENNER + 1);
+				z = ThreadLocalRandom.current().nextInt(1, ZAEHLER + 1);
 			} while (n == z || existingValues.contains(z < n ? z / n : n / z));
 			if(n < z) {
 				floats[0] = n;

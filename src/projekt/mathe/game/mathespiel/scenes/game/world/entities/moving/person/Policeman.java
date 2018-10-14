@@ -159,11 +159,12 @@ public class Policeman extends Person {
 			
 		}
 		
-		if(isMoving()) {
-			moveViewField();
+		if(!world.isDialogOpen()) {
+			if(isMoving()) {
+				moveViewField();
+			}
+			super.onTick(delta);
 		}
-		
-		super.onTick(delta);
 		
 		Rectangle playerBounds = new Rectangle(player.getOriginalBounds());
 		playerBounds.x--;
