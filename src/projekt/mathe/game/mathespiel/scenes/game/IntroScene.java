@@ -1,12 +1,16 @@
 package projekt.mathe.game.mathespiel.scenes.game;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
 
 import projekt.mathe.game.engine.Game;
 import projekt.mathe.game.engine.Scene;
 import projekt.mathe.game.engine.SceneData;
 import projekt.mathe.game.engine.help.Animator;
+import projekt.mathe.game.engine.help.Helper;
+import projekt.mathe.game.engine.help.Helper.FONT;
 import projekt.mathe.game.mathespiel.scenes.MainSceneData;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.World;
 import projekt.mathe.game.mathespiel.scenes.game.world.worlds.dialogs.Dialog;
@@ -16,15 +20,21 @@ public class IntroScene extends Scene {
 
 	private Animator animator;
 	
+	private Animator spaceAnimator;
+	private boolean appeared;
+	
 	public IntroScene(Game container) {
 		super(container, "intro", Color.BLACK);
 		animator = new Animator(60, 1);
 		registerWorld(World.emptyInstance(this));
+		spaceAnimator = new Animator(5f * 60, 1f);
 	}
 
 	@Override
 	public void onCall(String lastID, SceneData sceneData) {
 		animator.reset();
+		spaceAnimator = new Animator(5f * 60, 1f);
+		appeared = false;
 	}
 
 	@Override
@@ -70,11 +80,38 @@ public class IntroScene extends Scene {
 			dialog.addCard(card9);
 			world.openDialog(dialog);
 		}
+		
+		spaceAnimator.calculate(delta);
+		if(spaceAnimator.finished()) {
+			if(appeared) {
+				spaceAnimator.reset();
+			}else if(world.isDialogOpen()) {
+				spaceAnimator = new Animator(2 * 60, 1);
+				appeared = true;
+			}
+		}
 	}
 
 	@Override
 	public void onPaint(Graphics2D g2d) {
-		
+		if(appeared) {
+			float curr = spaceAnimator.getCurrValueRelative() * 2;
+			boolean b = false;
+			if(curr >= 1f) {
+				curr -= 1f;
+				b = true;
+			}
+			
+			Composite composite = g2d.getComposite();
+			if(b) {
+				curr = 1f - curr;
+			}
+			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, curr));
+			
+			Helper.drawStringAroundPosition(640, 610, "[LEERTASTE]", Color.LIGHT_GRAY, 30, FONT.VCR, g2d, null, -1);
+			
+			g2d.setComposite(composite);
+		}
 	}
 
 	@Override
