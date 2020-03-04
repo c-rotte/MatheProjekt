@@ -4,7 +4,7 @@
 
 Ein Adventure-Spiel, welches auf mathematischen Aufgaben aufbaut.
 
-### Build (Download der aktuellen Version) ###
+### Download ###
 
 https://github.com/jhash-github/MatheProjekt/releases/download/1.0/build.jar
 
